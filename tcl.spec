@@ -81,7 +81,7 @@ install -d $RPM_BUILD_ROOT/usr
 cd unix
 make INSTALL_ROOT=$RPM_BUILD_ROOT install
 ln -sf libtcl8.0.so $RPM_BUILD_ROOT%{_libdir}/libtcl.so
-ln -sf tclsh8.0 $RPM_BUILD_ROOT/usr/bin/tclsh
+ln -sf tclsh8.0 $RPM_BUILD_ROOT%{_bindir}/tclsh
 
 install ../generic/{tclMath,tclInt}.h $RPM_BUILD_ROOT/usr/include
 
@@ -95,7 +95,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%attr(755,root,root) /usr/bin/*
+%attr(755,root,root) %{_bindir}/*
 %{_mandir}/man1/*
 %attr(755,root,root) %{_libdir}/lib*.so
 %{_libdir}/tcl*
