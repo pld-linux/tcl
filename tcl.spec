@@ -17,8 +17,8 @@ Patch4:		tcl-64bit.patch
 Patch5:		tcl-readline.patch
 Icon:		tcl.gif
 URL:		http://www.scriptics.com/
-BuildPrereq:	ncurses-devel
-BuildPrereq:	readline-devel
+BuildRequires:	ncurses-devel
+BuildRequires:	readline-devel
 Buildroot:	/tmp/%{name}-%{version}-root
 
 %description
