@@ -121,7 +121,8 @@ mv -f Makefile.in.new Makefile.in
 	--disable-threads \
 	--enable-64bit \
 	--enable-gcc
-%{__make}
+%{__make} \
+	TCL_PACKAGE_PATH="%{_libdir} %{_libdir}/tcl%{major} %{_ulibdir} %{_ulibdir}/tcl%{major}"
 
 sed -e "s#%{_builddir}/%{name}%{version}/unix#%{_libdir}#; \
 	s#%{_builddir}/%{name}%{version}#%{_includedir}#" tclConfig.sh > tclConfig.sh.new
@@ -133,6 +134,7 @@ install -d $RPM_BUILD_ROOT{%{_prefix},%{_mandir}/man1}
 
 %{__make} -C unix install \
 	INSTALL_ROOT=$RPM_BUILD_ROOT \
+	TCL_PACKAGE_PATH="%{_libdir} %{_libdir}/tcl%{major} %{_ulibdir} %{_ulibdir}/tcl%{major}" \
 	MAN_INSTALL_DIR=$RPM_BUILD_ROOT%{_mandir}
 
 ln -sf libtcl%{major}.so.0.0 $RPM_BUILD_ROOT%{_libdir}/libtcl.so
@@ -141,6 +143,8 @@ mv -f $RPM_BUILD_ROOT%{_bindir}/tclsh%{major} $RPM_BUILD_ROOT%{_bindir}/tclsh
 mv $RPM_BUILD_ROOT%{_libdir}/tclConfig.sh $RPM_BUILD_ROOT%{_ulibdir}/tclConfig.sh
 
 bzip2 -dc %{SOURCE1} | tar xf - -C $RPM_BUILD_ROOT%{_mandir}
+
+install -d $RPM_BUILD_ROOT%{_libdir}/tcl%{major}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -153,6 +157,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 %{_ulibdir}/tcl%{major}
+%{_libdir}/tcl%{major}
 %{_mandir}/man1/*
 %lang(pl) %{_mandir}/pl/man1/*
 
