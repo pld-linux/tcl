@@ -1,3 +1,4 @@
+%define	major 8.3
 Summary:	Tool Command Language embeddable scripting language, with shared libraries
 Summary(fr):	Tool Command Language, langage de script avec bibliothèques partagées
 Summary(pl):	Tool Command Language - jêzyk skryptowy z bibliotekami dynamicznymi
@@ -5,8 +6,8 @@ Summary(ru):	Tool Command Language - ×ÓÔÒÁÉ×ÁÅÍÙÊ ÑÚÙË ÓËÒÉÐÔÏ×
 Summary(tr):	TCL ile kullanýlabilen betik dili
 Summary(uk):	Tool Command Language - ×ÂÕÄÏ×Õ×ÁÎÁ ÍÏ×Á ÓËÒÉÐÔ¦×
 Name:		tcl
-Version:	8.3.4
-Release:	9
+Version:	%{major}.4
+Release:	10
 License:	BSD
 Group:		Development/Languages/Tcl
 #Source0-md5:	8777250e03d6be9be7551bfc6e99d252
@@ -109,7 +110,7 @@ Pliki nag³ówkowe oraz dokumentacja dla tcl (Tool Command Language).
 %patch7 -p1
 %patch8 -p1
 %patch9 -p1
-%patch10 -p1
+%patch10 -p1 -b .wiget
 
 %build
 cd unix
@@ -137,7 +138,8 @@ cd unix
 	INSTALL_ROOT=$RPM_BUILD_ROOT \
 	MAN_INSTALL_DIR=$RPM_BUILD_ROOT%{_mandir}
 
-ln -sf libtcl8.3.so $RPM_BUILD_ROOT%{_libdir}/libtcl.so
+ln -sf libtcl%{major}.so.0.0 $RPM_BUILD_ROOT%{_libdir}/libtcl.so
+ln -sf libtcl%{major}.so.0.0 $RPM_BUILD_ROOT%{_libdir}/libtcl%{major}.so
 mv -f $RPM_BUILD_ROOT%{_bindir}/tclsh8.3 $RPM_BUILD_ROOT%{_bindir}/tclsh
 
 bzip2 -dc %{SOURCE1} | tar xf - -C $RPM_BUILD_ROOT%{_mandir}
@@ -151,7 +153,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %{_libdir}/lib*.so
+%attr(755,root,root) %{_libdir}/lib*.so.*.*
 %{_libdir}/tcl8.3
 %{_mandir}/man1/*
 %lang(pl) %{_mandir}/pl/man1/*
@@ -160,6 +162,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/tclConfig.sh
 %{_libdir}/libtclstub8.3.a
+%attr(755,root,root) %{_libdir}/lib*.so
 %{_includedir}/*
 %{_mandir}/man[3n]/*
 %lang(pl) %{_mandir}/pl/mann/*
