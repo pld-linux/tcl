@@ -79,7 +79,7 @@ Pliki nag³ówkowe oraz dokumentacja dla tcl (Tool Command Language)
 cd unix
 autoconf
 CFLAGS="$RPM_OPT_FLAGS -D_REENTRANT" LDFLAGS="-s" \
-./configure %{_target} \
+./configure %{_target_platform} \
 	--prefix=%{_prefix} \
 	--enable-shared \
 	--enable-gcc
