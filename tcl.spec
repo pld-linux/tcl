@@ -1,4 +1,4 @@
-%define	major 8.3
+%define	major 8.4
 Summary:	Tool Command Language embeddable scripting language, with shared libraries
 Summary(fr):	Tool Command Language, langage de script avec bibliothèques partagées
 Summary(pl):	Tool Command Language - jêzyk skryptowy z bibliotekami dynamicznymi
@@ -6,12 +6,12 @@ Summary(ru):	Tool Command Language - ×ÓÔÒÁÉ×ÁÅÍÙÊ ÑÚÙË ÓËÒÉÐÔÏ×
 Summary(tr):	TCL ile kullanýlabilen betik dili
 Summary(uk):	Tool Command Language - ×ÂÕÄÏ×Õ×ÁÎÁ ÍÏ×Á ÓËÒÉÐÔ¦×
 Name:		tcl
-Version:	%{major}.4
-Release:	10
+Version:	%{major}.3
+Release:	0.1
 License:	BSD
 Group:		Development/Languages/Tcl
-#Source0-md5:	8777250e03d6be9be7551bfc6e99d252
-Source0:	ftp://ftp.scriptics.com/pub/tcl/tcl8_3/%{name}%{version}.tar.gz
+Source0:	http://dl.sourceforge.net/tcl/%{name}%{version}-src.tar.gz
+# Source0-md5:	fedc2fa745db19c91e7f92aeeca75497
 #Source1-md5:	dd3370f2b588763758787831a4bf48fc
 Source1:	%{name}-pl-man-pages.tar.bz2
 Patch0:		%{name}-glibc21.patch
@@ -26,7 +26,7 @@ Patch8:		%{name}-system_encoding.patch
 Patch9:		%{name}-mannames.patch
 Patch10:	%{name}-soname_fix.patch
 Icon:		tcl.gif
-URL:		http://www.scriptics.com/
+URL:		http://www.tcl.tk/
 BuildRequires:	autoconf
 BuildRequires:	ncurses-devel >= 5.2
 BuildRequires:	readline-devel >= 4.2
@@ -108,7 +108,9 @@ Pliki nag³ówkowe oraz dokumentacja dla tcl (Tool Command Language).
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
-%patch8 -p1
+# outdated
+#patch8 -p1
+# incommplet yet
 %patch9 -p1
 %patch10 -p1 -b .wiget
 
@@ -140,7 +142,7 @@ cd unix
 
 ln -sf libtcl%{major}.so.0.0 $RPM_BUILD_ROOT%{_libdir}/libtcl.so
 ln -sf libtcl%{major}.so.0.0 $RPM_BUILD_ROOT%{_libdir}/libtcl%{major}.so
-mv -f $RPM_BUILD_ROOT%{_bindir}/tclsh8.3 $RPM_BUILD_ROOT%{_bindir}/tclsh
+mv -f $RPM_BUILD_ROOT%{_bindir}/tclsh%{major} $RPM_BUILD_ROOT%{_bindir}/tclsh
 
 bzip2 -dc %{SOURCE1} | tar xf - -C $RPM_BUILD_ROOT%{_mandir}
 
@@ -154,14 +156,14 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
-%{_libdir}/tcl8.3
+%{_libdir}/tcl%{major}
 %{_mandir}/man1/*
 %lang(pl) %{_mandir}/pl/man1/*
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/tclConfig.sh
-%{_libdir}/libtclstub8.3.a
+%{_libdir}/libtclstub%{major}.a
 %attr(755,root,root) %{_libdir}/lib*.so
 %{_includedir}/*
 %{_mandir}/man[3n]/*
