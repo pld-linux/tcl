@@ -6,7 +6,7 @@ Summary(tr):	TCL ile kullanЩlabilen betik dili
 Summary(uk):	Tool Command Language - вбудовувана мова скрипт╕в
 Name:		tcl
 Version:	8.3.4
-Release:	5
+Release:	6
 License:	BSD
 Group:		Development/Languages/Tcl
 Source0:	ftp://ftp.scriptics.com/pub/tcl/tcl8_3/%{name}%{version}.tar.gz
