@@ -7,7 +7,7 @@ diff -urN tcl8.5a2.org/unix/Makefile.in tcl8.5a2/unix/Makefile.in
  	@echo "Installing header files";
 -	@for i in $(GENERIC_DIR)/tcl.h $(GENERIC_DIR)/tclDecls.h \
 -		$(GENERIC_DIR)/tclPlatDecls.h; \
-+	@for i in tcl.h tclDecls.h tclIntDecls.h tclMath.h tclInt.h tclPort.h tclRegexp.h tclPlatDecls.h tclIntPlatDecls.h; \
++	@for i in tcl.h tclDecls.h tclIntDecls.h tclInt.h tclPort.h tclRegexp.h tclPlatDecls.h tclIntPlatDecls.h; \
  	    do \
 -	    $(INSTALL_DATA) $$i $(INCLUDE_INSTALL_DIR); \
 +	    $(INSTALL_DATA) $(GENERIC_DIR)/$$i $(INCLUDE_INSTALL_DIR); \
