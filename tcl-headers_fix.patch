@@ -1,0 +1,31 @@
+diff -Nru tcl8.0.5/generic/tclPort.h tcl8.0.5.new/generic/tclPort.h
+--- tcl8.0.5/generic/tclPort.h	Mon Sep 14 20:40:01 1998
++++ tcl8.0.5.new/generic/tclPort.h	Mon Sep  6 01:12:57 1999
+@@ -22,7 +22,7 @@
+ #   if defined(MAC_TCL)
+ #	include "tclMacPort.h"
+ #    else
+-#	include "../unix/tclUnixPort.h"
++#	include <tclUnixPort.h>
+ #    endif
+ #endif
+ 
+diff -Nru tcl8.0.5/unix/Makefile.in tcl8.0.5.new/unix/Makefile.in
+--- tcl8.0.5/unix/Makefile.in	Mon Sep  6 01:12:25 1999
++++ tcl8.0.5.new/unix/Makefile.in	Mon Sep  6 01:12:09 1999
+@@ -472,8 +472,13 @@
+ 		else true; \
+ 		fi; \
+ 	    done;
+-	@echo "Installing tcl.h"
+-	@$(INSTALL_DATA) $(GENERIC_DIR)/tcl.h $(INCLUDE_INSTALL_DIR)/tcl.h
++	@echo "Installing tcl.h, tclUnixPort.h, tclMath.h, tclInt.h, tclPort.h ,tclRegexp.h"
++	@$(INSTALL_DATA) $(GENERIC_DIR)/tcl.h $(INCLUDE_INSTALL_DIR)
++	@$(INSTALL_DATA) $(GENERIC_DIR)/tclMath.h $(INCLUDE_INSTALL_DIR)
++	@$(INSTALL_DATA) $(GENERIC_DIR)/tclInt.h $(INCLUDE_INSTALL_DIR)
++	@$(INSTALL_DATA) $(GENERIC_DIR)/tclPort.h $(INCLUDE_INSTALL_DIR)
++	@$(INSTALL_DATA) $(GENERIC_DIR)/tclRegexp.h $(INCLUDE_INSTALL_DIR)
++	@$(INSTALL_DATA) $(UNIX_DIR)/tclUnixPort.h $(INCLUDE_INSTALL_DIR)
+ 	@for i in $(TOP_DIR)/library/*.tcl $(TOP_DIR)/library/tclIndex $(UNIX_DIR)/tclAppInit.c $(UNIX_DIR)/ldAix; \
+ 	    do \
+ 	    echo "Installing $$i"; \
