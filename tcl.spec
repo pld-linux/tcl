@@ -84,7 +84,7 @@ cd unix
 sed -e "s/^CFLAGS_OPTIMIZE.*/CFLAGS_OPTIMIZE=%{optflags} -D__NO_STRING_INLINES -D__NO_MATH_INLINES -D_REENTRANT/" \
 	Makefile.in > Makefile.in.new
 mv -f Makefile.in.new Makefile.in
-autoconf
+%{__autoconf}
 %configure \
 	--enable-shared \
 	--disable-threads \
