@@ -5,13 +5,13 @@ Summary(ru):	Tool Command Language - встраиваемый язык скриптов
 Summary(tr):	Tcl ile kullanЩlabilen betik dili
 Summary(uk):	Tool Command Language - вбудовувана мова скрипт╕в
 Name:		tcl
-%define	major	8.4
-Version:	%{major}.9
+%define	major	8.5
+Version:	%{major}a2
 Release:	1
 License:	BSD
 Group:		Development/Languages/Tcl
 Source0:	http://dl.sourceforge.net/tcl/%{name}%{version}-src.tar.gz
-# Source0-md5:	7e01b409925e4eb59ad44a4c12b9c681
+# Source0-md5:	95c9d614538a9918f51e948386702bb4
 Source1:	%{name}-pl-man-pages.tar.bz2
 # Source1-md5:	dd3370f2b588763758787831a4bf48fc
 Patch0:		%{name}-glibc21.patch
@@ -19,7 +19,6 @@ Patch1:		%{name}-64bit.patch
 Patch2:		%{name}-readline.patch
 Patch3:		%{name}-headers_fix.patch
 Patch4:		%{name}-opt.patch
-Patch5:		%{name}-ac25x.patch
 Patch6:		%{name}-mannames.patch
 Patch7:		%{name}-soname_fix.patch
 Patch8:		%{name}-norpath.patch
@@ -109,7 +108,6 @@ Pliki nagЁСwkowe oraz dokumentacja dla Tcl (Tool Command Language).
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
-%patch5 -p1
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
@@ -121,6 +119,7 @@ sed -e "s/^CFLAGS_OPTIMIZE.*/CFLAGS_OPTIMIZE=%{rpmcflags} -D__NO_STRING_INLINES 
 mv -f Makefile.in.new Makefile.in
 %{__autoconf}
 %configure \
+	--enable-langinfo \
 	--enable-shared \
 	--enable-threads \
 	--enable-64bit \
@@ -161,6 +160,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
+%{_libdir}/tcl[0-9]
 %{_libdir}/tcl%{major}
 %{?have_ulibdir:%{_ulibdir}/tcl%{major}}
 %{_mandir}/man1/*
