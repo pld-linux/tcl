@@ -4,7 +4,7 @@ Summary(pl):	Tool Command Language - jêzyk skryptowy z bibliotekami dynamicznymi
 Summary(tr):	TCL ile kullanýlabilen betik dili
 Name:		tcl
 Version:	8.3.2
-Release:	1
+Release:	2
 License:	BSD
 Group:		Development/Languages/Tcl
 Group(pl):	Programowanie/Jêzyki/Tcl
