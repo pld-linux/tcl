@@ -30,6 +30,8 @@ BuildRequires:	ncurses-devel >= 5.2
 BuildRequires:	readline-devel >= 4.2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+%define	_ulibdir /usr/lib
+
 %description
 TCL is a simple scripting language that is designed to be embedded in
 other applications. This package includes tclsh, a simple example of a
@@ -149,7 +151,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
-%{_libdir}/tcl%{major}
+%{_ulibdir}/tcl%{major}
 %{_mandir}/man1/*
 %lang(pl) %{_mandir}/pl/man1/*
 
