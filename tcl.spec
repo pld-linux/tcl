@@ -93,7 +93,7 @@ tcl. TCL дуже популярний для написання простих граф╕чних програм
 Summary:	Tool Command Language header files and development documentation
 Summary(pl):	Pliki nagЁСwkowe oraz dokumentacja dla tcl (Tool Command Language)
 Group:		Development/Languages/Tcl
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description devel
 Tool Command Language embeddable scripting language header files and
