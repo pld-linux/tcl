@@ -77,13 +77,19 @@ Pliki nag³ówkowe oraz dokumentacja dla tcl (Tool Command Language)
 
 %build
 cd unix
+sed -e "s/^CFLAGS_OPTIMIZE=.*/CFLAGS_OPTIMIZE=\'%{optflags} -D_REENTRANT\'/" \
+	configure.in > configure.in.new
+mv -f configure.in.new configure.in
 autoconf
-CFLAGS="$RPM_OPT_FLAGS -D_REENTRANT" LDFLAGS="-s" \
+LDFLAGS="-s" \
 ./configure %{_target_platform} \
 	--prefix=%{_prefix} \
 	--enable-shared \
 	--enable-gcc
 make
+
+sed -e "s#%{_builddir}/tcl8.0.5/unix#/usr/lib#" tclConfig.sh > tclConfig.sh.new
+mv -f tclConfig.sh.new tclConfig.sh
 
 %install
 rm -rf $RPM_BUILD_ROOT
