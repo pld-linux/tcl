@@ -105,7 +105,7 @@ Pliki nag³ówkowe oraz dokumentacja dla tcl (Tool Command Language).
 
 %build
 cd unix
-sed -e "s/^CFLAGS_OPTIMIZE.*/CFLAGS_OPTIMIZE=%{optflags} -D__NO_STRING_INLINES -D__NO_MATH_INLINES -D_REENTRANT/" \
+sed -e "s/^CFLAGS_OPTIMIZE.*/CFLAGS_OPTIMIZE=%{rpmcflags} -D__NO_STRING_INLINES -D__NO_MATH_INLINES -D_REENTRANT/" \
 	Makefile.in > Makefile.in.new
 mv -f Makefile.in.new Makefile.in
 %{__autoconf}
