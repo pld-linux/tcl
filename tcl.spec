@@ -21,7 +21,7 @@ Icon:		tcl.gif
 URL:		http://www.scriptics.com/
 BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	readline-devel >= 4.1
-Buildroot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 TCL is a simple scripting language that is designed to be embedded in
