@@ -1,17 +1,17 @@
-Summary:     Tool Command Language embeddable scripting language, with shared libraries
-Summary(fr): Tool Command Language, langage de script avec bibliothèques partagées
-Summary(pl): Tool Command Language - jêzyk skryptowy z bibliotekami dynamicznymi
-Summary(tr): TCL ile kullanýlabilen betik dili
-Name:        tcl
-Version:     8.0.3
-Release:     21
-Source0:     ftp://ftp.scriptics.com/pub/tcl/tcl8_0/%{name}%{version}.tar.gz
-Patch:       tcl-8.0-ieee.patch
-Copyright:   BSD
-URL:         http://www.scriptics.com/
-Group:       Development/Languages/Tcl
-Icon:        tcl.gif
-Buildroot:   /tmp/%{name}-%{version}-root
+Summary:	Tool Command Language embeddable scripting language, with shared libraries
+Summary(fr):	Tool Command Language, langage de script avec bibliothèques partagées
+Summary(pl):	Tool Command Language - jêzyk skryptowy z bibliotekami dynamicznymi
+Summary(tr):	TCL ile kullanýlabilen betik dili
+Name:		tcl
+Version:	8.0.5
+Release:	1
+Source0:	ftp://ftp.scriptics.com/pub/tcl/tcl8_0/%{name}%{version}.tar.gz
+Patch:		tcl-ieee.patch
+Copyright:	BSD
+URL:		http://www.scriptics.com/
+Group:		Development/Languages/Tcl
+Icon:		tcl.gif
+Buildroot:	/tmp/%{name}-%{version}-root
 
 %description
 TCL is a simple scripting language that is designed to be embedded in
@@ -45,10 +45,10 @@ kümesinin de desteðiyle küçük grafik uygulamalar yazma konusunda son derece
 yaygýn kullanýlmaktadýr.
 
 %package devel
-Summary:     Tool Command Language header files and development documentation
-Summary(pl): Pliki nag³ówkowe oraz dokumentacja dla tcl (Tool Command Language)
-Group:       Development/Languages/Tcl
-Requires:    %{name} = %{version}
+Summary:	Tool Command Language header files and development documentation
+Summary(pl):	Pliki nag³ówkowe oraz dokumentacja dla tcl (Tool Command Language)
+Group:		Development/Languages/Tcl
+Requires:	%{name} = %{version}
 
 %description devel
 Tool Command Language embeddable scripting language header files and
@@ -65,7 +65,8 @@ autoconf
 
 %build
 cd unix
-CFLAGS="$RPM_OPT_FLAGS -D_REENTRANT" ./configure \
+CFLAGS="$RPM_OPT_FLAGS -D_REENTRANT" LDFLAGS="-s" \
+./configure \
 	--prefix=/usr \
 	--enable-shared \
 	--enable-gcc
@@ -91,19 +92,24 @@ strip $RPM_BUILD_ROOT/usr/{bin/*,lib/lib*.so}
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%defattr(644, root, root, 755)
-%attr(755, root, root) /usr/bin/*
-%attr(644, root,  man) /usr/man/man1/*
-%attr(755, root, root) /usr/lib/lib*.so
+%defattr(644,root,root,755)
+%attr(755,root,root) /usr/bin/*
+/usr/man/man1/*
+%attr(755,root,root) /usr/lib/lib*.so
 /usr/lib/tcl*
 
 %files devel
 %defattr(644, root, root, 755)
 /usr/include/*
-/usr/lib/tclConfig.sh
-%attr(644, root,  man) /usr/man/man[3n]/*
+%attr(755,root,root) /usr/lib/tclConfig.sh
+/usr/man/man[3n]/*
 
 %changelog
+* Fri Mar 19 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [8.0.5-1]
+- added LDFLAGS="-s" to ./configure enviroment,
+- removed man group from man pages.
+
 * Thu Oct 13 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [8.0.3-21]
 - changed way passing $RPM_OPT_FLAGS.
