@@ -138,6 +138,7 @@ install -d $RPM_BUILD_ROOT{%{_prefix},%{_mandir}/man1}
 ln -sf libtcl%{major}.so.0.0 $RPM_BUILD_ROOT%{_libdir}/libtcl.so
 ln -sf libtcl%{major}.so.0.0 $RPM_BUILD_ROOT%{_libdir}/libtcl%{major}.so
 mv -f $RPM_BUILD_ROOT%{_bindir}/tclsh%{major} $RPM_BUILD_ROOT%{_bindir}/tclsh
+mv $RPM_BUILD_ROOT%{_libdir}/tclConfig.sh $RPM_BUILD_ROOT%{_ulibdir}/tclConfig.sh
 
 bzip2 -dc %{SOURCE1} | tar xf - -C $RPM_BUILD_ROOT%{_mandir}
 
@@ -157,7 +158,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/tclConfig.sh
+%attr(755,root,root) %{_ulibdir}/tclConfig.sh
 %{_libdir}/libtclstub%{major}.a
 %attr(755,root,root) %{_libdir}/lib*.so
 %{_includedir}/*
