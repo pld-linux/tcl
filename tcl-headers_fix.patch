@@ -13,19 +13,16 @@ diff -Nru tcl8.0.5/generic/tclPort.h tcl8.0.5.new/generic/tclPort.h
 diff -Nru tcl8.0.5/unix/Makefile.in tcl8.0.5.new/unix/Makefile.in
 --- tcl8.0.5/unix/Makefile.in	Mon Sep  6 01:12:25 1999
 +++ tcl8.0.5.new/unix/Makefile.in	Mon Sep  6 01:12:09 1999
-@@ -472,8 +472,13 @@
- 		else true; \
- 		fi; \
- 	    done;
--	@echo "Installing tcl.h"
--	@$(INSTALL_DATA) $(GENERIC_DIR)/tcl.h $(INCLUDE_INSTALL_DIR)/tcl.h
-+	@echo "Installing tcl.h, tclUnixPort.h, tclMath.h, tclInt.h, tclPort.h ,tclRegexp.h"
-+	@$(INSTALL_DATA) $(GENERIC_DIR)/tcl.h $(INCLUDE_INSTALL_DIR)
-+	@$(INSTALL_DATA) $(GENERIC_DIR)/tclMath.h $(INCLUDE_INSTALL_DIR)
-+	@$(INSTALL_DATA) $(GENERIC_DIR)/tclInt.h $(INCLUDE_INSTALL_DIR)
-+	@$(INSTALL_DATA) $(GENERIC_DIR)/tclPort.h $(INCLUDE_INSTALL_DIR)
-+	@$(INSTALL_DATA) $(GENERIC_DIR)/tclRegexp.h $(INCLUDE_INSTALL_DIR)
-+	@$(INSTALL_DATA) $(UNIX_DIR)/tclUnixPort.h $(INCLUDE_INSTALL_DIR)
- 	@for i in $(TOP_DIR)/library/*.tcl $(TOP_DIR)/library/tclIndex $(UNIX_DIR)/tclAppInit.c $(UNIX_DIR)/ldAix; \
+@@ -472,9 +472,10 @@
+ 	    chmod +x $(SRC_DIR)/install-sh; \
+ 	    fi
+ 	@echo "Installing header files";
+-	@for i in $(GENERIC_DIR)/tcl.h $(GENERIC_DIR)/tclDecls.h ; \
++	@for i in tcl.h tclDecls.h tclIntDecls.h tclMath.h tclInt.h tclPort.h tclRegexp.h ; \
  	    do \
- 	    echo "Installing $$i"; \
+-	    $(INSTALL_DATA) $$i $(INCLUDE_INSTALL_DIR); \
++	    $(INSTALL_DATA) $(GENERIC_DIR)/$$i $(INCLUDE_INSTALL_DIR); \
+ 	    done;
++	    $(INSTALL_DATA) $(UNIX_DIR)/tclUnixPort.h $(INCLUDE_INSTALL_DIR);
+ 	@echo "Installing library files to $(SCRIPT_INSTALL_DIR)";
+ 	@for i in $(TOP_DIR)/library/*.tcl $(TOP_DIR)/library/tclIndex $(UNIX_DIR)/tclAppInit.c $(UNIX_DIR)/ldAix; \
