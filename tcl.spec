@@ -129,15 +129,3 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/tclConfig.sh
 %{_includedir}/*
 %{_mandir}/man[3n]/*
-
-%changelog
-* Sun May 30 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [8.0.5-2]
-- based on RH spec,
-- added patches:
--- tcl-glibc21.patch - fiix problems on glibc 2.1 (RH 6.0),
--- tcl-tmpfix.patch - fix tmp race (from Debian),
--- tcl-manlnk.patch - make some ,man pages as *roff include,
--- tcl-64bit.patch - fix problems on 64-bit architectures,
--- tcl-readline.patch -- add ability to use readline in tclsh,
-- spec rewrited by PLD team.
