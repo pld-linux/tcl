@@ -128,7 +128,7 @@ rm -rf $RPM_BUILD_ROOT
 - added using %%{name} and %%{version} in Source,
 - fixed using $RPM_OPT_FLAGS during compile (curren tcl configure script don't
   accept passing CFLAGS in enviroment variable),
-- added striping shared libraries and tclsh binary,
+- added stripping shared libraries and tclsh binary,
 - added devel subpackage,
 - added URL,
 - added package icon,
