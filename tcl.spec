@@ -3,12 +3,12 @@ Summary(fr):	Tool Command Language, langage de script avec bibliothèques partagé
 Summary(pl):	Tool Command Language - jêzyk skryptowy z bibliotekami dynamicznymi
 Summary(tr):	TCL ile kullanýlabilen betik dili
 Name:		tcl
-Version:	8.0.5
-Release:	37
+Version:	8.3.2
+Release:	1
 License:	BSD
 Group:		Development/Languages/Tcl
 Group(pl):	Programowanie/Jêzyki/Tcl
-Source0:	ftp://ftp.scriptics.com/pub/tcl/tcl8_0/%{name}%{version}.tar.gz
+Source0:	ftp://ftp.scriptics.com/pub/tcl/tcl8_3/%{name}%{version}.tar.gz
 Patch0:		tcl-ieee.patch
 Patch1:		tcl-glibc21.patch
 Patch2:		tcl-tmpfix.patch
@@ -16,7 +16,6 @@ Patch3:		tcl-manlnk.patch
 Patch4:		tcl-64bit.patch
 Patch5:		tcl-readline.patch
 Patch6:		tcl-headers_fix.patch
-Patch7:		tcl-sigpwr.patch
 Patch8:		tcl-autoconf.patch
 Icon:		tcl.gif
 URL:		http://www.scriptics.com/
@@ -75,13 +74,12 @@ Pliki nag³ówkowe oraz dokumentacja dla tcl (Tool Command Language).
 %setup  -q -n %{name}%{version}
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
+#%patch2 -p1 CHECK IT!
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
-%patch7 -p1
-%patch8 -p1
+#%patch8 -p1 unneeded (?)
 
 %build
 cd unix
@@ -108,13 +106,13 @@ cd unix
 	INSTALL_ROOT=$RPM_BUILD_ROOT \
 	MAN_INSTALL_DIR=$RPM_BUILD_ROOT%{_mandir}
 
-ln -sf libtcl8.0.so $RPM_BUILD_ROOT%{_libdir}/libtcl.so
-ln -sf tclsh8.0 $RPM_BUILD_ROOT%{_bindir}/tclsh
+ln -sf libtcl8.3.so $RPM_BUILD_ROOT%{_libdir}/libtcl.so
+ln -sf tclsh8.3 $RPM_BUILD_ROOT%{_bindir}/tclsh
 
-strip $RPM_BUILD_ROOT%{_bindir}/*
-strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so
 
-gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man?/*
+#strip $RPM_BUILD_ROOT%{_bindir}/tclsh8.3
+#strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/libtcl8.3.so
+#gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man?/*
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
@@ -126,11 +124,12 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so
-%{_libdir}/tcl8.0
+%{_libdir}/tcl8.3
 %{_mandir}/man1/*
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/tclConfig.sh
+%{_libdir}/libtclstub8.3.a
 %{_includedir}/*
 %{_mandir}/man[3n]/*
