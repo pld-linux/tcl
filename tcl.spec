@@ -15,16 +15,13 @@ Source0:	http://dl.sourceforge.net/tcl/%{name}%{version}-src.tar.gz
 Source1:	%{name}-pl-man-pages.tar.bz2
 #Source1-md5:	dd3370f2b588763758787831a4bf48fc
 Patch0:		%{name}-glibc21.patch
-Patch1:		%{name}-tmpfix.patch
-Patch2:		%{name}-manlnk.patch
-Patch3:		%{name}-64bit.patch
-Patch4:		%{name}-readline.patch
-Patch5:		%{name}-headers_fix.patch
-Patch6:		%{name}-opt.patch
-Patch7:		%{name}-ac25x.patch
-Patch8:		%{name}-system_encoding.patch
-Patch9:		%{name}-mannames.patch
-Patch10:	%{name}-soname_fix.patch
+Patch1:		%{name}-64bit.patch
+Patch2:		%{name}-readline.patch
+Patch3:		%{name}-headers_fix.patch
+Patch4:		%{name}-opt.patch
+Patch5:		%{name}-ac25x.patch
+Patch6:		%{name}-mannames.patch
+Patch7:		%{name}-soname_fix.patch
 Icon:		tcl.gif
 URL:		http://www.tcl.tk/
 BuildRequires:	autoconf
@@ -101,18 +98,13 @@ Pliki nag³ówkowe oraz dokumentacja dla tcl (Tool Command Language).
 %prep
 %setup  -q -n %{name}%{version}
 %patch0 -p1
-#%patch1 -p1 CHECK IT!
+%patch1 -p1
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
-# outdated
-#patch8 -p1
-# incommplet yet
-%patch9 -p1
-%patch10 -p1 -b .wiget
 
 %build
 cd unix
