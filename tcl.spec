@@ -3,7 +3,7 @@ Summary(fr): Tool Command Language, langage de script avec bibliothèques partagé
 Summary(tr): TCL ile kullanýlabilen betik dili
 Name:        tcl
 Version:     8.0p2
-Release:     2
+Release:     3
 Source0:     ftp://ftp.scriptics.com/pub/tcl/tcl8_0/%{name}%{version}.tar.gz
 Patch:       tcl-8.0-ieee.patch
 Copyright:   BSD
@@ -41,6 +41,7 @@ yaygýn kullanýlmaktadýr.
 %package devel
 Summary:     Tool Command Language header files and development documentation
 Group:       Development/Languages/Tcl
+Requires:    %{name} = %{version}
 
 %description devel
 Tool Command Language embeddable scripting language header files and
@@ -66,7 +67,7 @@ make INSTALL_ROOT=$RPM_BUILD_ROOT install
 ln -sf libtcl8.0.so $RPM_BUILD_ROOT/usr/lib/libtcl.so
 ln -sf tclsh8.0 $RPM_BUILD_ROOT/usr/bin/tclsh
 
-install ../generic/tclMath.h $RPM_BUILD_ROOT/usr/include
+install ../generic/{tclMath,tclInt}.h $RPM_BUILD_ROOT/usr/include
 
 strip $RPM_BUILD_ROOT/usr/{bin/*,lib/lib*.so}
 
@@ -89,6 +90,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(644, root, root) /usr/man/mann/*
 
 %changelog
+* Thu Sep  8 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [8.0pl2-3]
+- added "Requires: %{name} = %%{version}" for devel,
+- added tclInt.h to devel (required on compile expect).
+
 * Mon Aug 24 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [8.0pl2-2]
 - added tclMath.h to devel (required on compile tk).
