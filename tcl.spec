@@ -4,7 +4,7 @@ Summary(pl): Tool Command Language - jêzyk skryptowy z bibliotekami dynamicznymi
 Summary(tr): TCL ile kullanýlabilen betik dili
 Name:        tcl
 Version:     8.0.3
-Release:     1
+Release:     21
 Source0:     ftp://ftp.scriptics.com/pub/tcl/tcl8_0/%{name}%{version}.tar.gz
 Patch:       tcl-8.0-ieee.patch
 Copyright:   BSD
@@ -91,10 +91,11 @@ strip $RPM_BUILD_ROOT/usr/{bin/*,lib/lib*.so}
 rm -rf $RPM_BUILD_ROOT
 
 %files
+%defattr(644, root, root, 755)
 %attr(755, root, root) /usr/bin/*
 %attr(644, root,  man) /usr/man/man1/*
 %attr(755, root, root) /usr/lib/lib*.so
-/usr/lib/tcl8.0
+/usr/lib/tcl*
 
 %files devel
 %defattr(644, root, root, 755)
@@ -104,7 +105,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %changelog
 * Thu Oct 13 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [8.0.3-1]
+  [8.0.3-21]
 - changed way passing $RPM_OPT_FLAGS.
 
 * Mon Oct 05 1998 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
