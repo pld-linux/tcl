@@ -6,12 +6,12 @@ Summary(tr):	Tcl ile kullanýlabilen betik dili
 Summary(uk):	Tool Command Language - ×ÂÕÄÏ×Õ×ÁÎÁ ÍÏ×Á ÓËÒÉÐÔ¦×
 Name:		tcl
 %define	major	8.4
-Version:	%{major}.7
-Release:	2
+Version:	%{major}.9
+Release:	1
 License:	BSD
 Group:		Development/Languages/Tcl
 Source0:	http://dl.sourceforge.net/tcl/%{name}%{version}-src.tar.gz
-# Source0-md5:	07e256e21bd0d05887770318b540c36f
+# Source0-md5:	7e01b409925e4eb59ad44a4c12b9c681
 Source1:	%{name}-pl-man-pages.tar.bz2
 # Source1-md5:	dd3370f2b588763758787831a4bf48fc
 Patch0:		%{name}-glibc21.patch
@@ -30,10 +30,10 @@ BuildRequires:	ncurses-devel >= 5.2
 BuildRequires:	readline-devel >= 4.2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define	_ulibdir /usr/lib
+%define		_ulibdir	/usr/lib
 
 %if "%{_libdir}" != "%{_ulibdir}"
-%define have_ulibdir 1
+%define		have_ulibdir	1
 %endif
 
 %description
