@@ -96,7 +96,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) /usr/bin/*
-/usr/man/man1/*
+%{_mandir}/man1/*
 %attr(755,root,root) /usr/lib/lib*.so
 /usr/lib/tcl*
 
@@ -104,7 +104,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 /usr/include/*
 %attr(755,root,root) /usr/lib/tclConfig.sh
-/usr/man/man[3n]/*
+%{_mandir}/man[3n]/*
 
 %changelog
 * Fri Mar 19 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
