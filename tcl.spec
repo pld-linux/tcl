@@ -89,7 +89,7 @@ LDFLAGS="-s"; export LDFLAGS
 %configure \
 	--enable-shared \
 	--enable-gcc
-make
+%{__make}
 
 sed -e "s#%{_builddir}/%{name}%{version}/unix#/usr/lib#; \
 	s#%{_builddir}/%{name}%{version}#/usr/include#" tclConfig.sh > tclConfig.sh.new
