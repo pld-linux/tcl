@@ -104,7 +104,7 @@ make install \
 ln -sf libtcl8.0.so $RPM_BUILD_ROOT%{_libdir}/libtcl.so
 ln -sf tclsh8.0 $RPM_BUILD_ROOT%{_bindir}/tclsh
 
-install ../generic/{tclMath,tclInt,tclRegexp,tclPort}.h tclUnixPort.h \
+install ../generic/{tclMath,tclInt,tclRegexp}.h tclUnixPort.h \
 	$RPM_BUILD_ROOT%{_includedir}
 
 strip $RPM_BUILD_ROOT{%{_bindir}/*,%{_libdir}/libtcl8*.so}
