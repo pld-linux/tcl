@@ -1,10 +1,12 @@
 Summary:	Tool Command Language embeddable scripting language, with shared libraries
 Summary(fr):	Tool Command Language, langage de script avec bibliothХques partagИes
 Summary(pl):	Tool Command Language - jЙzyk skryptowy z bibliotekami dynamicznymi
+Summary(ru):	Tool Command Language - встраиваемый язык скриптов
 Summary(tr):	TCL ile kullanЩlabilen betik dili
+Summary(uk):	Tool Command Language - вбудовувана мова скрипт╕в
 Name:		tcl
 Version:	8.3.4
-Release:	3
+Release:	4
 License:	BSD
 Group:		Development/Languages/Tcl
 Source0:	ftp://ftp.scriptics.com/pub/tcl/tcl8_3/%{name}%{version}.tar.gz
@@ -43,11 +45,24 @@ d'application tcl. TCL est trХs utilisИ pour Иcrire de petites
 applications graphiques grБce Ю l'ensemble de widgets TK qui lui est
 trХs liИ.
 
+%description -l ja
+Tcl ╓об╬╓н╔╒╔в╔Й╔╠║╪╔╥╔Г╔С╓ккД╓А╧Ч╓Ю╓©╓А╓к╔г╔╤╔╓╔С╓╣╓Л╓©╢йц╠╓й╔╧╔╞╔Й╔в
+╔х╦ю╦Л╓г╓╧║ёTcl╓о╔╕╔ё╔╦╔ц╔и║╕╔╩╔ц╔х╓г╓╒╓КTk╓х╓х╓Б╓кмя╓╓╓К╓Х╓╕╓к╔г╔╤╔╓╔С
+╓╥╓ф╓╓╓ч╓╧║ё╓Ё╓н╔я╔ц╔╠║╪╔╦╓к╓оTcl╓н╢йц╠╓йнЦ╓х╓╥╓ф║╒tclsh
+╓Б╢ч╓С╓г╓╓╓ч╓╧║ё
+
 %description -l pl
 TCL jest prostym jЙzykiem skryptowym, przeznaczonym do wspСЁpracy z
 innymi aplikacjami. W pakiecie znajduje siЙ rСwnie© tclsh - prosty
 przykЁad programСw. TCL jest bardzo popularnym jЙzykiem do pisania
 maЁych programСw graficznych.
+
+%description -l ru
+TCL - это простой интерпретируемый язык, предназначенный для
+встраивания в другие программы. Этот пакет включает tclsh, простой
+пример программы на tcl. TCL очень популярен для написания небольших
+графических программ из-за набора экранных примитивов TK, который
+очень тесно с ним связан.
 
 %description -l tr
 TCL, baЧka uygulamalarЩn iГine gЖmЭlmesi hedeflenerek geliЧtirilmiЧ
@@ -55,6 +70,13 @@ basit bir betimleme dilidir. Bu paket basit bir tcl uygulamasЩ ЖrneПi
 olan tclsh kabuПunu iГerir. TCL, kendisi ile sЩkЩca ilintili olan TK
 arayЭz elemanЩ kЭmesinin de desteПiyle kЭГЭk grafik uygulamalar yazma
 konusunda son derece yaygЩn kullanЩlmaktadЩr.
+
+%description -l uk
+TCL - це проста ╕нтерпретована мова, призначена для вбудови в ╕нш╕
+програми. Цей пакет м╕стить також tclsh, простий приклад програми на
+tcl. TCL дуже популярний для написання простих граф╕чних програм
+завдяки набору екранних прим╕тив╕в TK, котрий з ним дуже т╕сно
+зв'язаний.
 
 %package devel
 Summary:	Tool Command Language header files and development documentation
