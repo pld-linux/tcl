@@ -9,7 +9,9 @@ Version:	8.3.4
 Release:	9
 License:	BSD
 Group:		Development/Languages/Tcl
+#Source0-md5:	8777250e03d6be9be7551bfc6e99d252
 Source0:	ftp://ftp.scriptics.com/pub/tcl/tcl8_3/%{name}%{version}.tar.gz
+#Source1-md5:	dd3370f2b588763758787831a4bf48fc
 Source1:	%{name}-pl-man-pages.tar.bz2
 Patch0:		%{name}-glibc21.patch
 Patch1:		%{name}-tmpfix.patch
