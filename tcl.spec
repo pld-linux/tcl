@@ -4,19 +4,20 @@ Summary(pl):	Tool Command Language - jêzyk skryptowy z bibliotekami dynamicznymi
 Summary(tr):	TCL ile kullanýlabilen betik dili
 Name:		tcl
 Version:	8.3.2
-Release:	2
+Release:	49
 License:	BSD
 Group:		Development/Languages/Tcl
+Group(de):	Entwicklung/Sprachen/Tcl
 Group(pl):	Programowanie/Jêzyki/Tcl
 Source0:	ftp://ftp.scriptics.com/pub/tcl/tcl8_3/%{name}%{version}.tar.gz
-Patch0:		tcl-ieee.patch
-Patch1:		tcl-glibc21.patch
-Patch2:		tcl-tmpfix.patch
-Patch3:		tcl-manlnk.patch
-Patch4:		tcl-64bit.patch
-Patch5:		tcl-readline.patch
-Patch6:		tcl-headers_fix.patch
-Patch8:		tcl-autoconf.patch
+Patch0:		%{name}-ieee.patch
+Patch1:		%{name}-glibc21.patch
+Patch2:		%{name}-tmpfix.patch
+Patch3:		%{name}-manlnk.patch
+Patch4:		%{name}-64bit.patch
+Patch5:		%{name}-readline.patch
+Patch6:		%{name}-headers_fix.patch
+Patch8:		%{name}-autoconf.patch
 Icon:		tcl.gif
 URL:		http://www.scriptics.com/
 BuildRequires:	ncurses-devel >= 5.0
@@ -60,6 +61,7 @@ konusunda son derece yaygýn kullanýlmaktadýr.
 Summary:	Tool Command Language header files and development documentation
 Summary(pl):	Pliki nag³ówkowe oraz dokumentacja dla tcl (Tool Command Language)
 Group:		Development/Languages/Tcl
+Group(de):	Entwicklung/Sprachen/Tcl
 Group(pl):	Programowanie/Jêzyki/Tcl
 Requires:	%{name} = %{version}
 
@@ -106,7 +108,7 @@ cd unix
 	MAN_INSTALL_DIR=$RPM_BUILD_ROOT%{_mandir}
 
 ln -sf libtcl8.3.so $RPM_BUILD_ROOT%{_libdir}/libtcl.so
-ln -sf tclsh8.3 $RPM_BUILD_ROOT%{_bindir}/tclsh
+mv -f $RPM_BUILD_ROOT%{_bindir}/tclsh8.3 $RPM_BUILD_ROOT%{_bindir}/tclsh
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
