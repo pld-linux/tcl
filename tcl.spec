@@ -7,7 +7,7 @@ Summary(tr):	TCL ile kullanýlabilen betik dili
 Summary(uk):	Tool Command Language - ×ÂÕÄÏ×Õ×ÁÎÁ ÍÏ×Á ÓËÒÉÐÔ¦×
 Name:		tcl
 Version:	%{major}.3
-Release:	0.3
+Release:	0.4
 License:	BSD
 Group:		Development/Languages/Tcl
 Source0:	http://dl.sourceforge.net/tcl/%{name}%{version}-src.tar.gz
@@ -127,7 +127,7 @@ mv -f tclConfig.sh.new tclConfig.sh
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_prefix},%{_mandir}/man1}
+install -d $RPM_BUILD_ROOT{%{_prefix},%{_mandir}/man1,%{_aclocaldir}}
 
 cd unix
 %{__make} install \
@@ -137,6 +137,7 @@ cd unix
 ln -sf libtcl%{major}.so.0.0 $RPM_BUILD_ROOT%{_libdir}/libtcl.so
 ln -sf libtcl%{major}.so.0.0 $RPM_BUILD_ROOT%{_libdir}/libtcl%{major}.so
 mv -f $RPM_BUILD_ROOT%{_bindir}/tclsh%{major} $RPM_BUILD_ROOT%{_bindir}/tclsh
+install tcl.m4 $RPM_BUILD_ROOT%{_aclocaldir}
 
 bzip2 -dc %{SOURCE1} | tar xf - -C $RPM_BUILD_ROOT%{_mandir}
 
@@ -160,5 +161,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libtclstub%{major}.a
 %attr(755,root,root) %{_libdir}/lib*.so
 %{_includedir}/*
+%{_aclocaldir}/*
 %{_mandir}/man[3n]/*
 %lang(pl) %{_mandir}/pl/mann/*
