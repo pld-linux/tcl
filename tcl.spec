@@ -32,6 +32,11 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define	_ulibdir /usr/lib
 
+%if %(test "%{_libdir}" = "%{_ulibdir}"; echo $?)
+%define have_ulibdir 1
+%endif
+
+
 %description
 TCL is a simple scripting language that is designed to be embedded in
 other applications. This package includes tclsh, a simple example of a
@@ -141,9 +146,7 @@ ln -sf libtcl%{major}.so.0.0 $RPM_BUILD_ROOT%{_libdir}/libtcl.so
 ln -sf libtcl%{major}.so.0.0 $RPM_BUILD_ROOT%{_libdir}/libtcl%{major}.so
 mv -f $RPM_BUILD_ROOT%{_bindir}/tclsh%{major} $RPM_BUILD_ROOT%{_bindir}/tclsh
 
-if [ "%{_libdir}" != "%{_ulibdir}" ] ; then
-mv $RPM_BUILD_ROOT%{_libdir}/tclConfig.sh $RPM_BUILD_ROOT%{_ulibdir}/tclConfig.sh
-fi
+%{?have_ulibdir:mv $RPM_BUILD_ROOT%{_libdir}/tclConfig.sh $RPM_BUILD_ROOT%{_ulibdir}/tclConfig.sh}
 
 bzip2 -dc %{SOURCE1} | tar xf - -C $RPM_BUILD_ROOT%{_mandir}
 
@@ -159,8 +162,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
-%{_ulibdir}/tcl%{major}
 %{_libdir}/tcl%{major}
+%{?have_ulibdir:%{_ulibdir}/tcl%{major}}
 %{_mandir}/man1/*
 %lang(pl) %{_mandir}/pl/man1/*
 
