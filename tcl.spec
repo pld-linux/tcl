@@ -88,7 +88,8 @@ LDFLAGS="-s" \
 	--enable-gcc
 make
 
-sed -e "s#%{_builddir}/tcl8.0.5/unix#/usr/lib#" tclConfig.sh > tclConfig.sh.new
+sed -e "s#%{_builddir}/%{name}%{version}/unix#/usr/lib#; \
+	s#%{_builddir}/%{name}%{version}#/usr/include#" tclConfig.sh > tclConfig.sh.new
 mv -f tclConfig.sh.new tclConfig.sh
 
 %install
