@@ -1,12 +1,13 @@
---- tcl8.4.3/unix/Makefile.in.wiget	2003-06-09 22:18:03.000000000 +0200
-+++ tcl8.4.3/unix/Makefile.in	2003-06-09 22:18:03.000000000 +0200
-@@ -639,11 +639,11 @@
+diff -urN tcl8.5a2.org/unix/Makefile.in tcl8.5a2/unix/Makefile.in
+--- tcl8.5a2.org/unix/Makefile.in	2004-12-08 00:16:06.000000000 +0100
++++ tcl8.5a2/unix/Makefile.in	2005-04-04 13:13:39.000000000 +0200
+@@ -649,11 +649,11 @@
  	    chmod +x $(SRC_DIR)/install-sh; \
  	    fi
  	@echo "Installing header files";
 -	@for i in $(GENERIC_DIR)/tcl.h $(GENERIC_DIR)/tclDecls.h \
--		$(GENERIC_DIR)/tclPlatDecls.h ; \
-+	@for i in tcl.h tclDecls.h tclIntDecls.h tclMath.h tclInt.h tclPort.h tclRegexp.h tclPlatDecls.h tclIntPlatDecls.h ; \
+-		$(GENERIC_DIR)/tclPlatDecls.h; \
++	@for i in tcl.h tclDecls.h tclIntDecls.h tclMath.h tclInt.h tclPort.h tclRegexp.h tclPlatDecls.h tclIntPlatDecls.h; \
  	    do \
 -	    $(INSTALL_DATA) $$i $(INCLUDE_INSTALL_DIR); \
 +	    $(INSTALL_DATA) $(GENERIC_DIR)/$$i $(INCLUDE_INSTALL_DIR); \
@@ -15,14 +16,3 @@
  	@echo "Installing library files to $(SCRIPT_INSTALL_DIR)";
  	@for i in $(TOP_DIR)/library/*.tcl $(TOP_DIR)/library/tclIndex $(UNIX_DIR)/tclAppInit.c $(UNIX_DIR)/ldAix; \
  	    do \
---- tcl8.4.3/generic/tclPort.h.wiget	2003-05-11 00:42:22.000000000 +0200
-+++ tcl8.4.3/generic/tclPort.h	2003-06-09 22:20:37.000000000 +0200
-@@ -24,7 +24,7 @@
- #   if defined(MAC_TCL)
- #      include "tclMacPort.h"
- #   else
--#      include "../unix/tclUnixPort.h"
-+#      include "tclUnixPort.h"
- #   endif
- #endif
- 

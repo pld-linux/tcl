@@ -1,6 +1,7 @@
---- tcl8.4.6/unix/configure.in.orig	2004-03-06 20:29:26.000000000 +0100
-+++ tcl8.4.6/unix/configure.in	2004-03-06 21:47:35.627341128 +0100
-@@ -452,7 +452,11 @@
+diff -urN tcl8.5a2.org/unix/configure.in tcl8.5a2/unix/configure.in
+--- tcl8.5a2.org/unix/configure.in	2004-12-08 00:16:06.000000000 +0100
++++ tcl8.5a2/unix/configure.in	2005-04-04 13:19:13.000000000 +0200
+@@ -436,7 +436,11 @@
  
  TCL_UNSHARED_LIB_SUFFIX=${UNSHARED_LIB_SUFFIX}
  TCL_SHARED_LIB_SUFFIX=${SHARED_LIB_SUFFIX}
@@ -13,15 +14,18 @@
  
  SC_ENABLE_FRAMEWORK
  
---- tcl8.4.6/unix/Makefile.in.orig	2004-03-06 20:29:26.000000000 +0100
-+++ tcl8.4.6/unix/Makefile.in	2004-03-06 21:54:37.004282096 +0100
-@@ -455,7 +455,8 @@
+diff -urN tcl8.5a2.org/unix/Makefile.in tcl8.5a2/unix/Makefile.in
+--- tcl8.5a2.org/unix/Makefile.in	2004-12-08 00:16:06.000000000 +0100
++++ tcl8.5a2/unix/Makefile.in	2005-04-04 13:20:39.000000000 +0200
+@@ -459,7 +459,9 @@
  # a shared library or non-shared library for Tcl.
  ${LIB_FILE}: ${OBJS} ${STUB_LIB_FILE}
  	rm -f $@
 -	@MAKE_LIB@
 +	@MAKE_LIB@ -Wl,-soname,@TCL_LIB_SONAME@
 +	-ln -sf ${TCL_LIB_FILE} libtcl${VERSION}@SHLIB_SUFFIX@
++	-ln -sf ${TCL_LIB_FILE} libtcl${VERSION}@SHLIB_SUFFIX@.0
  
  ${STUB_LIB_FILE}: ${STUB_LIB_OBJS}
  	rm -f $@
+
