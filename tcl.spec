@@ -106,7 +106,7 @@ ln -sf libtcl8.0.so $RPM_BUILD_ROOT%{_libdir}/libtcl.so
 ln -sf tclsh8.0 $RPM_BUILD_ROOT%{_bindir}/tclsh
 
 strip $RPM_BUILD_ROOT%{_bindir}/*
-strip --strip-unneded $RPM_BUILD_ROOT%{_libdir}/lib*.so
+strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so
 
 gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man?/*
 
