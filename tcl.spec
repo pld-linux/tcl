@@ -43,7 +43,7 @@ d'application tcl. TCL est très utilisé pour écrire de petites
 applications graphiques grâce à l'ensemble de widgets TK qui lui est
 très lié.
 
-%description -l pl 
+%description -l pl
 TCL jest prostym jêzykiem skryptowym, przeznaczonym do wspó³pracy z
 innymi aplikacjami. W pakiecie znajduje siê równie¿ tclsh - prosty
 przyk³ad programów. TCL jest bardzo popularnym jêzykiem do pisania
@@ -66,7 +66,7 @@ Requires:	%{name} = %{version}
 Tool Command Language embeddable scripting language header files and
 develppment documentation.
 
-%description -l pl devel
+%description devel -l pl
 Pliki nag³ówkowe oraz dokumentacja dla tcl (Tool Command Language).
 
 %prep
