@@ -1,9 +1,10 @@
 Summary:     Tool Command Language embeddable scripting language, with shared libraries
 Summary(fr): Tool Command Language, langage de script avec bibliothèques partagées
+Summary(pl): Tool Command Language - jêzyk skryptowy z bibliotekami dynamicznymi
 Summary(tr): TCL ile kullanýlabilen betik dili
 Name:        tcl
-Version:     8.0p2
-Release:     3
+Version:     8.0.3
+Release:     1
 Source0:     ftp://ftp.scriptics.com/pub/tcl/tcl8_0/%{name}%{version}.tar.gz
 Patch:       tcl-8.0-ieee.patch
 Copyright:   BSD
@@ -31,6 +32,11 @@ applications. Ce paquetage contient tclsh, un exemple simple d'application
 tcl. TCL est très utilisé pour écrire de petites applications graphiques
 grâce à l'ensemble de widgets TK qui lui est très lié.
 
+%description -l pl 
+TCL jest prostym jêzykiem skryptowym, przeznaczonym do wspó³pracy z innymi
+aplikacjami. W pakiecie znajduje siê równie¿ tclsh - prosty przyk³ad programów.
+TCL jest bardzo popularnym jêzykiem do pisania ma³ych programów graficzych.
+
 %description -l tr
 TCL, baþka uygulamalarýn içine gömülmesi hedeflenerek geliþtirilmiþ basit
 bir betimleme dilidir. Bu paket basit bir tcl uygulamasý örneði olan tclsh
@@ -40,6 +46,7 @@ yaygýn kullanýlmaktadýr.
 
 %package devel
 Summary:     Tool Command Language header files and development documentation
+Summary(pl): Pliki nag³ówkowe oraz dokumentacja dla tcl (Tool Command Language)
 Group:       Development/Languages/Tcl
 Requires:    %{name} = %{version}
 
@@ -47,16 +54,22 @@ Requires:    %{name} = %{version}
 Tool Command Language embeddable scripting language header files and
 develppment documentation.
 
+%description -l pl devel
+Pliki nag³ówkowe oraz dokumentacja dla tcl (Tool Command Language) 
+
 %prep
-%setup -q -n %{name}8.0
+%setup -q -n %{name}%{version}
 %patch -p1
 cd unix
 autoconf
 
 %build
 cd unix
-./configure --prefix=/usr --enable-shared --enable-gcc
-make CFLAGS="$RPM_OPT_FLAGS -D_REENTRANT"
+CFLAGS="$RPM_OPT_FLAGS -D_REENTRANT" ./configure \
+	--prefix=/usr \
+	--enable-shared \
+	--enable-gcc
+make
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -79,7 +92,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %attr(755, root, root) /usr/bin/*
-%attr(644, root, root) /usr/man/man1/*
+%attr(644, root,  man) /usr/man/man1/*
 %attr(755, root, root) /usr/lib/lib*.so
 /usr/lib/tcl8.0
 
@@ -87,10 +100,17 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644, root, root, 755)
 /usr/include/*
 /usr/lib/tclConfig.sh
-%attr(644, root, root) /usr/man/man3/*
-%attr(644, root, root) /usr/man/mann/*
+%attr(644, root,  man) /usr/man/man[3n]/*
 
 %changelog
+* Thu Oct 13 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [8.0.3-1]
+- changed way passing $RPM_OPT_FLAGS.
+
+* Mon Oct 05 1998 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
+- added pl translation,
+- fixed man pages group.
+
 * Thu Sep  8 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [8.0pl2-3]
 - added "Requires: %{name} = %%{version}" for devel,
