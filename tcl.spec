@@ -4,7 +4,7 @@ Summary(pl):	Tool Command Language - jêzyk skryptowy z bibliotekami dynamicznymi
 Summary(tr):	TCL ile kullanýlabilen betik dili
 Name:		tcl
 Version:	8.3.2
-Release:	49
+Release:	50
 License:	BSD
 Group:		Development/Languages/Tcl
 Group(de):	Entwicklung/Sprachen/Tcl
@@ -18,6 +18,7 @@ Patch4:		%{name}-64bit.patch
 Patch5:		%{name}-readline.patch
 Patch6:		%{name}-headers_fix.patch
 Patch8:		%{name}-autoconf.patch
+Patch9:		%{name}-opt.patch
 Icon:		tcl.gif
 URL:		http://www.scriptics.com/
 BuildRequires:	ncurses-devel >= 5.0
@@ -82,12 +83,13 @@ Pliki nag³ówkowe oraz dokumentacja dla tcl (Tool Command Language).
 %patch5 -p1
 %patch6 -p1
 #%patch8 -p1 unneeded (?)
+%patch9 -p1
 
 %build
 cd unix
-sed -e "s/^CFLAGS_OPTIMIZE=.*/CFLAGS_OPTIMIZE=\'%{optflags} -D_REENTRANT\'/" \
-	configure.in > configure.in.new
-mv -f configure.in.new configure.in
+sed -e "s/^CFLAGS_OPTIMIZE.*/CFLAGS_OPTIMIZE=%{optflags} -D__NO_STRING_INLINES -D__NO_MATH_INLINES -D_REENTRANT/" \
+	Makefile.in > Makefile.in.new
+mv -f Makefile.in.new Makefile.in
 autoconf
 %configure \
 	--enable-shared \
