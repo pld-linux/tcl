@@ -1,0 +1,14 @@
+--- tcl8.3.2/unix/Makefile.in~	Wed Dec 13 21:29:33 2000
++++ tcl8.3.2/unix/Makefile.in	Wed Dec 13 21:29:55 2000
+@@ -85,9 +85,9 @@
+ # To change the compiler switches, for example to change from optimization to
+ # debugging symbols, change the following line:
+ #CFLAGS			= $(CFLAGS_DEBUG)
+-#CFLAGS			= $(CFLAGS_OPTIMIZE)
++CFLAGS			= $(CFLAGS_OPTIMIZE)
+ #CFLAGS			= $(CFLAGS_DEBUG) $(CFLAGS_OPTIMIZE)
+-CFLAGS			= @CFLAGS@
++#CFLAGS			= @CFLAGS@
+ 
+ # To disable ANSI-C procedure prototypes reverse the comment characters
+ # on the following lines:
