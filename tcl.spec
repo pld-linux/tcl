@@ -3,22 +3,20 @@ Summary(fr):	Tool Command Language, langage de script avec bibliothèques partagé
 Summary(pl):	Tool Command Language - jêzyk skryptowy z bibliotekami dynamicznymi
 Summary(tr):	TCL ile kullanýlabilen betik dili
 Name:		tcl
-Version:	8.3.2
-Release:	52
+Version:	8.3.3
+Release:	1
 License:	BSD
 Group:		Development/Languages/Tcl
 Group(de):	Entwicklung/Sprachen/Tcl
 Group(pl):	Programowanie/Jêzyki/Tcl
 Source0:	ftp://ftp.scriptics.com/pub/tcl/tcl8_3/%{name}%{version}.tar.gz
-Patch0:		%{name}-ieee.patch
-Patch1:		%{name}-glibc21.patch
-Patch2:		%{name}-tmpfix.patch
-Patch3:		%{name}-manlnk.patch
-Patch4:		%{name}-64bit.patch
-Patch5:		%{name}-readline.patch
-Patch6:		%{name}-headers_fix.patch
-Patch8:		%{name}-autoconf.patch
-Patch9:		%{name}-opt.patch
+Patch0:		%{name}-glibc21.patch
+Patch1:		%{name}-tmpfix.patch
+Patch2:		%{name}-manlnk.patch
+Patch3:		%{name}-64bit.patch
+Patch4:		%{name}-readline.patch
+Patch5:		%{name}-headers_fix.patch
+Patch6:		%{name}-opt.patch
 Icon:		tcl.gif
 URL:		http://www.scriptics.com/
 BuildRequires:	ncurses-devel >= 5.2
@@ -76,14 +74,12 @@ Pliki nag³ówkowe oraz dokumentacja dla tcl (Tool Command Language).
 %prep
 %setup  -q -n %{name}%{version}
 %patch0 -p1
-%patch1 -p1
-#%patch2 -p1 CHECK IT!
+#%patch1 -p1 CHECK IT!
+%patch2 -p1
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
-#%patch8 -p1 unneeded (?)
-%patch9 -p1
 
 %build
 cd unix
@@ -93,7 +89,7 @@ mv -f Makefile.in.new Makefile.in
 autoconf
 %configure \
 	--enable-shared \
-	--enable-threads \
+	--disable-threads \
 	--enable-64bit \
 	--enable-gcc
 %{__make}
