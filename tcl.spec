@@ -4,13 +4,13 @@ Summary(pl):	Tool Command Language - jêzyk skryptowy z bibliotekami dynamicznymi
 Summary(tr):	TCL ile kullanýlabilen betik dili
 Name:		tcl
 Version:	8.3.4
-Release:	2
+Release:	3
 License:	BSD
 Group:		Development/Languages/Tcl
 Group(de):	Entwicklung/Sprachen/Tcl
 Group(pl):	Programowanie/Jêzyki/Tcl
 Source0:	ftp://ftp.scriptics.com/pub/tcl/tcl8_3/%{name}%{version}.tar.gz
-Source1:	tclsh.1.pl
+Source1:	%{name}-pl-man-pages.tar.bz2
 Patch0:		%{name}-glibc21.patch
 Patch1:		%{name}-tmpfix.patch
 Patch2:		%{name}-manlnk.patch
@@ -102,7 +102,7 @@ mv -f tclConfig.sh.new tclConfig.sh
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_prefix},%{_mandir}/{,pl}/man1}
+install -d $RPM_BUILD_ROOT{%{_prefix},%{_mandir}/man1}
 
 cd unix
 %{__make} install \
@@ -112,7 +112,7 @@ cd unix
 ln -sf libtcl8.3.so $RPM_BUILD_ROOT%{_libdir}/libtcl.so
 mv -f $RPM_BUILD_ROOT%{_bindir}/tclsh8.3 $RPM_BUILD_ROOT%{_bindir}/tclsh
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_mandir}/pl/man1/tclsh.1
+bzip2 -dc %{SOURCE1} | tar xf - -C $RPM_BUILD_ROOT%{_mandir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -134,3 +134,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libtclstub8.3.a
 %{_includedir}/*
 %{_mandir}/man[3n]/*
+%lang(pl) %{_mandir}/pl/mann/*
