@@ -6,7 +6,7 @@ Summary(tr):	TCL ile kullanýlabilen betik dili
 Summary(uk):	Tool Command Language - ×ÂÕÄÏ×Õ×ÁÎÁ ÍÏ×Á ÓËÒÉÐÔ¦×
 Name:		tcl
 Version:	8.3.4
-Release:	9
+Release:	8
 License:	BSD
 Group:		Development/Languages/Tcl
 Source0:	ftp://ftp.scriptics.com/pub/tcl/tcl8_3/%{name}%{version}.tar.gz
@@ -21,7 +21,6 @@ Patch6:		%{name}-opt.patch
 Patch7:		%{name}-ac25x.patch
 Patch8:		%{name}-system_encoding.patch
 Patch9:		%{name}-mannames.patch
-Patch10:	%{name}-soname_fix.patch
 Icon:		tcl.gif
 URL:		http://www.scriptics.com/
 BuildRequires:	autoconf
@@ -107,7 +106,6 @@ Pliki nag³ówkowe oraz dokumentacja dla tcl (Tool Command Language).
 %patch7 -p1
 %patch8 -p1
 %patch9 -p1
-%patch10 -p1
 
 %build
 cd unix
