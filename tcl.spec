@@ -18,6 +18,7 @@ Patch3:		%{name}-64bit.patch
 Patch4:		%{name}-readline.patch
 Patch5:		%{name}-headers_fix.patch
 Patch6:		%{name}-opt.patch
+Patch7:		%{name}-ac25x.patch
 Icon:		tcl.gif
 URL:		http://www.scriptics.com/
 BuildRequires:	autoconf
@@ -100,6 +101,7 @@ Pliki nag³ówkowe oraz dokumentacja dla tcl (Tool Command Language).
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
 
 %build
 cd unix
