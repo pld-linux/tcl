@@ -1,0 +1,11 @@
+--- tcl8.0-8.0.4.orig/generic/tclObj.c
++++ tcl8.0-8.0.4/generic/tclObj.c
+@@ -1632,7 +1632,7 @@
+ 	}
+     }
+     l = objPtr->internalRep.longValue;
+-    if (((long)((int)l)) == l) {
++    if (l <= UINT_MAX) {
+ 	*intPtr = (int)objPtr->internalRep.longValue;
+ 	return TCL_OK;
+     }
