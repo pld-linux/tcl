@@ -19,6 +19,7 @@ Patch5:		%{name}-headers_fix.patch
 Patch6:		%{name}-opt.patch
 Icon:		tcl.gif
 URL:		http://www.scriptics.com/
+BuildRequires:	autoconf
 BuildRequires:	ncurses-devel >= 5.2
 BuildRequires:	readline-devel >= 4.2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -47,7 +48,7 @@ très lié.
 TCL jest prostym jêzykiem skryptowym, przeznaczonym do wspó³pracy z
 innymi aplikacjami. W pakiecie znajduje siê równie¿ tclsh - prosty
 przyk³ad programów. TCL jest bardzo popularnym jêzykiem do pisania
-ma³ych programów graficzych.
+ma³ych programów graficznych.
 
 %description -l tr
 TCL, baþka uygulamalarýn içine gömülmesi hedeflenerek geliþtirilmiþ
@@ -110,11 +111,11 @@ cd unix
 ln -sf libtcl8.3.so $RPM_BUILD_ROOT%{_libdir}/libtcl.so
 mv -f $RPM_BUILD_ROOT%{_bindir}/tclsh8.3 $RPM_BUILD_ROOT%{_bindir}/tclsh
 
-%post   -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
-
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post   -p /sbin/ldconfig
+%postun -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
