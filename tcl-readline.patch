@@ -13,8 +13,8 @@
  
  
  tclsh: ${TCLSH_OBJS} ${TCL_LIB_FILE}
--	${CC} @LDFLAGS@ ${TCLSH_OBJS} @TCL_BUILD_LIB_SPEC@ ${LIBS} \
-+	${CC} @LDFLAGS@ ${TCLSH_OBJS} @TCL_BUILD_LIB_SPEC@ -lreadline -lncurses ${LIBS} \
+-	${CC} ${LDFLAGS} ${TCLSH_OBJS} @TCL_BUILD_LIB_SPEC@ ${LIBS} \
++	${CC} ${LDFLAGS} ${TCLSH_OBJS} @TCL_BUILD_LIB_SPEC@ -lreadline -lncurses ${LIBS} \
  		@TCL_LD_SEARCH_FLAGS@ -o tclsh
  
  tcltest: ${TCLTEST_OBJS} ${TCL_LIB_FILE} ${BUILD_DLTEST}
