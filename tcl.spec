@@ -4,7 +4,7 @@ Summary(pl):	Tool Command Language - jêzyk skryptowy z bibliotekami dynamicznymi
 Summary(tr):	TCL ile kullanýlabilen betik dili
 Name:		tcl
 Version:	8.0.5
-Release:	3
+Release:	31
 Group:		Development/Languages/Tcl
 Group(pl):	Programowanie/Jêzyki/Tcl
 Copyright:	BSD
@@ -15,6 +15,7 @@ Patch2:		tcl-tmpfix.patch
 Patch3:		tcl-manlnk.patch
 Patch4:		tcl-64bit.patch
 Patch5:		tcl-readline.patch
+Patch6:		tcl-headers_fix.patch
 Icon:		tcl.gif
 URL:		http://www.scriptics.com/
 BuildRequires:	ncurses-devel
@@ -74,6 +75,7 @@ Pliki nag³ówkowe oraz dokumentacja dla tcl (Tool Command Language)
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 
 %build
 cd unix
@@ -81,9 +83,8 @@ sed -e "s/^CFLAGS_OPTIMIZE=.*/CFLAGS_OPTIMIZE=\'%{optflags} -D_REENTRANT\'/" \
 	configure.in > configure.in.new
 mv -f configure.in.new configure.in
 autoconf
-LDFLAGS="-s" \
-./configure %{_target_platform} \
-	--prefix=%{_prefix} \
+LDFLAGS="-s"; export LDFLAGS
+%configure \
 	--enable-shared \
 	--enable-gcc
 make
@@ -104,12 +105,10 @@ make install \
 ln -sf libtcl8.0.so $RPM_BUILD_ROOT%{_libdir}/libtcl.so
 ln -sf tclsh8.0 $RPM_BUILD_ROOT%{_bindir}/tclsh
 
-install ../generic/{tclMath,tclInt,tclRegexp}.h tclUnixPort.h \
-	$RPM_BUILD_ROOT%{_includedir}
+strip $RPM_BUILD_ROOT%{_bindir}/*
+strip --strip-unneded $RPM_BUILD_ROOT%{_libdir}/lib*.so
 
-strip $RPM_BUILD_ROOT{%{_bindir}/*,%{_libdir}/libtcl8*.so}
-
-gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man?/* \
+gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man?/*
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
