@@ -1,54 +1,6 @@
-diff -durN tcl8.3.3.orig/generic/tclPort.h tcl8.3.3/generic/tclPort.h
---- tcl8.3.3.orig/generic/tclPort.h	Tue May 25 03:00:27 1999
-+++ tcl8.3.3/generic/tclPort.h	Sat Jun 16 20:00:47 2001
-@@ -24,7 +24,7 @@
- #   if defined(MAC_TCL)
- #	include "tclMacPort.h"
- #    else
--#	include "../unix/tclUnixPort.h"
-+#	include <tclUnixPort.h>
- #    endif
- #endif
- 
-diff -durN tcl8.3.3.orig/generic/tclPort.h.orig tcl8.3.3/generic/tclPort.h.orig
---- tcl8.3.3.orig/generic/tclPort.h.orig	Thu Jan  1 01:00:00 1970
-+++ tcl8.3.3/generic/tclPort.h.orig	Tue May 25 03:00:27 1999
-@@ -0,0 +1,31 @@
-+/*
-+ * tclPort.h --
-+ *
-+ *	This header file handles porting issues that occur because
-+ *	of differences between systems.  It reads in platform specific
-+ *	portability files.
-+ *
-+ * Copyright (c) 1994-1995 Sun Microsystems, Inc.
-+ *
-+ * See the file "license.terms" for information on usage and redistribution
-+ * of this file, and for a DISCLAIMER OF ALL WARRANTIES.
-+ *
-+ * RCS: @(#) $Id$
-+ */
-+
-+#ifndef _TCLPORT
-+#define _TCLPORT
-+
-+#include "tcl.h"
-+
-+#if defined(__WIN32__)
-+#   include "../win/tclWinPort.h"
-+#else
-+#   if defined(MAC_TCL)
-+#	include "tclMacPort.h"
-+#    else
-+#	include "../unix/tclUnixPort.h"
-+#    endif
-+#endif
-+
-+#endif /* _TCLPORT */
-diff -durN tcl8.3.3.orig/unix/Makefile.in tcl8.3.3/unix/Makefile.in
---- tcl8.3.3.orig/unix/Makefile.in	Sat Jun 16 20:00:01 2001
-+++ tcl8.3.3/unix/Makefile.in	Sat Jun 16 20:02:34 2001
-@@ -565,11 +565,11 @@
+--- tcl8.4.3/unix/Makefile.in.wiget	2003-06-09 22:18:03.000000000 +0200
++++ tcl8.4.3/unix/Makefile.in	2003-06-09 22:18:03.000000000 +0200
+@@ -639,11 +639,11 @@
  	    chmod +x $(SRC_DIR)/install-sh; \
  	    fi
  	@echo "Installing header files";
@@ -63,3 +15,14 @@ diff -durN tcl8.3.3.orig/unix/Makefile.in tcl8.3.3/unix/Makefile.in
  	@echo "Installing library files to $(SCRIPT_INSTALL_DIR)";
  	@for i in $(TOP_DIR)/library/*.tcl $(TOP_DIR)/library/tclIndex $(UNIX_DIR)/tclAppInit.c $(UNIX_DIR)/ldAix; \
  	    do \
+--- tcl8.4.3/generic/tclPort.h.wiget	2003-05-11 00:42:22.000000000 +0200
++++ tcl8.4.3/generic/tclPort.h	2003-06-09 22:20:37.000000000 +0200
+@@ -24,7 +24,7 @@
+ #   if defined(MAC_TCL)
+ #      include "tclMacPort.h"
+ #   else
+-#      include "../unix/tclUnixPort.h"
++#      include "tclUnixPort.h"
+ #   endif
+ #endif
+ 

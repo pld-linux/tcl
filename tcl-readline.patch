@@ -1,6 +1,6 @@
---- tcl8.0-8.0.4.orig/unix/Makefile.in
-+++ tcl8.0-8.0.4/unix/Makefile.in
-@@ -222,7 +222,7 @@
+--- tcl8.4.3/unix/Makefile.in.wiget	2003-05-23 02:47:23.000000000 +0200
++++ tcl8.4.3/unix/Makefile.in	2003-06-09 22:15:13.000000000 +0200
+@@ -295,7 +295,7 @@
  ${GENERIC_FLAGS} ${PROTO_FLAGS} ${MEM_DEBUG_FLAGS} \
  -DTCL_SHLIB_EXT=\"${SHLIB_SUFFIX}\"
  
@@ -8,18 +8,18 @@
 +TCLSH_OBJS = tclAppInit.o rl-tclMain.o
  
  TCLTEST_OBJS = tclTestInit.o tclTest.o tclTestObj.o tclTestProcBodyObj.o \
- 	tclUnixTest.o
-@@ -353,7 +353,7 @@
- 
+ 	tclThreadTest.o	tclUnixTest.o
+@@ -475,7 +475,7 @@
  
  tclsh: ${TCLSH_OBJS} ${TCL_LIB_FILE}
--	${CC} ${LDFLAGS} ${TCLSH_OBJS} @TCL_BUILD_LIB_SPEC@ ${LIBS} \
-+	${CC} ${LDFLAGS} ${TCLSH_OBJS} @TCL_BUILD_LIB_SPEC@ -lreadline -lncurses ${LIBS} \
- 		@TCL_LD_SEARCH_FLAGS@ -o tclsh
+ 	${CC} ${LDFLAGS} ${TCLSH_OBJS} @TCL_BUILD_LIB_SPEC@ ${LIBS} \
+-		${CC_SEARCH_FLAGS} -o tclsh
++		-lreadline -lncurses ${CC_SEARCH_FLAGS} -o tclsh
  
- tcltest: ${TCLTEST_OBJS} ${TCL_LIB_FILE} ${BUILD_DLTEST}
---- tcl8.0-8.0.4.orig/unix/rl-tclMain.c
-+++ tcl8.0-8.0.4/unix/rl-tclMain.c
+ # Resetting the LIB_RUNTIME_DIR below is required so that
+ # the generated tcltest executable gets the build directory
+--- /dev/null	1970-01-01 01:00:00.000000000 +0100
++++ tcl8.4.3/unix/rl-tclMain.c	2003-06-09 22:13:58.000000000 +0200
 @@ -0,0 +1,395 @@
 +/* 
 + * tclMain.c --
