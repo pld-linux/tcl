@@ -4,14 +4,21 @@ Summary(pl):	Tool Command Language - j瞛yk skryptowy z bibliotekami dynamicznymi
 Summary(tr):	TCL ile kullan�labilen betik dili
 Name:		tcl
 Version:	8.0.5
-Release:	1
+Release:	2
 Group:		Development/Languages/Tcl
 Group(pl):	Programowanie/J瞛yki/Tcl
-Source0:	ftp://ftp.scriptics.com/pub/tcl/tcl8_0/%{name}%{version}.tar.gz
-Patch:		tcl-ieee.patch
 Copyright:	BSD
-URL:		http://www.scriptics.com/
+Source0:	ftp://ftp.scriptics.com/pub/tcl/tcl8_0/%{name}%{version}.tar.gz
+Patch0:		tcl-ieee.patch
+Patch1:		tcl-glibc21.patch
+Patch2:		tcl-tmpfix.patch
+Patch3:		tcl-manlnk.patch
+Patch4:		tcl-64bit.patch
+Patch5:		tcl-readline.patch
 Icon:		tcl.gif
+URL:		http://www.scriptics.com/
+BuildPrereq:	ncurses-devel
+BuildPrereq:	readline-devel
 Buildroot:	/tmp/%{name}-%{version}-root
 
 %description
@@ -60,16 +67,20 @@ develppment documentation.
 Pliki nag堯wkowe oraz dokumentacja dla tcl (Tool Command Language) 
 
 %prep
-%setup -q -n %{name}%{version}
-%patch -p1
-cd unix
-autoconf
+%setup  -q -n %{name}%{version}
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
+%patch3 -p1
+%patch4 -p1
+%patch5 -p1
 
 %build
 cd unix
+autoconf
 CFLAGS="$RPM_OPT_FLAGS -D_REENTRANT" LDFLAGS="-s" \
 ./configure %{_target} \
-	--prefix=/usr \
+	--prefix=%{_prefix} \
 	--enable-shared \
 	--enable-gcc
 make
@@ -79,13 +90,18 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/usr
 
 cd unix
-make INSTALL_ROOT=$RPM_BUILD_ROOT install
+make install \
+	INSTALL_ROOT=$RPM_BUILD_ROOT \
+	MAN_INSTALL_DIR=$RPM_BUILD_ROOT%{_mandir}
+
 ln -sf libtcl8.0.so $RPM_BUILD_ROOT%{_libdir}/libtcl.so
 ln -sf tclsh8.0 $RPM_BUILD_ROOT%{_bindir}/tclsh
 
 install ../generic/{tclMath,tclInt}.h $RPM_BUILD_ROOT%{_includedir}
 
-strip $RPM_BUILD_ROOT/usr/{bin/*,lib/lib*.so}
+strip $RPM_BUILD_ROOT{%{_bindir}/*,%{_libdir}/libtcl8*.so}
+
+gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man?/* \
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
@@ -96,84 +112,24 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/*
-%{_mandir}/man1/*
 %attr(755,root,root) %{_libdir}/lib*.so
 %{_libdir}/tcl*
+%{_mandir}/man1/*
 
 %files devel
 %defattr(644,root,root,755)
-%{_includedir}/*
 %attr(755,root,root) %{_libdir}/tclConfig.sh
+%{_includedir}/*
 %{_mandir}/man[3n]/*
 
 %changelog
-* Fri Mar 19 1999 Tomasz K這czko <kloczek@rudy.mif.pg.gda.pl>
-  [8.0.5-1]
-- added LDFLAGS="-s" to ./configure enviroment,
-- removed man group from man pages.
-
-* Thu Oct 13 1998 Tomasz K這czko <kloczek@rudy.mif.pg.gda.pl>
-  [8.0.3-21]
-- changed way passing $RPM_OPT_FLAGS.
-
-* Mon Oct 05 1998 Wojtek 奸usarczyk <wojtek@shadow.eu.org>
-- added pl translation,
-- fixed man pages group.
-
-* Thu Sep  8 1998 Tomasz K這czko <kloczek@rudy.mif.pg.gda.pl>
-  [8.0pl2-3]
-- added "Requires: %{name} = %%{version}" for devel,
-- added tclInt.h to devel (required on compile expect).
-
-* Mon Aug 24 1998 Tomasz K這czko <kloczek@rudy.mif.pg.gda.pl>
-  [8.0pl2-2]
-- added tclMath.h to devel (required on compile tk).
-
-* Sat Aug 22 1998 Tomasz K這czko <kloczek@rudy.mif.pg.gda.pl>
-  [8.0pl2-1]
-- tcl is now in separated source package from orher tcl/tk stuff,
-- changed Buildroot to /tmp/%%{name}-%%{version}-root,
-- added using %%{name} and %%{version} in Source,
-- fixed using $RPM_OPT_FLAGS during compile (curren tcl configure script don't
-  accept passing CFLAGS in enviroment variable),
-- added stripping shared libraries and tclsh binary,
-- added devel subpackage,
-- added URL,
-- added package icon,
-- updated Source Url to based on ftp://ftp.scriptics.com/,
-- added %attr and %defattr macros in %files (allows build package from
-  non-root account).
-
-* Thu May 07 1998 Prospector System <bugs@redhat.com>
-- translations modified for de, fr, tr
-
-* Sat May 02 1998 Cristian Gafton <gafton@redhat.com>
-- fixed expect binaries exec permissions
-
-* Thu Apr 09 1998 Erik Troan <ewt@redhat.com>
-- updated to Tix 4.1.0.006
-- updated version numbers of tcl/tk to relflect includsion of p2
-
-* Wed Mar 25 1998 Cristian Gafton <gafton@redhat.com>
-- updated tcl/tk to patch level 2
-- updated tclX to 8.0.2
-
-* Thu Oct 30 1997 Otto Hammersmith <otto@redhat.com>
-- fixed filelist for tix... replacing path to the expect binary in scripts
-  was leaving junk files around.
-
-* Wed Oct 22 1997 Otto Hammersmith <otto@redhat.com>
-- added patch to remove libieee test in configure.in for tcl and tk.
-  Shoudln't be needed anymore for glibc systems, but this isn't the "proper" 
-  solution for all systems
-- fixed src urls
-
-* Mon Oct 06 1997 Erik Troan <ewt@redhat.com>
-- removed version numbers from descriptions
-
-* Mon Sep 22 1997 Erik Troan <ewt@redhat.com>
-- updated to tcl/tk 8.0 and related versions of packages
-
-* Tue Jun 17 1997 Erik Troan <ewt@redhat.com>
-- built against glibc
-- fixed dangling tclx/tkx symlinks
+* Sun May 30 1999 Tomasz K這czko <kloczek@rudy.mif.pg.gda.pl>
+  [8.0.5-2]
+- based on RH spec,
+- added patches:
+-- tcl-glibc21.patch - fiix problems on glibc 2.1 (RH 6.0),
+-- tcl-tmpfix.patch - fix tmp race (from Debian),
+-- tcl-manlnk.patch - make some ,man pages as *roff include,
+-- tcl-64bit.patch - fix problems on 64-bit architectures,
+-- tcl-readline.patch -- add ability to use readline in tclsh,
+- spec rewrited by PLD team.
