@@ -4,10 +4,10 @@ Summary(pl):	Tool Command Language - jêzyk skryptowy z bibliotekami dynamicznymi
 Summary(tr):	TCL ile kullanýlabilen betik dili
 Name:		tcl
 Version:	8.0.5
-Release:	32
+Release:	33
+Copyright:	BSD
 Group:		Development/Languages/Tcl
 Group(pl):	Programowanie/Jêzyki/Tcl
-Copyright:	BSD
 Source0:	ftp://ftp.scriptics.com/pub/tcl/tcl8_0/%{name}%{version}.tar.gz
 Patch0:		tcl-ieee.patch
 Patch1:		tcl-glibc21.patch
@@ -19,7 +19,7 @@ Patch6:		tcl-headers_fix.patch
 Icon:		tcl.gif
 URL:		http://www.scriptics.com/
 BuildRequires:	ncurses-devel >= 5.0
-BuildRequires:	readline-devel
+BuildRequires:	readline-devel >= 4.1
 Buildroot:	/tmp/%{name}-%{version}-root
 
 %description
