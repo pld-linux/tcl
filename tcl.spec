@@ -32,10 +32,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define	_ulibdir /usr/lib
 
-%if %(test "%{_libdir}" = "%{_ulibdir}"; echo $?)
+%if "%{_libdir}" != "%{_ulibdir}"
 %define have_ulibdir 1
 %endif
-
 
 %description
 TCL is a simple scripting language that is designed to be embedded in
