@@ -19,6 +19,7 @@ Icon:		tcl.gif
 URL:		http://www.scriptics.com/
 BuildPrereq:	ncurses-devel
 BuildPrereq:	readline-devel
+BuildPrereq:	XFree86-devel
 Buildroot:	/tmp/%{name}-%{version}-root
 
 %description
