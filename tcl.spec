@@ -1,4 +1,3 @@
-%define	major 8.4
 Summary:	Tool Command Language embeddable scripting language, with shared libraries
 Summary(fr):	Tool Command Language, langage de script avec bibliothХques partagИes
 Summary(pl):	Tool Command Language - jЙzyk skryptowy z bibliotekami dynamicznymi
@@ -6,12 +5,13 @@ Summary(ru):	Tool Command Language - встраиваемый язык скриптов
 Summary(tr):	TCL ile kullanЩlabilen betik dili
 Summary(uk):	Tool Command Language - вбудовувана мова скрипт╕в
 Name:		tcl
-Version:	%{major}.4
-Release:	2
+%define	major	8.4
+Version:	%{major}.5
+Release:	1
 License:	BSD
 Group:		Development/Languages/Tcl
 Source0:	http://dl.sourceforge.net/tcl/%{name}%{version}-src.tar.gz
-# Source0-md5:	e503db5f1d762c2a3bbe7cb02c630659
+# Source0-md5:	3fb354dba28166a1004f9103553a3974
 Source1:	%{name}-pl-man-pages.tar.bz2
 # Source1-md5:	dd3370f2b588763758787831a4bf48fc
 Patch0:		%{name}-glibc21.patch
@@ -97,7 +97,7 @@ develppment documentation.
 Pliki nagЁСwkowe oraz dokumentacja dla tcl (Tool Command Language).
 
 %prep
-%setup  -q -n %{name}%{version}
+%setup -q -n %{name}%{version}
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
@@ -129,8 +129,7 @@ mv -f tclConfig.sh.new tclConfig.sh
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_prefix},%{_mandir}/man1}
 
-cd unix
-%{__make} install \
+%{__make} -C unix install \
 	INSTALL_ROOT=$RPM_BUILD_ROOT \
 	MAN_INSTALL_DIR=$RPM_BUILD_ROOT%{_mandir}
 
