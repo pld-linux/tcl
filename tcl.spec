@@ -81,6 +81,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755, root, root) /usr/bin/*
 %attr(644, root, root) /usr/man/man1/*
 %attr(755, root, root) /usr/lib/lib*.so
+/usr/lib/tcl8.0
 
 %files devel
 %defattr(644, root, root, 755)
