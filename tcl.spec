@@ -26,7 +26,7 @@ Patch8:		%{name}-system_encoding.patch
 Patch9:		%{name}-mannames.patch
 Patch10:	%{name}-soname_fix.patch
 Icon:		tcl.gif
-URL:		http://www.scriptics.com/
+URL:		http://www.tcl.tk/
 BuildRequires:	autoconf
 BuildRequires:	ncurses-devel >= 5.2
 BuildRequires:	readline-devel >= 4.2
