@@ -5,11 +5,12 @@ Summary(tr):	TCL ile kullanýlabilen betik dili
 Name:		tcl
 Version:	8.0.5
 Release:	1
+Group:		Development/Languages/Tcl
+Group(pl):	Programowanie/Jêzyki/Tcl
 Source0:	ftp://ftp.scriptics.com/pub/tcl/tcl8_0/%{name}%{version}.tar.gz
 Patch:		tcl-ieee.patch
 Copyright:	BSD
 URL:		http://www.scriptics.com/
-Group:		Development/Languages/Tcl
 Icon:		tcl.gif
 Buildroot:	/tmp/%{name}-%{version}-root
 
@@ -48,6 +49,7 @@ yaygýn kullanýlmaktadýr.
 Summary:	Tool Command Language header files and development documentation
 Summary(pl):	Pliki nag³ówkowe oraz dokumentacja dla tcl (Tool Command Language)
 Group:		Development/Languages/Tcl
+Group(pl):	Programowanie/Jêzyki/Tcl
 Requires:	%{name} = %{version}
 
 %description devel
@@ -66,7 +68,7 @@ autoconf
 %build
 cd unix
 CFLAGS="$RPM_OPT_FLAGS -D_REENTRANT" LDFLAGS="-s" \
-./configure \
+./configure %{_target} \
 	--prefix=/usr \
 	--enable-shared \
 	--enable-gcc
@@ -99,7 +101,7 @@ rm -rf $RPM_BUILD_ROOT
 /usr/lib/tcl*
 
 %files devel
-%defattr(644, root, root, 755)
+%defattr(644,root,root,755)
 /usr/include/*
 %attr(755,root,root) /usr/lib/tclConfig.sh
 /usr/man/man[3n]/*
