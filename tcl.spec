@@ -4,7 +4,7 @@ Summary(pl):	Tool Command Language - jêzyk skryptowy z bibliotekami dynamicznymi
 Summary(tr):	TCL ile kullanýlabilen betik dili
 Name:		tcl
 Version:	8.3.2
-Release:	50
+Release:	51
 License:	BSD
 Group:		Development/Languages/Tcl
 Group(de):	Entwicklung/Sprachen/Tcl
@@ -93,6 +93,8 @@ mv -f Makefile.in.new Makefile.in
 autoconf
 %configure \
 	--enable-shared \
+	--enable-threads \
+	--enable-64bit \
 	--enable-gcc
 %{__make}
 
