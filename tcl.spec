@@ -102,7 +102,7 @@ rm -rf $RPM_BUILD_ROOT
 
 * Sat Aug 22 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [8.0pl2-1]
-- tcl is now separated source package from orher tcl/tk stuff,
+- tcl is now in separated source package from orher tcl/tk stuff,
 - changed Buildroot to /tmp/%%{name}-%%{version}-root,
 - added using %%{name} and %%{version} in Source,
 - fixed using $RPM_OPT_FLAGS during compile (curren tcl configure script don't
