@@ -4,12 +4,13 @@ Summary(pl):	Tool Command Language - jêzyk skryptowy z bibliotekami dynamicznymi
 Summary(tr):	TCL ile kullanýlabilen betik dili
 Name:		tcl
 Version:	8.3.4
-Release:	1
+Release:	2
 License:	BSD
 Group:		Development/Languages/Tcl
 Group(de):	Entwicklung/Sprachen/Tcl
 Group(pl):	Programowanie/Jêzyki/Tcl
 Source0:	ftp://ftp.scriptics.com/pub/tcl/tcl8_3/%{name}%{version}.tar.gz
+Source1:	tclsh.1.pl
 Patch0:		%{name}-glibc21.patch
 Patch1:		%{name}-tmpfix.patch
 Patch2:		%{name}-manlnk.patch
@@ -101,7 +102,7 @@ mv -f tclConfig.sh.new tclConfig.sh
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_prefix}
+install -d $RPM_BUILD_ROOT{%{_prefix},%{_mandir}/{,pl}/man1}
 
 cd unix
 %{__make} install \
@@ -110,6 +111,8 @@ cd unix
 
 ln -sf libtcl8.3.so $RPM_BUILD_ROOT%{_libdir}/libtcl.so
 mv -f $RPM_BUILD_ROOT%{_bindir}/tclsh8.3 $RPM_BUILD_ROOT%{_bindir}/tclsh
+
+install %{SOURCE1} $RPM_BUILD_ROOT%{_mandir}/pl/man1/tclsh.1
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -123,6 +126,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/lib*.so
 %{_libdir}/tcl8.3
 %{_mandir}/man1/*
+%lang(pl) %{_mandir}/pl/man1/*
 
 %files devel
 %defattr(644,root,root,755)
