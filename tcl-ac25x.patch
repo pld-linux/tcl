@@ -36,9 +36,9 @@
  fi
  
  #--------------------------------------------------------------------
---- tcl8.4.3/unix/tcl.m4.wiget	2003-05-23 02:47:23.000000000 +0200
-+++ tcl8.4.3/unix/tcl.m4	2003-06-09 22:32:06.000000000 +0200
-@@ -884,7 +884,7 @@
+--- tcl8.4.7/unix/tcl.m4.orig	2004-07-26 23:40:46.000000000 +0200
++++ tcl8.4.7/unix/tcl.m4	2004-08-05 23:35:20.341554280 +0200
+@@ -904,7 +904,7 @@
  
  	    # AIX v<=4.1 has some different flags than 4.2+
  	    if test "$system" = "AIX-4.1" -o "`uname -v`" -lt "4" ; then
@@ -47,16 +47,16 @@
  		DL_LIBS="-lld"
  	    fi
  
-@@ -1131,7 +1131,7 @@
+@@ -1162,7 +1162,7 @@
  	    # is kind of overkill but it works.
  	    # Disable inlining only when one of the
  	    # files in compat/*.c is being linked in.
 -	    if test x"${LIBOBJS}" != x ; then
 +	    if test x"${LIB@&t@OBJS}" != x ; then
- 	        EXTRA_CFLAGS="${EXTRA_CFLAGS} -fno-inline"
+ 	        CFLAGS="$CFLAGS -fno-inline"
  	    fi
  
-@@ -2243,7 +2243,7 @@
+@@ -2283,7 +2283,7 @@
  	    AC_MSG_RESULT(ok)
  	else
  	    AC_MSG_RESULT(buggy)
