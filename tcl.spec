@@ -87,7 +87,6 @@ sed -e "s/^CFLAGS_OPTIMIZE=.*/CFLAGS_OPTIMIZE=\'%{optflags} -D_REENTRANT\'/" \
 	configure.in > configure.in.new
 mv -f configure.in.new configure.in
 autoconf
-LDFLAGS="-s"; export LDFLAGS
 %configure \
 	--enable-shared \
 	--enable-gcc
@@ -108,11 +107,6 @@ cd unix
 
 ln -sf libtcl8.3.so $RPM_BUILD_ROOT%{_libdir}/libtcl.so
 ln -sf tclsh8.3 $RPM_BUILD_ROOT%{_bindir}/tclsh
-
-
-#strip $RPM_BUILD_ROOT%{_bindir}/tclsh8.3
-#strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/libtcl8.3.so
-#gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man?/*
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
