@@ -7,8 +7,6 @@ Version:	8.3.4
 Release:	3
 License:	BSD
 Group:		Development/Languages/Tcl
-Group(de):	Entwicklung/Sprachen/Tcl
-Group(pl):	Programowanie/Jêzyki/Tcl
 Source0:	ftp://ftp.scriptics.com/pub/tcl/tcl8_3/%{name}%{version}.tar.gz
 Source1:	%{name}-pl-man-pages.tar.bz2
 Patch0:		%{name}-glibc21.patch
@@ -62,8 +60,6 @@ konusunda son derece yaygýn kullanýlmaktadýr.
 Summary:	Tool Command Language header files and development documentation
 Summary(pl):	Pliki nag³ówkowe oraz dokumentacja dla tcl (Tool Command Language)
 Group:		Development/Languages/Tcl
-Group(de):	Entwicklung/Sprachen/Tcl
-Group(pl):	Programowanie/Jêzyki/Tcl
 Requires:	%{name} = %{version}
 
 %description devel
