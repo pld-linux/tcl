@@ -133,7 +133,7 @@ rm -rf $RPM_BUILD_ROOT
 - added URL,
 - added package icon,
 - updated Source Url to based on ftp://ftp.scriptics.com/,
-- added %attr and %defattr macros in %files (allow build package from
+- added %attr and %defattr macros in %files (allows build package from
   non-root account).
 
 * Thu May 07 1998 Prospector System <bugs@redhat.com>
