@@ -12,8 +12,8 @@ License:	BSD
 Group:		Development/Languages/Tcl
 Source0:	http://dl.sourceforge.net/tcl/%{name}%{version}-src.tar.gz
 # Source0-md5:	fedc2fa745db19c91e7f92aeeca75497
-#Source1-md5:	dd3370f2b588763758787831a4bf48fc
 Source1:	%{name}-pl-man-pages.tar.bz2
+#Source1-md5:	dd3370f2b588763758787831a4bf48fc
 Patch0:		%{name}-glibc21.patch
 Patch1:		%{name}-tmpfix.patch
 Patch2:		%{name}-manlnk.patch
