@@ -1,11 +1,23 @@
---- tcl8.3.4/unix/Makefile.in.orig	Tue May 20 13:43:06 2003
-+++ tcl8.3.4/unix/Makefile.in	Tue May 20 13:45:59 2003
-@@ -417,7 +417,7 @@
+--- tcl8.3.4/unix/tcl.m4.wiget	2003-06-04 16:59:59.301863737 +0200
++++ tcl8.3.4/unix/tcl.m4	2003-06-04 17:01:23.680635631 +0200
+@@ -828,7 +828,7 @@
+ 	Linux*)
+ 	    SHLIB_CFLAGS="-fPIC"
+ 	    SHLIB_LD_LIBS='${LIBS}'
+-	    SHLIB_SUFFIX=".so"
++	    SHLIB_SUFFIX=".so.0.0"
+ 
+ 	    # egcs-2.91.66 on Redhat Linux 6.0 generates lots of warnings 
+ 	    # when you inline the string and math operations.  Turn this off to
+--- tcl8.3.4/unix/Makefile.in.wiget	2003-06-04 16:59:59.280877222 +0200
++++ tcl8.3.4/unix/Makefile.in	2003-06-04 17:02:05.161970185 +0200
+@@ -417,7 +417,8 @@
  # a shared library or non-shared library for Tcl.
  ${TCL_LIB_FILE}: ${OBJS} ${STUB_LIB_FILE}
  	rm -f ${TCL_LIB_FILE}
 -	@MAKE_LIB@
-+	@MAKE_LIB@ -Wl,-soname,libtcl8.3.so
++	@MAKE_LIB@ -Wl,-soname,libtcl${VERSION}.so.0
++	-ln -sf ${TCL_LIB_FILE} libtcl${VERSION}.so
  	if test "x@DL_OBJS@" = "xtclLoadAout.o"; then \
  		$(RANLIB) ${TCL_LIB_FILE}; \
  	fi
