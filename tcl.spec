@@ -122,7 +122,7 @@ mv -f Makefile.in.new Makefile.in
 %{__autoconf}
 %configure \
 	--enable-shared \
-	--disable-threads \
+	--enable-threads \
 	--enable-64bit \
 	--enable-gcc
 %{__make} \
