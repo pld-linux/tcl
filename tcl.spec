@@ -8,7 +8,7 @@ Name:		tcl
 %define	major	8.5
 Version:	%{major}
 %define	rel	a2
-Release:	0.%{rel}.1
+Release:	0.%{rel}.2
 License:	BSD
 Group:		Development/Languages/Tcl
 Source0:	http://dl.sourceforge.net/tcl/%{name}%{version}%{rel}-src.tar.gz
@@ -161,7 +161,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
-%{_libdir}/tcl[0-9]
+%{_ulibdir}/tcl[0-9]
 %{_libdir}/tcl%{major}
 %{?have_ulibdir:%{_ulibdir}/tcl%{major}}
 %{_mandir}/man1/*
