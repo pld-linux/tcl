@@ -8,7 +8,7 @@ Name:		tcl
 %define	major	8.5
 Version:	%{major}
 %define	rel	a2
-Release:	0.%{rel}.2
+Release:	0.%{rel}.3
 License:	BSD
 Group:		Development/Languages/Tcl
 Source0:	http://dl.sourceforge.net/tcl/%{name}%{version}%{rel}-src.tar.gz
@@ -23,6 +23,7 @@ Patch4:		%{name}-opt.patch
 Patch6:		%{name}-mannames.patch
 Patch7:		%{name}-soname_fix.patch
 Patch8:		%{name}-norpath.patch
+Patch9:		%{name}-gcc4.patch
 Icon:		tcl.gif
 URL:		http://www.tcl.tk/
 BuildRequires:	autoconf
@@ -112,6 +113,7 @@ Pliki nag³ówkowe oraz dokumentacja dla Tcl (Tool Command Language).
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
+%patch9 -p1
 
 %build
 cd unix
