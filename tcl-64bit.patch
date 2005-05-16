@@ -9,3 +9,14 @@
  	*intPtr = (int)l;
  	return TCL_OK;
      }
+--- tcl8.4.9/generic/tclGet.c.orig	2002-11-19 03:34:49.000000000 +0100
++++ tcl8.4.9/generic/tclGet.c	2005-05-16 22:09:40.000000000 +0200
+@@ -92,7 +92,7 @@
+      * an int.
+      */
+ 
+-    if ((errno == ERANGE) || (((long)(int) i) != i)) {
++    if ((errno == ERANGE) || (i > UINT_MAX) || (i < INT_MIN)) {
+         if (interp != (Tcl_Interp *) NULL) {
+ 	    Tcl_SetResult(interp, "integer value too large to represent",
+ 		    TCL_STATIC);
