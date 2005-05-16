@@ -8,7 +8,7 @@ Name:		tcl
 %define	major	8.5
 Version:	%{major}
 %define	rel	a2
-Release:	0.%{rel}.3
+Release:	0.%{rel}.4
 License:	BSD
 Group:		Development/Languages/Tcl
 Source0:	http://dl.sourceforge.net/tcl/%{name}%{version}%{rel}-src.tar.gz
