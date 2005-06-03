@@ -7,7 +7,7 @@ Summary(uk):	Tool Command Language - вбудовувана мова скрипт╕в
 Name:		tcl
 %define	major	8.4
 Version:	%{major}.9
-Release:	2
+Release:	3
 License:	BSD
 Group:		Development/Languages/Tcl
 Source0:	http://dl.sourceforge.net/tcl/%{name}%{version}-src.tar.gz
@@ -16,13 +16,12 @@ Source1:	%{name}-pl-man-pages.tar.bz2
 # Source1-md5:	dd3370f2b588763758787831a4bf48fc
 Patch0:		%{name}-glibc21.patch
 Patch1:		%{name}-64bit.patch
-Patch2:		%{name}-readline.patch
-Patch3:		%{name}-headers_fix.patch
-Patch4:		%{name}-opt.patch
-Patch5:		%{name}-ac25x.patch
-Patch6:		%{name}-mannames.patch
-Patch7:		%{name}-soname_fix.patch
-Patch8:		%{name}-norpath.patch
+Patch2:		%{name}-headers_fix.patch
+Patch3:		%{name}-opt.patch
+Patch4:		%{name}-ac25x.patch
+Patch5:		%{name}-mannames.patch
+Patch6:		%{name}-soname_fix.patch
+Patch7:		%{name}-norpath.patch
 Icon:		tcl.gif
 URL:		http://www.tcl.tk/
 BuildRequires:	autoconf
@@ -112,7 +111,6 @@ Pliki nagЁСwkowe oraz dokumentacja dla Tcl (Tool Command Language).
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
-%patch8 -p1
 
 %build
 cd unix
