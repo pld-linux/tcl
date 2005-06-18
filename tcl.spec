@@ -16,6 +16,7 @@ Source0:	http://dl.sourceforge.net/tcl/%{name}%{version}%{rel}-src.tar.gz
 Source1:	%{name}-pl-man-pages.tar.bz2
 # Source1-md5:	dd3370f2b588763758787831a4bf48fc
 Patch0:		%{name}-glibc21.patch
+Patch1:		%{name}-ieee.patch
 Patch2:		%{name}-readline.patch
 Patch3:		%{name}-headers_fix.patch
 Patch4:		%{name}-opt.patch
@@ -104,6 +105,7 @@ Pliki nag³ówkowe oraz dokumentacja dla Tcl (Tool Command Language).
 %prep
 %setup -q -n %{name}%{version}%{rel}
 %patch0 -p1
+%patch1 -p1
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
