@@ -6,16 +6,15 @@ Summary(tr):	Tcl ile kullanýlabilen betik dili
 Summary(uk):	Tool Command Language - ×ÂÕÄÏ×Õ×ÁÎÁ ÍÏ×Á ÓËÒÉÐÔ¦×
 Name:		tcl
 %define	major	8.4
-Version:	%{major}.9
-Release:	3
+Version:	%{major}.11
+Release:	1
 License:	BSD
 Group:		Development/Languages/Tcl
 Source0:	http://dl.sourceforge.net/tcl/%{name}%{version}-src.tar.gz
-# Source0-md5:	7e01b409925e4eb59ad44a4c12b9c681
+# Source0-md5:	629dfea34e4087eb4683f834060abb63
 Source1:	%{name}-pl-man-pages.tar.bz2
 # Source1-md5:	dd3370f2b588763758787831a4bf48fc
 Patch0:		%{name}-glibc21.patch
-Patch1:		%{name}-64bit.patch
 Patch2:		%{name}-headers_fix.patch
 Patch3:		%{name}-opt.patch
 Patch4:		%{name}-ac25x.patch
@@ -104,7 +103,6 @@ Pliki nag³ówkowe oraz dokumentacja dla Tcl (Tool Command Language).
 %prep
 %setup -q -n %{name}%{version}
 %patch0 -p1
-%patch1 -p1
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1

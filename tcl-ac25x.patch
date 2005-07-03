@@ -1,15 +1,16 @@
---- tcl8.4.3/unix/configure.in.wiget	2003-05-23 02:47:23.000000000 +0200
-+++ tcl8.4.3/unix/configure.in	2003-06-09 22:31:35.000000000 +0200
-@@ -196,7 +196,7 @@
-     AC_MSG_RESULT(yes)
- else
-     AC_MSG_RESULT([broken, using substitute])
--    LIBOBJS="$LIBOBJS strstr.o"
-+    AC_LIBOBJ([strstr])
+diff -urbB tcl8.4.11.org/unix/configure.in tcl8.4.11/unix/configure.in
+--- tcl8.4.11.org/unix/configure.in	2005-06-29 16:40:33.000000000 +0000
++++ tcl8.4.11/unix/configure.in	2005-07-03 22:38:29.358306352 +0000
+@@ -217,7 +217,7 @@
+         AC_MSG_RESULT(yes)
+     else
+         AC_MSG_RESULT([broken, using substitute])
+-        LIBOBJS="$LIBOBJS strstr.o"
++	AC_LIBOBJ([strstr])
+     fi
  fi
  
- #--------------------------------------------------------------------
-@@ -221,7 +221,7 @@
+@@ -243,7 +243,7 @@
  }], , tcl_ok=0, tcl_ok=0)
  if test "$tcl_ok" = 0; then
      test -n "$verbose" && echo "	Adding strtoul.o."
@@ -18,7 +19,7 @@
  fi
  
  #--------------------------------------------------------------------
-@@ -245,7 +245,7 @@
+@@ -267,7 +267,7 @@
  }], , tcl_ok=0, tcl_ok=0)
  if test "$tcl_ok" = 0; then
      test -n "$verbose" && echo "	Adding strtod.o."
@@ -27,7 +28,7 @@
  fi
  
  #--------------------------------------------------------------------
-@@ -327,7 +327,7 @@
+@@ -349,7 +349,7 @@
      AC_CHECK_LIB(inet, strncasecmp, tcl_ok=1, tcl_ok=0)
  fi
  if test "$tcl_ok" = 0; then
@@ -36,9 +37,10 @@
  fi
  
  #--------------------------------------------------------------------
---- tcl8.4.7/unix/tcl.m4.orig	2004-07-26 23:40:46.000000000 +0200
-+++ tcl8.4.7/unix/tcl.m4	2004-08-05 23:35:20.341554280 +0200
-@@ -904,7 +904,7 @@
+diff -urbB tcl8.4.11.org/unix/tcl.m4 tcl8.4.11/unix/tcl.m4
+--- tcl8.4.11.org/unix/tcl.m4	2005-06-29 16:40:33.000000000 +0000
++++ tcl8.4.11/unix/tcl.m4	2005-07-03 22:37:51.933995712 +0000
+@@ -952,7 +952,7 @@
  
  	    # AIX v<=4.1 has some different flags than 4.2+
  	    if test "$system" = "AIX-4.1" -o "`uname -v`" -lt "4" ; then
@@ -47,7 +49,7 @@
  		DL_LIBS="-lld"
  	    fi
  
-@@ -1162,7 +1162,7 @@
+@@ -1194,7 +1194,7 @@
  	    # is kind of overkill but it works.
  	    # Disable inlining only when one of the
  	    # files in compat/*.c is being linked in.
@@ -56,7 +58,7 @@
  	        CFLAGS="$CFLAGS -fno-inline"
  	    fi
  
-@@ -2283,7 +2283,7 @@
+@@ -2406,7 +2406,7 @@
  	    AC_MSG_RESULT(ok)
  	else
  	    AC_MSG_RESULT(buggy)

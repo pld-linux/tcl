@@ -1,22 +1,6 @@
---- tcl8.4.3/unix/Makefile.in.wiget	2003-06-09 22:18:03.000000000 +0200
-+++ tcl8.4.3/unix/Makefile.in	2003-06-09 22:18:03.000000000 +0200
-@@ -639,11 +639,11 @@
- 	    chmod +x $(SRC_DIR)/install-sh; \
- 	    fi
- 	@echo "Installing header files";
--	@for i in $(GENERIC_DIR)/tcl.h $(GENERIC_DIR)/tclDecls.h \
--		$(GENERIC_DIR)/tclPlatDecls.h ; \
-+	@for i in tcl.h tclDecls.h tclIntDecls.h tclMath.h tclInt.h tclPort.h tclRegexp.h tclPlatDecls.h tclIntPlatDecls.h ; \
- 	    do \
--	    $(INSTALL_DATA) $$i $(INCLUDE_INSTALL_DIR); \
-+	    $(INSTALL_DATA) $(GENERIC_DIR)/$$i $(INCLUDE_INSTALL_DIR); \
- 	    done;
-+	    $(INSTALL_DATA) $(UNIX_DIR)/tclUnixPort.h $(INCLUDE_INSTALL_DIR);
- 	@echo "Installing library files to $(SCRIPT_INSTALL_DIR)";
- 	@for i in $(TOP_DIR)/library/*.tcl $(TOP_DIR)/library/tclIndex $(UNIX_DIR)/tclAppInit.c $(UNIX_DIR)/ldAix; \
- 	    do \
---- tcl8.4.3/generic/tclPort.h.wiget	2003-05-11 00:42:22.000000000 +0200
-+++ tcl8.4.3/generic/tclPort.h	2003-06-09 22:20:37.000000000 +0200
+diff -urbB tcl8.4.11.org/generic/tclPort.h tcl8.4.11/generic/tclPort.h
+--- tcl8.4.11.org/generic/tclPort.h	2003-04-16 23:31:46.000000000 +0000
++++ tcl8.4.11/generic/tclPort.h	2005-07-03 22:35:39.529124312 +0000
 @@ -24,7 +24,7 @@
  #   if defined(MAC_TCL)
  #      include "tclMacPort.h"
@@ -26,3 +10,21 @@
  #   endif
  #endif
  
+diff -urbB tcl8.4.11.org/unix/Makefile.in tcl8.4.11/unix/Makefile.in
+--- tcl8.4.11.org/unix/Makefile.in	2005-06-29 16:40:32.000000000 +0000
++++ tcl8.4.11/unix/Makefile.in	2005-07-03 22:37:10.315322712 +0000
+@@ -658,11 +658,11 @@
+ 	    chmod +x $(SRC_DIR)/install-sh; \
+ 	    fi
+ 	@echo "Installing header files";
+-	@for i in $(GENERIC_DIR)/tcl.h $(GENERIC_DIR)/tclDecls.h \
+-		$(GENERIC_DIR)/tclPlatDecls.h; \
++	@for i in tcl.h tclDecls.h tclIntDecls.h tclMath.h tclInt.h tclPort.h tclRegexp.h tclPlatDecls.h tclIntPlatDecls.h; \
+ 	    do \
+-	    $(INSTALL_DATA) $$i $(INCLUDE_INSTALL_DIR); \
++	    $(INSTALL_DATA) $(GENERIC_DIR)/$$i $(INCLUDE_INSTALL_DIR); \
+ 	    done;
++	    $(INSTALL_DATA) $(UNIX_DIR)/tclUnixPort.h $(INCLUDE_INSTALL_DIR);
+ 	@echo "Installing library files to $(SCRIPT_INSTALL_DIR)";
+ 	@for i in $(TOP_DIR)/library/*.tcl $(TOP_DIR)/library/tclIndex $(UNIX_DIR)/tclAppInit.c $(UNIX_DIR)/ldAix; \
+ 	    do \
