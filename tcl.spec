@@ -113,9 +113,8 @@ Pliki nag³ówkowe oraz dokumentacja dla Tcl (Tool Command Language).
 
 %build
 cd unix
-sed -e "s/^CFLAGS_OPTIMIZE.*/CFLAGS_OPTIMIZE=%{rpmcflags} -D__NO_STRING_INLINES -D__NO_MATH_INLINES -D_REENTRANT/" \
-	Makefile.in > Makefile.in.new
-mv -f Makefile.in.new Makefile.in
+sed -i -e "s/^CFLAGS_OPTIMIZE.*/CFLAGS_OPTIMIZE=%{rpmcflags} -D__NO_STRING_INLINES -D__NO_MATH_INLINES -D_REENTRANT/" \
+	Makefile.in
 %{__autoconf}
 %configure \
 	--enable-langinfo \
@@ -127,7 +126,7 @@ mv -f Makefile.in.new Makefile.in
 	TCL_PACKAGE_PATH="%{_libdir} %{_libdir}/tcl%{major} %{_ulibdir} %{_ulibdir}/tcl%{major}"
 
 sed -i -e "s#%{_builddir}/%{name}%{version}/unix#%{_libdir}#; \
-	s#%{_builddir}/%{name}%{version}#%{_includedir}#" tclConfig.sh
+	s#%{_builddir}/%{name}%{version}#%{_includedir}/tcl-private#" tclConfig.sh
 
 %install
 rm -rf $RPM_BUILD_ROOT
