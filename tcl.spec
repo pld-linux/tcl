@@ -7,7 +7,7 @@ Summary(uk):	Tool Command Language - ×ÂÕÄÏ×Õ×ÁÎÁ ÍÏ×Á ÓËÒÉÐÔ¦×
 Name:		tcl
 %define	major	8.4
 Version:	%{major}.11
-Release:	1
+Release:	2
 License:	BSD
 Group:		Development/Languages/Tcl
 Source0:	http://dl.sourceforge.net/tcl/%{name}%{version}-src.tar.gz
@@ -15,7 +15,6 @@ Source0:	http://dl.sourceforge.net/tcl/%{name}%{version}-src.tar.gz
 Source1:	%{name}-pl-man-pages.tar.bz2
 # Source1-md5:	dd3370f2b588763758787831a4bf48fc
 Patch0:		%{name}-glibc21.patch
-Patch2:		%{name}-headers_fix.patch
 Patch3:		%{name}-opt.patch
 Patch4:		%{name}-ac25x.patch
 Patch5:		%{name}-mannames.patch
@@ -103,7 +102,6 @@ Pliki nag³ówkowe oraz dokumentacja dla Tcl (Tool Command Language).
 %prep
 %setup -q -n %{name}%{version}
 %patch0 -p1
-%patch2 -p1
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
@@ -124,9 +122,8 @@ mv -f Makefile.in.new Makefile.in
 %{__make} \
 	TCL_PACKAGE_PATH="%{_libdir} %{_libdir}/tcl%{major} %{_ulibdir} %{_ulibdir}/tcl%{major}"
 
-sed -e "s#%{_builddir}/%{name}%{version}/unix#%{_libdir}#; \
-	s#%{_builddir}/%{name}%{version}#%{_includedir}#" tclConfig.sh > tclConfig.sh.new
-mv -f tclConfig.sh.new tclConfig.sh
+sed -i -e "s#%{_builddir}/%{name}%{version}/unix#%{_libdir}#; \
+	s#%{_builddir}/%{name}%{version}#%{_includedir}#" tclConfig.sh
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -136,6 +133,15 @@ install -d $RPM_BUILD_ROOT{%{_prefix},%{_mandir}/man1}
 	INSTALL_ROOT=$RPM_BUILD_ROOT \
 	TCL_PACKAGE_PATH="%{_libdir} %{_libdir}/tcl%{major} %{_ulibdir} %{_ulibdir}/tcl%{major}" \
 	MAN_INSTALL_DIR=$RPM_BUILD_ROOT%{_mandir}
+
+install -d $RPM_BUILD_ROOT%{_includedir}/%{name}-private/{generic,unix}
+find generic unix -name "*.h" -exec cp -p '{}' $RPM_BUILD_ROOT%{_includedir}/%{name}-private/'{}' ';'
+for h in $RPM_BUILD_ROOT%{_includedir}/*.h; do
+        rh=$(basename "$h")
+        if [ -f "$RPM_BUILD_ROOT%{_includedir}/%{name}-private/generic/$rh" ]; then
+                ln -sf "../../$rh" $RPM_BUILD_ROOT%{_includedir}/%{name}-private/generic
+        fi
+done
 
 ln -sf libtcl%{major}.so.0.0 $RPM_BUILD_ROOT%{_libdir}/libtcl.so
 ln -sf libtcl%{major}.so.0.0 $RPM_BUILD_ROOT%{_libdir}/libtcl%{major}.so
