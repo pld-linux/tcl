@@ -7,7 +7,7 @@ Summary(uk):	Tool Command Language - вбудовувана мова скрипт╕в
 Name:		tcl
 %define	major	8.4
 Version:	%{major}.11
-Release:	2
+Release:	3
 License:	BSD
 Group:		Development/Languages/Tcl
 Source0:	http://dl.sourceforge.net/tcl/%{name}%{version}-src.tar.gz
@@ -24,7 +24,7 @@ Icon:		tcl.gif
 URL:		http://www.tcl.tk/
 BuildRequires:	autoconf
 BuildRequires:	ncurses-devel >= 5.2
-BuildRequires:	readline-devel >= 4.2
+BuildRequires:	readline-devel >= 5.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_ulibdir	/usr/lib
