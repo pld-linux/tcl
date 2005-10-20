@@ -8,7 +8,7 @@ Name:		tcl
 %define	major	8.5
 Version:	%{major}
 %define	rel	a3
-Release:	0.%{rel}.1
+Release:	0.%{rel}.2
 License:	BSD
 Group:		Development/Languages/Tcl
 Source0:	http://dl.sourceforge.net/tcl/%{name}%{version}%{rel}-src.tar.gz
@@ -125,8 +125,8 @@ sed -i -e "s/^CFLAGS_OPTIMIZE.*/CFLAGS_OPTIMIZE=%{rpmcflags} -D__NO_STRING_INLIN
 %{__make} \
 	TCL_PACKAGE_PATH="%{_libdir} %{_libdir}/tcl%{major} %{_ulibdir} %{_ulibdir}/tcl%{major}"
 
-sed -i -e "s#%{_builddir}/%{name}%{version}/unix#%{_libdir}#; \
-	s#%{_builddir}/%{name}%{version}#%{_includedir}/tcl-private#" tclConfig.sh
+sed -i -e "s#%{_builddir}/%{name}%{version}%{rel}/unix#%{_libdir}#; \
+	s#%{_builddir}/%{name}%{version}%{rel}#%{_includedir}/tcl-private#" tclConfig.sh
 
 %install
 rm -rf $RPM_BUILD_ROOT
