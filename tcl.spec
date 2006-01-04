@@ -22,6 +22,7 @@ Patch4:		%{name}-opt.patch
 Patch6:		%{name}-mannames.patch
 Patch7:		%{name}-soname_fix.patch
 Patch8:		%{name}-norpath.patch
+Patch9:		%{name}-shell-quotes.patch
 Icon:		tcl.gif
 URL:		http://www.tcl.tk/
 BuildRequires:	autoconf
@@ -110,6 +111,7 @@ Pliki nag³ówkowe oraz dokumentacja dla Tcl (Tool Command Language).
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
+%patch9 -p1
 
 %build
 cd unix
