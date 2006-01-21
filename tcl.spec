@@ -23,7 +23,6 @@ Patch6:		%{name}-mannames.patch
 Patch7:		%{name}-soname_fix.patch
 Patch8:		%{name}-norpath.patch
 Patch9:		%{name}-shell-quotes.patch
-Icon:		tcl.gif
 URL:		http://www.tcl.tk/
 BuildRequires:	autoconf
 BuildRequires:	ncurses-devel >= 5.2
