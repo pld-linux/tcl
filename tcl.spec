@@ -7,22 +7,20 @@ Summary(uk):	Tool Command Language - ×ÂÕÄÏ×Õ×ÁÎÁ ÍÏ×Á ÓËÒÉÐÔ¦×
 Name:		tcl
 %define	major	8.5
 Version:	%{major}
-%define	rel	a3
-Release:	0.%{rel}.2
+%define	rel	a4
+Release:	0.%{rel}.1
 License:	BSD
 Group:		Development/Languages/Tcl
 Source0:	http://dl.sourceforge.net/tcl/%{name}%{version}%{rel}-src.tar.gz
-# Source0-md5:	ff4a9fa2f0b23c139e78a7b33313954c
+# Source0-md5:	8c637b99e1fa44f7b849d8aaa9e667f8
 Source1:	%{name}-pl-man-pages.tar.bz2
 # Source1-md5:	dd3370f2b588763758787831a4bf48fc
-Patch0:		%{name}-glibc21.patch
-Patch1:		%{name}-ieee.patch
-Patch2:		%{name}-readline.patch
-Patch4:		%{name}-opt.patch
-Patch6:		%{name}-mannames.patch
-Patch7:		%{name}-soname_fix.patch
-Patch8:		%{name}-norpath.patch
-Patch9:		%{name}-shell-quotes.patch
+Patch0:		%{name}-ieee.patch
+Patch1:		%{name}-readline.patch
+Patch2:		%{name}-opt.patch
+Patch3:		%{name}-mannames.patch
+Patch4:		%{name}-soname_fix.patch
+Patch5:		%{name}-norpath.patch
 URL:		http://www.tcl.tk/
 BuildRequires:	autoconf
 BuildRequires:	ncurses-devel >= 5.2
@@ -106,11 +104,9 @@ Pliki nag³ówkowe oraz dokumentacja dla Tcl (Tool Command Language).
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 %patch4 -p1
-%patch6 -p1
-%patch7 -p1
-%patch8 -p1
-%patch9 -p1
+%patch5 -p1
 
 %build
 cd unix
