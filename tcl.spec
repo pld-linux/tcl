@@ -7,12 +7,12 @@ Summary(uk):	Tool Command Language - вбудовувана мова скрипт╕в
 Name:		tcl
 %define	major	8.5
 Version:	%{major}
-%define	rel	a4
+%define	rel	a5
 Release:	0.%{rel}.1
 License:	BSD
 Group:		Development/Languages/Tcl
 Source0:	http://dl.sourceforge.net/tcl/%{name}%{version}%{rel}-src.tar.gz
-# Source0-md5:	8c637b99e1fa44f7b849d8aaa9e667f8
+# Source0-md5:	fe9e399c1f186f8c605de8d2e262881e
 Source1:	%{name}-pl-man-pages.tar.bz2
 # Source1-md5:	dd3370f2b588763758787831a4bf48fc
 Patch0:		%{name}-ieee.patch
