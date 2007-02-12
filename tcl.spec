@@ -1,9 +1,9 @@
 Summary:	Tool Command Language embeddable scripting language, with shared libraries
-Summary(fr.UTF-8):   Tool Command Language, langage de script avec bibliothèques partagées
-Summary(pl.UTF-8):   Tool Command Language - język skryptowy z bibliotekami dynamicznymi
-Summary(ru.UTF-8):   Tool Command Language - встраиваемый язык скриптов
-Summary(tr.UTF-8):   Tcl ile kullanılabilen betik dili
-Summary(uk.UTF-8):   Tool Command Language - вбудовувана мова скриптів
+Summary(fr.UTF-8):	Tool Command Language, langage de script avec bibliothèques partagées
+Summary(pl.UTF-8):	Tool Command Language - język skryptowy z bibliotekami dynamicznymi
+Summary(ru.UTF-8):	Tool Command Language - встраиваемый язык скриптов
+Summary(tr.UTF-8):	Tcl ile kullanılabilen betik dili
+Summary(uk.UTF-8):	Tool Command Language - вбудовувана мова скриптів
 Name:		tcl
 %define	major	8.5
 Version:	%{major}
@@ -89,7 +89,7 @@ tcl. Tcl дуже популярний для написання простих 
 
 %package devel
 Summary:	Tool Command Language header files and development documentation
-Summary(pl.UTF-8):   Pliki nagłówkowe oraz dokumentacja dla Tcl (Tool Command Language)
+Summary(pl.UTF-8):	Pliki nagłówkowe oraz dokumentacja dla Tcl (Tool Command Language)
 Group:		Development/Languages/Tcl
 Requires:	%{name} = %{version}-%{release}
 
