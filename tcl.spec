@@ -23,6 +23,7 @@ Patch4:		%{name}-soname_fix.patch
 Patch5:		%{name}-norpath.patch
 Patch6:		%{name}-bug-1618411.patch
 Patch7:		%{name}-multilib.patch
+Patch8:		%{name}-tclunixport_h.patch
 URL:		http://www.tcl.tk/
 BuildRequires:	autoconf
 BuildRequires:	ncurses-devel >= 5.2
@@ -111,6 +112,7 @@ Pliki nagłówkowe oraz dokumentacja dla Tcl (Tool Command Language).
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
+%patch8 -p1
 
 %build
 cd unix
