@@ -7,12 +7,12 @@ Summary(uk.UTF-8):	Tool Command Language - вбудовувана мова ск�
 Name:		tcl
 %define	major	8.5
 Version:	%{major}
-%define	rel	a5
-Release:	0.%{rel}.3
+%define	rel	a6
+Release:	0.%{rel}.1
 License:	BSD
 Group:		Development/Languages/Tcl
 Source0:	http://dl.sourceforge.net/tcl/%{name}%{version}%{rel}-src.tar.gz
-# Source0-md5:	fe9e399c1f186f8c605de8d2e262881e
+# Source0-md5:	2759f9517898e2928d3a4bf6831a7eaa
 Source1:	%{name}-pl-man-pages.tar.bz2
 # Source1-md5:	dd3370f2b588763758787831a4bf48fc
 Patch0:		%{name}-ieee.patch
@@ -21,13 +21,12 @@ Patch2:		%{name}-opt.patch
 Patch3:		%{name}-mannames.patch
 Patch4:		%{name}-soname_fix.patch
 Patch5:		%{name}-norpath.patch
-Patch6:		%{name}-bug-1618411.patch
-Patch7:		%{name}-multilib.patch
-Patch8:		%{name}-tclunixport_h.patch
+Patch6:		%{name}-multilib.patch
 URL:		http://www.tcl.tk/
 BuildRequires:	autoconf
 BuildRequires:	ncurses-devel >= 5.2
 BuildRequires:	readline-devel >= 4.2
+Requires:	tzdata
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_ulibdir	/usr/lib
@@ -111,8 +110,6 @@ Pliki nagłówkowe oraz dokumentacja dla Tcl (Tool Command Language).
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
-%patch7 -p1
-%patch8 -p1
 
 %build
 cd unix
@@ -124,7 +121,8 @@ sed -i -e "s/^CFLAGS_OPTIMIZE.*/CFLAGS_OPTIMIZE=%{rpmcflags} -D__NO_STRING_INLIN
 	--enable-shared \
 	--enable-threads \
 	--enable-64bit \
-	--enable-gcc
+	--enable-gcc \
+	--without-tzdata
 %{__make} \
 	TCL_PACKAGE_PATH="%{_libdir} %{_libdir}/tcl%{major} %{_ulibdir} %{_ulibdir}/tcl%{major}"
 
@@ -307,7 +305,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_ulibdir}/tcl%{major}/opt0.4
 %{_ulibdir}/tcl%{major}/tclAppInit.c
 %{_ulibdir}/tcl%{major}/tclIndex
-%{_ulibdir}/tcl%{major}/tzdata
 %{_mandir}/man1/*
 %lang(pl) %{_mandir}/pl/man1/*
 
