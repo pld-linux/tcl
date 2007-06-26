@@ -1,16 +1,16 @@
---- tcl8.4.3/unix/Makefile.in.orig	2003-06-17 20:05:11.000000000 +0200
-+++ tcl8.4.3/unix/Makefile.in	2003-06-17 20:08:17.000000000 +0200
-@@ -205,8 +205,8 @@
- # Additional search flags needed to find the various shared libraries
- # at run-time.  The first symbol is for use when creating a binary
- # with cc, and the second is for use when running ld directly.
+--- tcl8.5a6/unix/Makefile.in.orig	2007-06-26 07:50:20.974722448 +0200
++++ tcl8.5a6/unix/Makefile.in	2007-06-26 18:05:36.274405487 +0200
+@@ -192,8 +192,8 @@
+ # Additional search flags needed to find the various shared libraries at
+ # run-time. The first symbol is for use when creating a binary with cc, and
+ # the second is for use when running ld directly.
 -CC_SEARCH_FLAGS	= @CC_SEARCH_FLAGS@
 -LD_SEARCH_FLAGS	= @LD_SEARCH_FLAGS@
 +CC_SEARCH_FLAGS	=
 +LD_SEARCH_FLAGS	=
  
- # The following symbol is defined to "$(DLTEST_TARGETS)" if dynamic
- # loading is available;  this causes everything in the "dltest"
+ # The following symbol is defined to "$(DLTEST_TARGETS)" if dynamic loading is
+ # available; this causes everything in the "dltest" subdirectory to be built
 diff -urN tcl8.5a3.org/unix/tcl.m4 tcl8.5a3/unix/tcl.m4
 --- tcl8.5a3.org/unix/tcl.m4	2005-06-04 23:07:14.000000000 +0200
 +++ tcl8.5a3/unix/tcl.m4	2005-06-17 23:44:37.081099616 +0200
