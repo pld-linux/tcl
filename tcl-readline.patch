@@ -12,7 +12,7 @@
 @@ -574,7 +574,7 @@
  
  tclsh: ${TCLSH_OBJS} ${TCL_LIB_FILE}
- 	${CC} ${CFLAGS} ${LDFLAGS} ${TCLSH_OBJS} @TCL_BUILD_LIB_SPEC@ ${LIBS} \
+ 	${CC} ${CFLAGS} ${LDFLAGS} ${TCLSH_OBJS} @TCL_BUILD_LIB_SPEC@ ${LIBS} @EXTRA_TCLSH_LIBS@ \
 -		${CC_SEARCH_FLAGS} -o tclsh
 +		-lreadline -lncurses ${CC_SEARCH_FLAGS} -o tclsh
  
