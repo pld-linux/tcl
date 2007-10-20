@@ -1,3 +1,4 @@
+%bcond_without	tests
 Summary:	Tool Command Language embeddable scripting language, with shared libraries
 Summary(fr.UTF-8):	Tool Command Language, langage de script avec bibliothèques partagées
 Summary(pl.UTF-8):	Tool Command Language - język skryptowy z bibliotekami dynamicznymi
@@ -128,6 +129,15 @@ sed -i -e "s/^CFLAGS_OPTIMIZE.*/CFLAGS_OPTIMIZE=%{rpmcflags} -D__NO_STRING_INLIN
 
 sed -i -e "s#%{_builddir}/%{name}%{version}%{rel}/unix#%{_libdir}#; \
 	s#%{_builddir}/%{name}%{version}%{rel}#%{_includedir}/tcl-private#" tclConfig.sh
+
+%if %{with tests}
+%{__make} test 2>&1 | tee make-test.log
+FAILED=$(grep 'Files with failing tests:' make-test.log | sed -e 's#Files with failing tests: ##g' | sort | xargs)
+if [ -n "$FAILED" -a "$FAILED" != "httpold.test" ]; then
+	echo "Files with failing tests: $FAILED"
+	exit 1
+fi
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
