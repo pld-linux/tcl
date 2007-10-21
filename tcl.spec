@@ -1,4 +1,7 @@
-%bcond_without	tests
+#
+# Conditional build:
+%bcond_without	tests	# don't perform "make test"
+#
 Summary:	Tool Command Language embeddable scripting language, with shared libraries
 Summary(fr.UTF-8):	Tool Command Language, langage de script avec bibliothèques partagées
 Summary(pl.UTF-8):	Tool Command Language - język skryptowy z bibliotekami dynamicznymi
