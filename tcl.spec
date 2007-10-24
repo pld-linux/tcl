@@ -116,6 +116,13 @@ Pliki nagłówkowe oraz dokumentacja dla Tcl (Tool Command Language).
 %patch6 -p1
 
 %build
+# Make sure we have /proc mounted - otherwise pthread_getattr_np will fail
+# https://sourceforge.net/tracker/index.php?func=detail&aid=1815573&group_id=10894&atid=110894
+if [ ! -r /proc/self/maps ]; then
+        echo "You need to have /proc mounted in order to build this package!"
+        exit 1
+fi
+
 cd unix
 sed -i -e "s/^CFLAGS_OPTIMIZE.*/CFLAGS_OPTIMIZE=%{rpmcflags} -D__NO_STRING_INLINES -D__NO_MATH_INLINES -D_REENTRANT/" \
 	Makefile.in
