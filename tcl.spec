@@ -12,7 +12,7 @@ Name:		tcl
 %define	major 8.5
 %define minor 0
 Version:	%{major}.%{minor}
-Release:	2
+Release:	3
 License:	BSD
 Group:		Development/Languages/Tcl
 Source0:	http://dl.sourceforge.net/tcl/%{name}%{version}-src.tar.gz
@@ -137,8 +137,12 @@ sed -i -e "s/^CFLAGS_OPTIMIZE.*/CFLAGS_OPTIMIZE=%{rpmcflags} -D__NO_STRING_INLIN
 %{__make} \
 	TCL_PACKAGE_PATH="%{_libdir} %{_libdir}/tcl%{major} %{_ulibdir} %{_ulibdir}/tcl%{major}"
 
-sed -i -e "s#%{_builddir}/%{name}%{version}%{rel}/unix#%{_libdir}#; \
-	s#%{_builddir}/%{name}%{version}%{rel}#%{_includedir}/tcl-private#" tclConfig.sh
+cp -a tclConfig.sh tclConfig.sh-orig
+sed -i -e "s#%{_builddir}/%{name}%{version}/unix#%{_libdir}#; \
+	s#%{_builddir}/%{name}%{version}#%{_includedir}/tcl-private#" tclConfig.sh
+if (cmp -s tclConfig.sh tclConfig.sh-orig); then
+	echo "tclConfig.sh fix rule didn't change anything. Please verify it."
+fi
 
 %if %{with tests}
 # tests that are problematic on builders; some probably could be fixed
