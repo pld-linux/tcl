@@ -1,3 +1,5 @@
+# TODO
+# - why is tclConfig.sh in /usr/lib on lib64 platform?
 #
 # Conditional build:
 %bcond_without	tests	# don't perform "make test"
