@@ -14,12 +14,12 @@
 diff -urN tcl8.5a3.org/unix/tcl.m4 tcl8.5a3/unix/tcl.m4
 --- tcl8.5a3.org/unix/tcl.m4	2005-06-04 23:07:14.000000000 +0200
 +++ tcl8.5a3/unix/tcl.m4	2005-06-17 23:44:37.081099616 +0200
-@@ -1909,7 +1909,7 @@
+@@ -2042,7 +2042,7 @@
  
-     if test "${SHARED_BUILD}" = "1" && test "${SHLIB_SUFFIX}" != "" ; then
+     AS_IF([test "${SHARED_BUILD}" = 1 -a "${SHLIB_SUFFIX}" != ""], [
          LIB_SUFFIX=${SHARED_LIB_SUFFIX}
 -        MAKE_LIB='${SHLIB_LD} -o [$]@ ${OBJS} ${SHLIB_LD_LIBS} ${TCL_SHLIB_LD_EXTRAS} ${TK_SHLIB_LD_EXTRAS} ${LD_SEARCH_FLAGS}'
 +        MAKE_LIB='${SHLIB_LD} -o [$]@ ${OBJS} ${SHLIB_LD_LIBS} ${TCL_SHLIB_LD_EXTRAS} ${TK_SHLIB_LD_EXTRAS}'
-         INSTALL_LIB='$(INSTALL_LIBRARY) $(LIB_FILE) $(LIB_INSTALL_DIR)/$(LIB_FILE)'
-     else
+         INSTALL_LIB='$(INSTALL_LIBRARY) $(LIB_FILE) "$(LIB_INSTALL_DIR)"/$(LIB_FILE)'
+     ], [
          LIB_SUFFIX=${UNSHARED_LIB_SUFFIX}
