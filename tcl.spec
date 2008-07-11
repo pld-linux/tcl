@@ -12,13 +12,13 @@ Summary(tr.UTF-8):	Tcl ile kullanılabilen betik dili
 Summary(uk.UTF-8):	Tool Command Language - вбудовувана мова скриптів
 Name:		tcl
 %define	major 8.5
-%define minor 2
+%define minor 3
 Version:	%{major}.%{minor}
 Release:	1
 License:	BSD
 Group:		Development/Languages/Tcl
 Source0:	http://dl.sourceforge.net/tcl/%{name}%{version}-src.tar.gz
-# Source0-md5:	2eeff7a61844b3e6de5202da1275cff1
+# Source0-md5:	651b2dc097a0291e31d44c72dcb5135e
 Source1:	%{name}-pl-man-pages.tar.bz2
 # Source1-md5:	dd3370f2b588763758787831a4bf48fc
 Patch0:		%{name}-ieee.patch
@@ -29,7 +29,7 @@ Patch4:		%{name}-soname_fix.patch
 Patch5:		%{name}-norpath.patch
 Patch6:		%{name}-multilib.patch
 URL:		http://www.tcl.tk/
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.59
 BuildRequires:	ncurses-devel >= 5.2
 BuildRequires:	readline-devel >= 4.2
 Requires:	tzdata
@@ -134,7 +134,6 @@ sed -i -e "s/^CFLAGS_OPTIMIZE.*/CFLAGS_OPTIMIZE=%{rpmcflags} -D__NO_STRING_INLIN
 	--enable-shared \
 	--enable-threads \
 	--enable-64bit \
-	--enable-gcc \
 	--without-tzdata
 %{__make} \
 	TCL_PACKAGE_PATH="%{_libdir} %{_libdir}/tcl%{major} %{_ulibdir} %{_ulibdir}/tcl%{major}"
@@ -180,6 +179,7 @@ done
 
 ln -sf libtcl%{major}.so.0.0 $RPM_BUILD_ROOT%{_libdir}/libtcl.so
 ln -sf libtcl%{major}.so.0.0 $RPM_BUILD_ROOT%{_libdir}/libtcl%{major}.so
+ln -sf libtcl%{major}.so.0.0 $RPM_BUILD_ROOT%{_libdir}/libtcl%{major}.so.0
 mv -f $RPM_BUILD_ROOT%{_bindir}/tclsh%{major} $RPM_BUILD_ROOT%{_bindir}/tclsh
 
 %{?have_ulibdir:mv $RPM_BUILD_ROOT%{_libdir}/tclConfig.sh $RPM_BUILD_ROOT%{_ulibdir}/tclConfig.sh}
@@ -197,7 +197,8 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %{_libdir}/lib*.so.*.*
+%attr(755,root,root) %{_libdir}/libtcl%{major}.so.*.*
+%attr(755,root,root) %ghost %{_libdir}/libtcl%{major}.so.0
 %{?have_ulibdir:%dir %{_libdir}/tcl%{major}}
 %{_ulibdir}/tcl[0-9]
 %dir %{_ulibdir}/tcl%{major}
@@ -336,14 +337,20 @@ rm -rf $RPM_BUILD_ROOT
 %{_ulibdir}/tcl%{major}/opt0.4
 %{_ulibdir}/tcl%{major}/tclAppInit.c
 %{_ulibdir}/tcl%{major}/tclIndex
-%{_mandir}/man1/*
-%lang(pl) %{_mandir}/pl/man1/*
+%{_mandir}/man1/tclsh.1*
+%lang(pl) %{_mandir}/pl/man1/tclsh.1*
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_ulibdir}/tclConfig.sh
-%attr(755,root,root) %{_libdir}/lib*.so
+%attr(755,root,root) %{_libdir}/libtcl%{major}.so
+%attr(755,root,root) %{_libdir}/libtcl.so
 %{_libdir}/libtclstub%{major}.a
-%{_includedir}/*
-%{_mandir}/man[3n]/*
-%lang(pl) %{_mandir}/pl/mann/*
+%{_includedir}/tcl*.h
+%{_includedir}/tcl-private
+%{_mandir}/man3/TCL_*.3*
+%{_mandir}/man3/Tcl_*.3*
+%{_mandir}/man3/attemptck*alloc.3*
+%{_mandir}/man3/ck*.3*
+%{_mandir}/mann/*.n*
+%lang(pl) %{_mandir}/pl/mann/*.n*
