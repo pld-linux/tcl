@@ -1,45 +1,34 @@
-diff -urbB tcl8.4.11.org/unix/configure.in tcl8.4.11/unix/configure.in
---- tcl8.4.11.org/unix/configure.in	2005-06-29 16:40:33.000000000 +0000
-+++ tcl8.4.11/unix/configure.in	2005-07-03 22:38:29.358306352 +0000
-@@ -217,7 +217,7 @@
-         AC_MSG_RESULT(yes)
-     else
-         AC_MSG_RESULT([broken, using substitute])
+--- tcl8.4.19/unix/configure.in~	2008-08-05 17:42:26.000000000 +0300
++++ tcl8.4.19/unix/configure.in	2008-08-05 17:45:02.656851443 +0300
+@@ -246,7 +246,7 @@
+ 	}], tcl_cv_strstr_unbroken=ok, tcl_cv_strstr_unbroken=broken,
+ 	    tcl_cv_strstr_unbroken=broken)])
+     if test $tcl_cv_strstr_unbroken = broken; then
 -        LIBOBJS="$LIBOBJS strstr.o"
-+	AC_LIBOBJ([strstr])
++        AC_LIBOBJ([strstr])
      fi
  fi
  
-@@ -243,7 +243,7 @@
- }], , tcl_ok=0, tcl_ok=0)
- if test "$tcl_ok" = 0; then
-     test -n "$verbose" && echo "	Adding strtoul.o."
+@@ -278,7 +278,7 @@
+     fi
+ fi
+ if test $tcl_ok = 0; then
 -    LIBOBJS="$LIBOBJS strtoul.o"
 +    AC_LIBOBJ([strtoul])
  fi
  
  #--------------------------------------------------------------------
-@@ -267,7 +267,7 @@
- }], , tcl_ok=0, tcl_ok=0)
- if test "$tcl_ok" = 0; then
-     test -n "$verbose" && echo "	Adding strtod.o."
+@@ -308,7 +308,7 @@
+     fi
+ fi
+ if test $tcl_ok = 0; then
 -    LIBOBJS="$LIBOBJS strtod.o"
 +    AC_LIBOBJ([strtod])
  fi
  
  #--------------------------------------------------------------------
-@@ -349,7 +349,7 @@
-     AC_CHECK_LIB(inet, strncasecmp, tcl_ok=1, tcl_ok=0)
- fi
- if test "$tcl_ok" = 0; then
--    LIBOBJS="$LIBOBJS strncasecmp.o"
-+    AC_LIBOBJ([strncasecmp])
- fi
- 
- #--------------------------------------------------------------------
-diff -urbB tcl8.4.11.org/unix/tcl.m4 tcl8.4.11/unix/tcl.m4
---- tcl8.4.11.org/unix/tcl.m4	2005-06-29 16:40:33.000000000 +0000
-+++ tcl8.4.11/unix/tcl.m4	2005-07-03 22:37:51.933995712 +0000
+--- tcl8.4.19/unix/tcl.m4~	2008-08-05 17:42:26.000000000 +0300
++++ tcl8.4.19/unix/tcl.m4	2008-08-05 17:46:25.053601771 +0300
 @@ -952,7 +952,7 @@
  
  	    # AIX v<=4.1 has some different flags than 4.2+
@@ -58,10 +47,10 @@ diff -urbB tcl8.4.11.org/unix/tcl.m4 tcl8.4.11/unix/tcl.m4
  	        CFLAGS="$CFLAGS -fno-inline"
  	    fi
  
-@@ -2406,7 +2406,7 @@
- 	    AC_MSG_RESULT(ok)
- 	else
- 	    AC_MSG_RESULT(buggy)
+@@ -2643,7 +2643,7 @@
+ 		}], tcl_cv_strtod_buggy=ok, tcl_cv_strtod_buggy=buggy,
+ 		    tcl_cv_strtod_buggy=buggy)])
+ 	if test "$tcl_cv_strtod_buggy" = buggy; then
 -	    LIBOBJS="$LIBOBJS fixstrtod.o"
 +	    AC_LIBOBJ([fixstrtod])
  	    AC_DEFINE(strtod, fixstrtod)
