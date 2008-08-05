@@ -1,11 +1,11 @@
-Summary:	Tool Command Language embeddable scripting language, with shared libraries
-Summary(fr):	Tool Command Language, langage de script avec bibliothХques partagИes
-Summary(pl):	Tool Command Language - jЙzyk skryptowy z bibliotekami dynamicznymi
-Summary(ru):	Tool Command Language - встраиваемый язык скриптов
-Summary(tr):	Tcl ile kullanЩlabilen betik dili
-Summary(uk):	Tool Command Language - вбудовувана мова скрипт╕в
-Name:		tcl
 %define	major	8.4
+Summary:	Tool Command Language embeddable scripting language, with shared libraries
+Summary(fr.UTF-8):	Tool Command Language, langage de script avec bibliothц╗ques partagц╘es
+Summary(pl.UTF-8):	Tool Command Language - jд≥zyk skryptowy z bibliotekami dynamicznymi
+Summary(ru.UTF-8):	Tool Command Language - п╡я│я┌я─п╟п╦п╡п╟п╣п╪я▀п╧ я▐п╥я▀п╨ я│п╨я─п╦п©я┌п╬п╡
+Summary(tr.UTF-8):	Tcl ile kullanд╠labilen betik dili
+Summary(uk.UTF-8):	Tool Command Language - п╡п╠я┐п╢п╬п╡я┐п╡п╟п╫п╟ п╪п╬п╡п╟ я│п╨я─п╦п©я┌я√п╡
+Name:		tcl
 Version:	%{major}.12
 Release:	1
 License:	BSD
@@ -20,7 +20,6 @@ Patch4:		%{name}-ac25x.patch
 Patch5:		%{name}-mannames.patch
 Patch6:		%{name}-soname_fix.patch
 Patch7:		%{name}-norpath.patch
-Icon:		tcl.gif
 URL:		http://www.tcl.tk/
 BuildRequires:	autoconf
 BuildRequires:	ncurses-devel >= 5.2
@@ -39,56 +38,56 @@ other applications. This package includes tclsh, a simple example of a
 tcl application. Tcl is very popular for writing small graphical
 applications because of the Tk widget set which is closely tied to it.
 
-%description -l de
+%description -l de.UTF-8
 Tcl ist eine einfache Skriptsprache, die zur Ingegration in andere
-Applikationen vorgesehen ist. Dieses Paket umfaъt tclsh, ein einfaches
+Applikationen vorgesehen ist. Dieses Paket umfaц÷t tclsh, ein einfaches
 Beispiel einer tcl-Applikation. Tcl wird gern zum Schreiben kleiner
 grafischer Anwendungen benutzt, weil das Tk-Widget-Set eng damit
-verknЭpft ist.
+verknц╪pft ist.
 
-%description -l fr
-Tcl est un langage simple de script, conГu pour Йtre intИgrИ dans
+%description -l fr.UTF-8
+Tcl est un langage simple de script, conц╖u pour ц╙tre intц╘grц╘ dans
 d'autres applications. Ce paquetage contient tclsh, un exemple simple
-d'application tcl. Tcl est trХs utilisИ pour Иcrire de petites
-applications graphiques grБce Ю l'ensemble de widgets Tk qui lui est
-trХs liИ.
+d'application tcl. Tcl est trц╗s utilisц╘ pour ц╘crire de petites
+applications graphiques grц╒ce ц═ l'ensemble de widgets Tk qui lui est
+trц╗s liц╘.
 
-%description -l ja
-Tcl ╓об╬╓н╔╒╔в╔Й╔╠║╪╔╥╔Г╔С╓ккД╓А╧Ч╓Ю╓©╓А╓к╔г╔╤╔╓╔С╓╣╓Л╓©╢йц╠╓й╔╧╔╞╔Й╔в
-╔х╦ю╦Л╓г╓╧║ёTcl╓о╔╕╔ё╔╦╔ц╔и║╕╔╩╔ц╔х╓г╓╒╓КTk╓х╓х╓Б╓кмя╓╓╓К╓Х╓╕╓к╔г╔╤╔╓╔С
-╓╥╓ф╓╓╓ч╓╧║ё╓Ё╓н╔я╔ц╔╠║╪╔╦╓к╓оTcl╓н╢йц╠╓йнЦ╓х╓╥╓ф║╒tclsh
-╓Б╢ч╓С╓г╓╓╓ч╓╧║ё
+%description -l ja.UTF-8
+Tcl Ц│╞Д╩√Ц│╝Ц┌╒Ц┐≈Ц┐╙Ц┌╠Ц┐╪Ц┌╥Ц┐╖Ц┐ЁЦ│╚Е÷▀Ц┌│Х╬╪Ц┌─Ц│÷Ц┌│Ц│╚Ц┐┤Ц┌╤Ц┌╓Ц┐ЁЦ│∙Ц┌▄Ц│÷Г╟║Е█≤Ц│╙Ц┌╧Ц┌╞Ц┐╙Ц┐≈
+Ц┐┬Х╗─Х╙·Ц│╖Ц│≥Ц─┌TclЦ│╞Ц┌╕Ц┌ёЦ┌╦Ц┐┐Ц┐┴Ц┐╩Ц┌╩Ц┐┐Ц┐┬Ц│╖Ц│┌Ц┌▀TkЦ│╗Ц│╗Ц┌┌Ц│╚Г■╗Ц│└Ц┌▀Ц┌┬Ц│├Ц│╚Ц┐┤Ц┌╤Ц┌╓Ц┐Ё
+Ц│≈Ц│╕Ц│└Ц│╬Ц│≥Ц─┌Ц│⌠Ц│╝Ц┐▒Ц┐┐Ц┌╠Ц┐╪Ц┌╦Ц│╚Ц│╞TclЦ│╝Г╟║Е█≤Ц│╙Д╬▀Ц│╗Ц│≈Ц│╕Ц─│tclsh
+Ц┌┌Е░╚Ц┌⌠Ц│╖Ц│└Ц│╬Ц│≥Ц─┌
 
-%description -l pl
-Tcl jest prostym jЙzykiem skryptowym, przeznaczonym do wspСЁpracy z
-innymi aplikacjami. W pakiecie znajduje siЙ rСwnie© tclsh - prosty
-przykЁad programСw. Tcl jest bardzo popularnym jЙzykiem do pisania
-maЁych programСw graficznych.
+%description -l pl.UTF-8
+Tcl jest prostym jд≥zykiem skryptowym, przeznaczonym do wspцЁе┌pracy z
+innymi aplikacjami. W pakiecie znajduje siд≥ rцЁwnieе╪ tclsh - prosty
+przykе┌ad programцЁw. Tcl jest bardzo popularnym jд≥zykiem do pisania
+maе┌ych programцЁw graficznych.
 
-%description -l ru
-Tcl - это простой интерпретируемый язык, предназначенный для
-встраивания в другие программы. Этот пакет включает tclsh, простой
-пример программы на tcl. Tcl очень популярен для написания небольших
-графических программ из-за набора экранных примитивов Tk, который
-очень тесно с ним связан.
+%description -l ru.UTF-8
+Tcl - я█я┌п╬ п©я─п╬я│я┌п╬п╧ п╦п╫я┌п╣я─п©я─п╣я┌п╦я─я┐п╣п╪я▀п╧ я▐п╥я▀п╨, п©я─п╣п╢п╫п╟п╥п╫п╟я┤п╣п╫п╫я▀п╧ п╢п╩я▐
+п╡я│я┌я─п╟п╦п╡п╟п╫п╦я▐ п╡ п╢я─я┐пЁп╦п╣ п©я─п╬пЁя─п╟п╪п╪я▀. п╜я┌п╬я┌ п©п╟п╨п╣я┌ п╡п╨п╩я▌я┤п╟п╣я┌ tclsh, п©я─п╬я│я┌п╬п╧
+п©я─п╦п╪п╣я─ п©я─п╬пЁя─п╟п╪п╪я▀ п╫п╟ tcl. Tcl п╬я┤п╣п╫я▄ п©п╬п©я┐п╩я▐я─п╣п╫ п╢п╩я▐ п╫п╟п©п╦я│п╟п╫п╦я▐ п╫п╣п╠п╬п╩я▄я┬п╦я┘
+пЁя─п╟я└п╦я┤п╣я│п╨п╦я┘ п©я─п╬пЁя─п╟п╪п╪ п╦п╥-п╥п╟ п╫п╟п╠п╬я─п╟ я█п╨я─п╟п╫п╫я▀я┘ п©я─п╦п╪п╦я┌п╦п╡п╬п╡ Tk, п╨п╬я┌п╬я─я▀п╧
+п╬я┤п╣п╫я▄ я┌п╣я│п╫п╬ я│ п╫п╦п╪ я│п╡я▐п╥п╟п╫.
 
-%description -l tr
-Tcl, baЧka uygulamalarЩn iГine gЖmЭlmesi hedeflenerek geliЧtirilmiЧ
-basit bir betimleme dilidir. Bu paket basit bir Tcl uygulamasЩ ЖrneПi
-olan tclsh kabuПunu iГerir. Tcl, kendisi ile sЩkЩca ilintili olan Tk
-arayЭz elemanЩ kЭmesinin de desteПiyle kЭГЭk grafik uygulamalar yazma
-konusunda son derece yaygЩn kullanЩlmaktadЩr.
+%description -l tr.UTF-8
+Tcl, baе÷ka uygulamalarд╠n iц╖ine gц╤mц╪lmesi hedeflenerek geliе÷tirilmiе÷
+basit bir betimleme dilidir. Bu paket basit bir Tcl uygulamasд╠ ц╤rneд÷i
+olan tclsh kabuд÷unu iц╖erir. Tcl, kendisi ile sд╠kд╠ca ilintili olan Tk
+arayц╪z elemanд╠ kц╪mesinin de desteд÷iyle kц╪ц╖ц╪k grafik uygulamalar yazma
+konusunda son derece yaygд╠n kullanд╠lmaktadд╠r.
 
-%description -l uk
-Tcl - це проста ╕нтерпретована мова, призначена для вбудови в ╕нш╕
-програми. Цей пакет м╕стить також tclsh, простий приклад програми на
-tcl. Tcl дуже популярний для написання простих граф╕чних програм
-завдяки набору екранних прим╕тив╕в Tk, котрий з ним дуже т╕сно
-зв'язаний.
+%description -l uk.UTF-8
+Tcl - я├п╣ п©я─п╬я│я┌п╟ я√п╫я┌п╣я─п©я─п╣я┌п╬п╡п╟п╫п╟ п╪п╬п╡п╟, п©я─п╦п╥п╫п╟я┤п╣п╫п╟ п╢п╩я▐ п╡п╠я┐п╢п╬п╡п╦ п╡ я√п╫я┬я√
+п©я─п╬пЁя─п╟п╪п╦. п╕п╣п╧ п©п╟п╨п╣я┌ п╪я√я│я┌п╦я┌я▄ я┌п╟п╨п╬п╤ tclsh, п©я─п╬я│я┌п╦п╧ п©я─п╦п╨п╩п╟п╢ п©я─п╬пЁя─п╟п╪п╦ п╫п╟
+tcl. Tcl п╢я┐п╤п╣ п©п╬п©я┐п╩я▐я─п╫п╦п╧ п╢п╩я▐ п╫п╟п©п╦я│п╟п╫п╫я▐ п©я─п╬я│я┌п╦я┘ пЁя─п╟я└я√я┤п╫п╦я┘ п©я─п╬пЁя─п╟п╪
+п╥п╟п╡п╢я▐п╨п╦ п╫п╟п╠п╬я─я┐ п╣п╨я─п╟п╫п╫п╦я┘ п©я─п╦п╪я√я┌п╦п╡я√п╡ Tk, п╨п╬я┌я─п╦п╧ п╥ п╫п╦п╪ п╢я┐п╤п╣ я┌я√я│п╫п╬
+п╥п╡'я▐п╥п╟п╫п╦п╧.
 
 %package devel
 Summary:	Tool Command Language header files and development documentation
-Summary(pl):	Pliki nagЁСwkowe oraz dokumentacja dla Tcl (Tool Command Language)
+Summary(pl.UTF-8):	Pliki nagе┌цЁwkowe oraz dokumentacja dla Tcl (Tool Command Language)
 Group:		Development/Languages/Tcl
 Requires:	%{name} = %{version}-%{release}
 
@@ -96,8 +95,8 @@ Requires:	%{name} = %{version}-%{release}
 Tool Command Language embeddable scripting language header files and
 develpment documentation.
 
-%description devel -l pl
-Pliki nagЁСwkowe oraz dokumentacja dla Tcl (Tool Command Language).
+%description devel -l pl.UTF-8
+Pliki nagе┌цЁwkowe oraz dokumentacja dla Tcl (Tool Command Language).
 
 %prep
 %setup -q -n %{name}%{version}
