@@ -14,7 +14,7 @@ Name:		tcl
 %define	major 8.5
 %define minor 5
 Version:	%{major}.%{minor}
-Release:	1
+Release:	2
 License:	BSD
 Group:		Development/Languages/Tcl
 Source0:	http://dl.sourceforge.net/tcl/%{name}%{version}-src.tar.gz
@@ -126,7 +126,7 @@ if [ ! -r /proc/self/maps ]; then
 fi
 
 cd unix
-sed -i -e "s/^CFLAGS_OPTIMIZE.*/CFLAGS_OPTIMIZE=%{rpmcflags} -D__NO_STRING_INLINES -D__NO_MATH_INLINES -D_REENTRANT/" \
+sed -i -e "s/^CFLAGS_OPTIMIZE.*/CFLAGS_OPTIMIZE=%{rpmcflags} -D__NO_STRING_INLINES -D__NO_MATH_INLINES -D_REENTRANT -DTCL_NO_STACK_CHECK=1/" \
 	Makefile.in
 %{__autoconf}
 %configure \
