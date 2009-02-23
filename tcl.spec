@@ -14,7 +14,7 @@ Name:		tcl
 %define	major 8.5
 %define minor 6
 Version:	%{major}.%{minor}
-Release:	1
+Release:	2
 License:	BSD
 Group:		Development/Languages/Tcl
 Source0:	http://dl.sourceforge.net/tcl/%{name}%{version}-src.tar.gz
