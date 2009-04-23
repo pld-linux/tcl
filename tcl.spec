@@ -12,13 +12,13 @@ Summary(tr.UTF-8):	Tcl ile kullanılabilen betik dili
 Summary(uk.UTF-8):	Tool Command Language - вбудовувана мова скриптів
 Name:		tcl
 %define	major 8.5
-%define minor 6
+%define minor 7
 Version:	%{major}.%{minor}
-Release:	2
+Release:	1
 License:	BSD
 Group:		Development/Languages/Tcl
 Source0:	http://dl.sourceforge.net/tcl/%{name}%{version}-src.tar.gz
-# Source0-md5:	d0b0b3ff7600ff63135c710b575265cd
+# Source0-md5:	f70ad8f78b5e4a9f792fe101f22b125f
 Source1:	%{name}-pl-man-pages.tar.bz2
 # Source1-md5:	dd3370f2b588763758787831a4bf48fc
 Patch0:		%{name}-ieee.patch
@@ -205,7 +205,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_ulibdir}/tcl%{major}/*.tcl
 %{_ulibdir}/tcl%{major}/encoding
 %{_ulibdir}/tcl%{major}/http1.0
-%{_ulibdir}/tcl%{major}/ldAix
 %dir %{_ulibdir}/tcl%{major}/msgs
 %lang(af) %{_ulibdir}/tcl%{major}/msgs/af.msg
 %lang(af_ZA) %{_ulibdir}/tcl%{major}/msgs/af_za.msg
