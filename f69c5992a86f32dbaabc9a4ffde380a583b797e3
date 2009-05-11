@@ -1,0 +1,4 @@
+- release 31,
+- added using %configure macro,
+- additional header files to install (headers_fix patch),
+- --strip-unneeded on stripping shared libraries.
