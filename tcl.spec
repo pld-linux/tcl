@@ -4,6 +4,8 @@
 # Conditional build:
 %bcond_without	tests	# don't perform "make test"
 #
+%define		major	8.5
+%define		minor	7
 Summary:	Tool Command Language embeddable scripting language, with shared libraries
 Summary(fr.UTF-8):	Tool Command Language, langage de script avec bibliothèques partagées
 Summary(pl.UTF-8):	Tool Command Language - język skryptowy z bibliotekami dynamicznymi
@@ -11,10 +13,8 @@ Summary(ru.UTF-8):	Tool Command Language - встраиваемый язык с�
 Summary(tr.UTF-8):	Tcl ile kullanılabilen betik dili
 Summary(uk.UTF-8):	Tool Command Language - вбудовувана мова скриптів
 Name:		tcl
-%define	major 8.5
-%define minor 7
 Version:	%{major}.%{minor}
-Release:	1
+Release:	2
 License:	BSD
 Group:		Development/Languages/Tcl
 Source0:	http://dl.sourceforge.net/tcl/%{name}%{version}-src.tar.gz
@@ -28,6 +28,9 @@ Patch3:		%{name}-mannames.patch
 Patch4:		%{name}-soname_fix.patch
 Patch5:		%{name}-norpath.patch
 Patch6:		%{name}-multilib.patch
+Patch7:		%{name}-autopath.patch
+Patch8:		%{name}-hidden.patch
+Patch9:		%{name}-conf.patch
 URL:		http://www.tcl.tk/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	ncurses-devel >= 5.2
@@ -116,13 +119,16 @@ Pliki nagłówkowe oraz dokumentacja dla Tcl (Tool Command Language).
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
+%patch8 -p1
+%patch9 -p1
 
 %build
 # Make sure we have /proc mounted - otherwise pthread_getattr_np will fail
 # https://sourceforge.net/tracker/index.php?func=detail&aid=1815573&group_id=10894&atid=110894
 if [ ! -r /proc/self/maps ]; then
-        echo "You need to have /proc mounted in order to build this package!"
-        exit 1
+		echo "You need to have /proc mounted in order to build this package!"
+		exit 1
 fi
 
 cd unix
@@ -135,13 +141,12 @@ sed -i -e "s/^CFLAGS_OPTIMIZE.*/CFLAGS_OPTIMIZE=%{rpmcflags} -D__NO_STRING_INLIN
 	--enable-threads \
 	--enable-64bit \
 	--without-tzdata
-%{__make} \
-	TCL_PACKAGE_PATH="%{_libdir} %{_libdir}/tcl%{major} %{_ulibdir} %{_ulibdir}/tcl%{major}"
+%{__make}
 
 cp -a tclConfig.sh tclConfig.sh-orig
 sed -i -e "s#%{_builddir}/%{name}%{version}/unix#%{_libdir}#; \
 	s#%{_builddir}/%{name}%{version}#%{_includedir}/tcl-private#" tclConfig.sh
-if (cmp -s tclConfig.sh tclConfig.sh-orig); then
+if cmp -s tclConfig.sh tclConfig.sh-orig; then
 	echo "tclConfig.sh fix rule didn't change anything. Please verify it."
 fi
 
@@ -161,15 +166,14 @@ fi
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_prefix},%{_mandir}/man1}
+install -d $RPM_BUILD_ROOT{%{_datadir}/tcl%{major},%{_prefix},%{_mandir}/man1}
 
 %{__make} -C unix install \
 	INSTALL_ROOT=$RPM_BUILD_ROOT \
-	TCL_PACKAGE_PATH="%{_libdir} %{_libdir}/tcl%{major} %{_ulibdir} %{_ulibdir}/tcl%{major}" \
 	MAN_INSTALL_DIR=$RPM_BUILD_ROOT%{_mandir}
 
 install -d $RPM_BUILD_ROOT%{_includedir}/%{name}-private/{generic,unix}
-find generic unix -name "*.h" -exec cp -p '{}' $RPM_BUILD_ROOT%{_includedir}/%{name}-private/'{}' ';'
+find generic unix -name '*.h' -exec cp -p '{}' $RPM_BUILD_ROOT%{_includedir}/%{name}-private/'{}' ';'
 for h in $RPM_BUILD_ROOT%{_includedir}/*.h; do
 	rh=$(basename "$h")
 	if [ -f "$RPM_BUILD_ROOT%{_includedir}/%{name}-private/generic/$rh" ]; then
@@ -200,11 +204,15 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libtcl%{major}.so.*.*
 %attr(755,root,root) %ghost %{_libdir}/libtcl%{major}.so.0
 %{?have_ulibdir:%dir %{_libdir}/tcl%{major}}
+%dir %{_datadir}/tcl%{major}
 %{_ulibdir}/tcl[0-9]
 %dir %{_ulibdir}/tcl%{major}
 %{_ulibdir}/tcl%{major}/*.tcl
 %{_ulibdir}/tcl%{major}/encoding
 %{_ulibdir}/tcl%{major}/http1.0
+%{_ulibdir}/tcl%{major}/opt0.4
+%{_ulibdir}/tcl%{major}/tclIndex
+
 %dir %{_ulibdir}/tcl%{major}/msgs
 %lang(af) %{_ulibdir}/tcl%{major}/msgs/af.msg
 %lang(af_ZA) %{_ulibdir}/tcl%{major}/msgs/af_za.msg
@@ -333,15 +341,14 @@ rm -rf $RPM_BUILD_ROOT
 %lang(zh_HK) %{_ulibdir}/tcl%{major}/msgs/zh_hk.msg
 %lang(zh_SG) %{_ulibdir}/tcl%{major}/msgs/zh_sg.msg
 %lang(zh_TW) %{_ulibdir}/tcl%{major}/msgs/zh_tw.msg
-%{_ulibdir}/tcl%{major}/opt0.4
-%{_ulibdir}/tcl%{major}/tclAppInit.c
-%{_ulibdir}/tcl%{major}/tclIndex
+
 %{_mandir}/man1/tclsh.1*
 %lang(pl) %{_mandir}/pl/man1/tclsh.1*
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_ulibdir}/tclConfig.sh
+%{_ulibdir}/tcl%{major}/tclAppInit.c
 %attr(755,root,root) %{_libdir}/libtcl%{major}.so
 %attr(755,root,root) %{_libdir}/libtcl.so
 %{_libdir}/libtclstub%{major}.a
