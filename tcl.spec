@@ -14,7 +14,7 @@ Summary(tr.UTF-8):	Tcl ile kullanılabilen betik dili
 Summary(uk.UTF-8):	Tool Command Language - вбудовувана мова скриптів
 Name:		tcl
 Version:	%{major}.%{minor}
-Release:	2
+Release:	3
 License:	BSD
 Group:		Development/Languages/Tcl
 Source0:	http://downloads.sourceforge.net/tcl/%{name}%{version}-src.tar.gz
@@ -172,6 +172,10 @@ install -d $RPM_BUILD_ROOT{%{_datadir}/tcl%{major},%{_prefix},%{_mandir}/man1}
 %{__make} -C unix install \
 	INSTALL_ROOT=$RPM_BUILD_ROOT \
 	MAN_INSTALL_DIR=$RPM_BUILD_ROOT%{_mandir}
+
+# avoid Tcl_SetObjLength called with shared object error
+# http://www.mail-archive.com/pld-devel-en@lists.pld-linux.org/msg05239.html
+sed -i -e '/set auto_index(history)/s,^,#&,' $RPM_BUILD_ROOT%{_ulibdir}/tcl%{major}/tclIndex
 
 install -d $RPM_BUILD_ROOT%{_includedir}/%{name}-private/{generic,unix}
 find generic unix -name '*.h' -exec cp -p '{}' $RPM_BUILD_ROOT%{_includedir}/%{name}-private/'{}' ';'
