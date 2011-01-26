@@ -2,6 +2,7 @@
 # - why is tclConfig.sh in /usr/lib on lib64 platform?
 #
 # Conditional build:
+%bcond_with	threads
 %bcond_without	tests	# don't perform "make test"
 #
 %define		major	8.5
@@ -14,7 +15,7 @@ Summary(tr.UTF-8):	Tcl ile kullanılabilen betik dili
 Summary(uk.UTF-8):	Tool Command Language - вбудовувана мова скриптів
 Name:		tcl
 Version:	%{major}.%{minor}
-Release:	1
+Release:	2
 License:	BSD
 Group:		Development/Languages/Tcl
 Source0:	http://downloads.sourceforge.net/tcl/%{name}%{version}-src.tar.gz
@@ -125,12 +126,14 @@ Pliki nagłówkowe oraz dokumentacja dla Tcl (Tool Command Language).
 %patch9 -p1
 
 %build
+%if %{with threads}
 # Make sure we have /proc mounted - otherwise pthread_getattr_np will fail
 # https://sourceforge.net/tracker/index.php?func=detail&aid=1815573&group_id=10894&atid=110894
 if [ ! -r /proc/self/maps ]; then
 		echo "You need to have /proc mounted in order to build this package!"
 		exit 1
 fi
+%endif
 
 cd unix
 sed -i -e "s/^CFLAGS_OPTIMIZE.*/CFLAGS_OPTIMIZE=%{rpmcflags} -D__NO_STRING_INLINES -D__NO_MATH_INLINES -D_REENTRANT -DTCL_NO_STACK_CHECK=1/" \
@@ -139,7 +142,7 @@ sed -i -e "s/^CFLAGS_OPTIMIZE.*/CFLAGS_OPTIMIZE=%{rpmcflags} -D__NO_STRING_INLIN
 %configure \
 	--enable-langinfo \
 	--enable-shared \
-	--enable-threads \
+	--%{?with_threads:en}%{!?with_threads:dis}able-threads \
 	--enable-64bit \
 	--without-tzdata
 %{__make}
