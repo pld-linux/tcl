@@ -15,7 +15,7 @@ Summary(tr.UTF-8):	Tcl ile kullanılabilen betik dili
 Summary(uk.UTF-8):	Tool Command Language - вбудовувана мова скриптів
 Name:		tcl
 Version:	%{major}.%{minor}
-Release:	1
+Release:	2
 License:	BSD
 Group:		Development/Languages/Tcl
 Source0:	http://downloads.sourceforge.net/tcl/%{name}%{version}-src.tar.gz
@@ -136,7 +136,9 @@ fi
 %endif
 
 cd unix
-sed -i -e "s/^CFLAGS_OPTIMIZE.*/CFLAGS_OPTIMIZE=%{rpmcflags} -D__NO_STRING_INLINES -D__NO_MATH_INLINES -D_REENTRANT -DTCL_NO_STACK_CHECK=1/" \
+sed -i -e "s/^CFLAGS_OPTIMIZE.*/CFLAGS_OPTIMIZE=%{rpmcflags} -D__NO_STRING_INLINES -D__NO_MATH_INLINES -D_REENTRANT -DTCL_NO_STACK_CHECK=1 -fPIC/" \
+       -e "s/^SHLIB_LD .*/SHLIB_LD=ld.bfd/" \
+       -e "s/^SHLIB_CFLAGS.*/SHLIB_CFLAGS=%{rpmldflags}/" \
 	Makefile.in
 %{__autoconf}
 %configure \
