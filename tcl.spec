@@ -6,7 +6,7 @@
 %bcond_without	tests	# don't perform "make test"
 #
 %define		major	8.5
-%define		minor	11
+%define		minor	13
 Summary:	Tool Command Language embeddable scripting language, with shared libraries
 Summary(fr.UTF-8):	Tool Command Language, langage de script avec bibliothèques partagées
 Summary(pl.UTF-8):	Tool Command Language - język skryptowy z bibliotekami dynamicznymi
@@ -19,7 +19,7 @@ Release:	1
 License:	BSD
 Group:		Development/Languages/Tcl
 Source0:	http://downloads.sourceforge.net/tcl/%{name}%{version}-src.tar.gz
-# Source0-md5:	b01a9691c83990b3db0ce62d1012ca67
+# Source0-md5:	fa3a9bf9b2d6ed2431f1baa46f4058b8
 Source1:	%{name}-pl-man-pages.tar.bz2
 # Source1-md5:	dd3370f2b588763758787831a4bf48fc
 Patch0:		%{name}-ieee.patch
