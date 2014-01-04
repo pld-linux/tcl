@@ -4,7 +4,7 @@
      if {![catch {
  	set vdata [lindex [split [exec $libc] \n] 0]
      }]} {
--	regexp {([0-9]+(\.[0-9]+)*)} $vdata -> v
+-	regexp {version ([0-9]+(\.[0-9]+)*)} $vdata -> v
 +	regexp {version ([0-9]+(\.[0-9]+)*), by } $vdata -> v
  	foreach {major minor} [split $v .] break
  	set v glibc${major}.${minor}

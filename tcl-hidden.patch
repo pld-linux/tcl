@@ -1,14 +1,14 @@
 --- tcl8.5.9/generic/tclPort.h.orig	2010-02-01 00:51:36.000000000 +0100
 +++ tcl8.5.9/generic/tclPort.h	2010-10-02 08:15:42.668708988 +0200
-@@ -24,7 +24,7 @@
- #endif
- #include "tcl.h"
- #if !defined(_WIN32)
+@@ -20,7 +20,7 @@
+ #if defined(_WIN32)
+ #   include "tclWinPort.h"
+ #else
 -#   include "tclUnixPort.h"
 +#   include "../unix/tclUnixPort.h"
  #endif
+ #include "tcl.h"
  
- #if defined(__CYGWIN__)
 diff -up tcl8.5.6/generic/tclInt.h.bbb tcl8.5.6/generic/tclInt.h
 --- tcl8.5.6/generic/tclInt.h.bbb	2008-11-14 01:22:39.000000000 +0100
 +++ tcl8.5.6/generic/tclInt.h	2009-02-11 13:05:13.000000000 +0100
