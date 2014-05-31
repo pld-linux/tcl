@@ -13,12 +13,13 @@
  # available; this causes everything in the "dltest" subdirectory to be built
 --- tcl8.5.13/unix/tcl.m4.orig	2012-11-28 21:29:42.223960573 +0100
 +++ tcl8.5.13/unix/tcl.m4	2012-11-28 21:31:03.440627511 +0100
-@@ -2103,7 +2103,7 @@
+@@ -2050,7 +2050,7 @@
  
      AS_IF([test "${SHARED_BUILD}" = 1 -a "${SHLIB_SUFFIX}" != ""], [
          LIB_SUFFIX=${SHARED_LIB_SUFFIX}
--        MAKE_LIB='${SHLIB_LD} -o [$]@ ${OBJS} ${SHLIB_LD_LIBS} ${TCL_SHLIB_LD_EXTRAS} ${TK_SHLIB_LD_EXTRAS} ${LD_SEARCH_FLAGS}'
-+        MAKE_LIB='${SHLIB_LD} -o [$]@ ${OBJS} ${SHLIB_LD_LIBS} ${TCL_SHLIB_LD_EXTRAS} ${TK_SHLIB_LD_EXTRAS}'
+-        MAKE_LIB='${SHLIB_LD} -o [$]@ ${OBJS} ${TCL_SHLIB_LD_EXTRAS} ${SHLIB_LD_LIBS} ${TK_SHLIB_LD_EXTRAS} ${LD_SEARCH_FLAGS}'
++        MAKE_LIB='${SHLIB_LD} -o [$]@ ${OBJS} ${TCL_SHLIB_LD_EXTRAS} ${SHLIB_LD_LIBS} ${TK_SHLIB_LD_EXTRAS}'
          AS_IF([test "${SHLIB_SUFFIX}" = ".dll"], [
              INSTALL_LIB='$(INSTALL_LIBRARY) $(LIB_FILE) "$(BIN_INSTALL_DIR)/$(LIB_FILE)"'
              DLL_INSTALL_DIR="\$(BIN_INSTALL_DIR)"
+

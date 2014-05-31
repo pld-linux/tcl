@@ -13,3 +13,32 @@ diff -urN tcl8.5a2.org/unix/Makefile.in tcl8.5a2/unix/Makefile.in
  
  # Flags to pass to the linker
  LDFLAGS_DEBUG		= @LDFLAGS_DEBUG@
+--- tcl8.6.1/unix/tcl.m4~	2013-09-19 22:17:13.000000000 +0200
++++ tcl8.6.1/unix/tcl.m4	2014-05-31 19:44:20.670186134 +0200
+@@ -1114,7 +1114,7 @@
+     TCL_LIB_VERSIONS_OK=ok
+     CFLAGS_DEBUG=-g
+     AS_IF([test "$GCC" = yes], [
+-	CFLAGS_OPTIMIZE=-O2
++	CFLAGS_OPTIMIZE=${OPTFLAGS}
+ 	CFLAGS_WARNING="-Wall"
+     ], [
+ 	CFLAGS_OPTIMIZE=-O
+@@ -1409,7 +1409,7 @@
+ 	    SHLIB_CFLAGS="-fPIC"
+ 	    SHLIB_SUFFIX=".so"
+ 
+-	    CFLAGS_OPTIMIZE="-O2"
++	    CFLAGS_OPTIMIZE="${OPTFLAGS}"
+ 	    # egcs-2.91.66 on Redhat Linux 6.0 generates lots of warnings
+ 	    # when you inline the string and math operations.  Turn this off to
+ 	    # get rid of the warnings.
+@@ -1507,7 +1507,7 @@
+ 		CFLAGS_OPTIMIZE="-O0"
+ 		;;
+ 	    *)
+-		CFLAGS_OPTIMIZE="-O2"
++		CFLAGS_OPTIMIZE="${OPTFLAGS}"
+ 		;;
+ 	    esac
+ 	    AS_IF([test "${TCL_THREADS}" = "1"], [

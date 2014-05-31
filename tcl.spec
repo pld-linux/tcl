@@ -5,8 +5,8 @@
 %bcond_with	threads
 %bcond_without	tests	# don't perform "make test"
 #
-%define		major	8.5
-%define		minor	15
+%define		major	8.6
+%define		minor	1
 Summary:	Tool Command Language embeddable scripting language, with shared libraries
 Summary(fr.UTF-8):	Tool Command Language, langage de script avec bibliothèques partagées
 Summary(pl.UTF-8):	Tool Command Language - język skryptowy z bibliotekami dynamicznymi
@@ -18,12 +18,12 @@ Version:	%{major}.%{minor}
 Release:	1
 License:	BSD
 Group:		Development/Languages/Tcl
-Source0:	http://downloads.sourceforge.net/tcl/%{name}%{version}-src.tar.gz
-# Source0-md5:	f3df162f92c69b254079c4d0af7a690f
+Source0:	http://downloads.sourceforge.net/tcl/%{name}-core%{version}-src.tar.gz
+# Source0-md5:	f9d2fb6d673f19fbe387c792a6197477
 Source1:	%{name}-pl-man-pages.tar.bz2
 # Source1-md5:	dd3370f2b588763758787831a4bf48fc
 Patch0:		%{name}-ieee.patch
-Patch1:		%{name}-readline.patch
+
 Patch2:		%{name}-opt.patch
 Patch3:		%{name}-mannames.patch
 Patch4:		%{name}-soname_fix.patch
@@ -36,7 +36,6 @@ Patch10:	libc-version.patch
 URL:		http://www.tcl.tk/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	ncurses-devel >= 5.2
-BuildRequires:	readline-devel >= 4.2
 Requires:	tzdata
 Provides:	tcl(abi) = %{major}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -116,7 +115,7 @@ Pliki nagłówkowe oraz dokumentacja dla Tcl (Tool Command Language).
 %prep
 %setup -q -n %{name}%{version}
 %patch0 -p1
-%patch1 -p1
+
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
@@ -138,12 +137,9 @@ fi
 %endif
 
 cd unix
-sed -i -e "s/^CFLAGS_OPTIMIZE.*/CFLAGS_OPTIMIZE=%{rpmcflags} -D__NO_STRING_INLINES -D__NO_MATH_INLINES -D_REENTRANT -DTCL_NO_STACK_CHECK=1 -fPIC/" \
-       -e "s/^SHLIB_LD .*/SHLIB_LD=ld.bfd/" \
-       -e "s/^SHLIB_CFLAGS.*/SHLIB_CFLAGS=%{rpmldflags}/" \
-	Makefile.in
 %{__autoconf}
 %configure \
+	OPTFLAGS="%{rpmcflags} %{rpmcppflags}" \
 	--enable-langinfo \
 	--enable-shared \
 	--%{?with_threads:en}%{!?with_threads:dis}able-threads \
@@ -199,6 +195,7 @@ ln -sf libtcl%{major}.so.0.0 $RPM_BUILD_ROOT%{_libdir}/libtcl%{major}.so.0
 mv -f $RPM_BUILD_ROOT%{_bindir}/tclsh%{major} $RPM_BUILD_ROOT%{_bindir}/tclsh
 
 %{?have_ulibdir:mv $RPM_BUILD_ROOT%{_libdir}/tclConfig.sh $RPM_BUILD_ROOT%{_ulibdir}/tclConfig.sh}
+%{?have_ulibdir:mv $RPM_BUILD_ROOT%{_libdir}/tclooConfig.sh $RPM_BUILD_ROOT%{_ulibdir}/tclooConfig.sh}
 
 bzip2 -dc %{SOURCE1} | tar xf - -C $RPM_BUILD_ROOT%{_mandir}
 
@@ -360,12 +357,14 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_ulibdir}/tclConfig.sh
+%attr(755,root,root) %{_ulibdir}/tclooConfig.sh
 %{_ulibdir}/tcl%{major}/tclAppInit.c
 %attr(755,root,root) %{_libdir}/libtcl%{major}.so
 %attr(755,root,root) %{_libdir}/libtcl.so
 %{_libdir}/libtclstub%{major}.a
 %{_includedir}/tcl*.h
 %{_includedir}/tcl-private
+%{_pkgconfigdir}/tcl.pc
 %{_mandir}/man3/TCL_*.3*
 %{_mandir}/man3/Tcl_*.3*
 %{_mandir}/man3/attemptck*alloc.3*
