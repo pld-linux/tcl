@@ -6,10 +6,10 @@ diff -up tcl8.5.1/unix/configure.in.autopath tcl8.5.1/unix/configure.in
  	TCL_MODULE_PATH="~/Library/Tcl /Library/Tcl /Network/Library/Tcl /System/Library/Tcl"
  elif test "$prefix/lib" != "$libdir"; then
 -    TCL_PACKAGE_PATH="${libdir} ${prefix}/lib ${TCL_PACKAGE_PATH}"
-+    TCL_PACKAGE_PATH="${libdir} ${libdir}/tcl8.5 ${prefix}/lib ${prefix}/lib/tcl8.5 ${prefix}/share/tcl8.5 ${TCL_PACKAGE_PATH}"
++    TCL_PACKAGE_PATH="${libdir} ${libdir}/tcl8.6 ${prefix}/lib ${prefix}/lib/tcl8.6 ${prefix}/share/tcl8.6 ${TCL_PACKAGE_PATH}"
  else
 -    TCL_PACKAGE_PATH="${prefix}/lib ${TCL_PACKAGE_PATH}"
-+    TCL_PACKAGE_PATH="${libdir} ${libdir}/tcl8.5 ${prefix}/share/tcl8.5 ${TCL_PACKAGE_PATH}"
++    TCL_PACKAGE_PATH="${libdir} ${libdir}/tcl8.6 ${prefix}/share/tcl8.6 ${TCL_PACKAGE_PATH}"
  fi
  
  #--------------------------------------------------------------------
