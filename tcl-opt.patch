@@ -33,12 +33,4 @@ diff -urN tcl8.5a2.org/unix/Makefile.in tcl8.5a2/unix/Makefile.in
  	    # egcs-2.91.66 on Redhat Linux 6.0 generates lots of warnings
  	    # when you inline the string and math operations.  Turn this off to
  	    # get rid of the warnings.
-@@ -1507,7 +1507,7 @@
- 		CFLAGS_OPTIMIZE="-O0"
- 		;;
- 	    *)
--		CFLAGS_OPTIMIZE="-O2"
-+		CFLAGS_OPTIMIZE="${OPTFLAGS}"
- 		;;
- 	    esac
- 	    AS_IF([test "${TCL_THREADS}" = "1"], [
+
