@@ -1,15 +1,14 @@
-diff -up tcl8.5.1/unix/configure.in.autopath tcl8.5.1/unix/configure.in
---- tcl8.5.1/unix/configure.in.autopath	2008-02-05 18:00:35.000000000 +0100
-+++ tcl8.5.1/unix/configure.in	2008-03-17 14:57:24.000000000 +0100
-@@ -795,9 +795,9 @@ if test "$FRAMEWORK_BUILD" = "1" ; then
+--- tcl8.6.10/unix/configure.in.orig	2020-01-15 20:42:45.382933027 +0100
++++ tcl8.6.10/unix/configure.in	2020-01-15 21:03:28.699530737 +0100
+@@ -870,9 +870,9 @@
      test -z "$TCL_MODULE_PATH"  && \
- 	TCL_MODULE_PATH="~/Library/Tcl /Library/Tcl /Network/Library/Tcl /System/Library/Tcl"
+ 	TCL_MODULE_PATH="~/Library/Tcl /Library/Tcl"
  elif test "$prefix/lib" != "$libdir"; then
--    TCL_PACKAGE_PATH="${libdir} ${prefix}/lib ${TCL_PACKAGE_PATH}"
-+    TCL_PACKAGE_PATH="${libdir} ${libdir}/tcl8.6 ${prefix}/lib ${prefix}/lib/tcl8.6 ${prefix}/share/tcl8.6 ${TCL_PACKAGE_PATH}"
+-    test -z "$TCL_PACKAGE_PATH" && TCL_PACKAGE_PATH="${libdir} ${prefix}/lib ${TCL_PACKAGE_PATH}"
++    test -z "$TCL_PACKAGE_PATH" && TCL_PACKAGE_PATH="${libdir} ${libdir}/tcl8.6 ${prefix}/lib ${prefix}/lib/tcl8.6 ${prefix}/share/tcl8.6 ${TCL_PACKAGE_PATH}"
  else
--    TCL_PACKAGE_PATH="${prefix}/lib ${TCL_PACKAGE_PATH}"
-+    TCL_PACKAGE_PATH="${libdir} ${libdir}/tcl8.6 ${prefix}/share/tcl8.6 ${TCL_PACKAGE_PATH}"
+-    test -z "$TCL_PACKAGE_PATH" && TCL_PACKAGE_PATH="${prefix}/lib ${TCL_PACKAGE_PATH}"
++    test -z "$TCL_PACKAGE_PATH" && TCL_PACKAGE_PATH="${libdir} ${libdir}/tcl8.6 ${prefix}/share/tcl8.6 ${TCL_PACKAGE_PATH}"
  fi
  
  #--------------------------------------------------------------------

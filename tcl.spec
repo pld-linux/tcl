@@ -6,7 +6,7 @@
 %bcond_without	tests	# don't perform "make test"
 #
 %define		major	8.6
-%define		minor	9
+%define		minor	10
 Summary:	Tool Command Language embeddable scripting language, with shared libraries
 Summary(fr.UTF-8):	Tool Command Language, langage de script avec bibliothèques partagées
 Summary(pl.UTF-8):	Tool Command Language - język skryptowy z bibliotekami dynamicznymi
@@ -19,7 +19,7 @@ Release:	1
 License:	BSD
 Group:		Development/Languages/Tcl
 Source0:	http://downloads.sourceforge.net/tcl/%{name}-core%{version}-src.tar.gz
-# Source0-md5:	4f9f1d1b3e2fe4617c6fdeae4f247cd4
+# Source0-md5:	96ba4235d1a3086f899b6d7cc2fef301
 Source1:	%{name}-pl-man-pages.tar.bz2
 # Source1-md5:	dd3370f2b588763758787831a4bf48fc
 Patch2:		%{name}-opt.patch
@@ -153,9 +153,9 @@ fi
 
 %if %{with tests}
 # tests that are problematic on builders; some probably could be fixed
-rm ../tests/{http,httpold,socket,unixInit}.test
+%{__rm} ../tests/{http,httpold,socket,unixInit}.test
 # problematic
-rm ../tests/{clock,async}.test
+%{__rm} ../tests/{clock,async}.test
 
 %{__make} test 2>&1 | tee make-test.log
 FAILED=$(grep 'Files with failing tests:' make-test.log | sed -e 's#Files with failing tests: ##g' | sort | xargs)
@@ -362,8 +362,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/tcl*.h
 %{_includedir}/tcl-private
 %{_pkgconfigdir}/tcl.pc
+%{_mandir}/man3/DString.3*
+%{_mandir}/man3/Notifier.3*
+%{_mandir}/man3/RegExp.3*
 %{_mandir}/man3/TCL_*.3*
 %{_mandir}/man3/Tcl_*.3*
+%{_mandir}/man3/Thread.3*
 %{_mandir}/man3/attemptck*alloc.3*
 %{_mandir}/man3/ck*.3*
 %{_mandir}/mann/*.n*
