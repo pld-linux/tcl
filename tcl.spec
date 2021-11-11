@@ -2,7 +2,7 @@
 # - why is tclConfig.sh in /usr/lib on lib64 platform?
 #
 # Conditional build:
-%bcond_with	threads
+%bcond_without	threads
 %bcond_without	tests	# don't perform "make test"
 #
 %define		major	8.6
