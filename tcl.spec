@@ -6,7 +6,7 @@
 %bcond_without	tests	# don't perform "make test"
 #
 %define		major	8.6
-%define		minor	10
+%define		minor	12
 Summary:	Tool Command Language embeddable scripting language, with shared libraries
 Summary(fr.UTF-8):	Tool Command Language, langage de script avec bibliothèques partagées
 Summary(pl.UTF-8):	Tool Command Language - język skryptowy z bibliotekami dynamicznymi
@@ -19,9 +19,10 @@ Release:	1
 License:	BSD
 Group:		Development/Languages/Tcl
 Source0:	http://downloads.sourceforge.net/tcl/%{name}-core%{version}-src.tar.gz
-# Source0-md5:	96ba4235d1a3086f899b6d7cc2fef301
+# Source0-md5:	0802e5c9e8936fc9b0c69a8da4cedfe2
 Source1:	%{name}-pl-man-pages.tar.bz2
 # Source1-md5:	dd3370f2b588763758787831a4bf48fc
+Patch1:		tests.patch
 Patch2:		%{name}-opt.patch
 Patch3:		%{name}-mannames.patch
 Patch4:		%{name}-soname_fix.patch
@@ -31,6 +32,7 @@ Patch7:		%{name}-autopath.patch
 Patch8:		%{name}-hidden.patch
 Patch9:		%{name}-conf.patch
 Patch10:	libc-version.patch
+Patch11:	tcl-8.6.10-tcltests-path-fix.patch
 URL:		http://www.tcl.tk/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	ncurses-devel >= 5.2
@@ -113,6 +115,7 @@ Pliki nagłówkowe oraz dokumentacja dla Tcl (Tool Command Language).
 %prep
 %setup -q -n %{name}%{version}
 
+%patch1 -p1
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
@@ -122,6 +125,7 @@ Pliki nagłówkowe oraz dokumentacja dla Tcl (Tool Command Language).
 %patch8 -p1
 %patch9 -p1
 %patch10 -p1
+%patch11 -p1
 
 %build
 %if %{with threads}

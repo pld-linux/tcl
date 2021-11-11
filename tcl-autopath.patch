@@ -1,52 +1,51 @@
---- tcl8.6.10/unix/configure.in.orig	2020-01-15 20:42:45.382933027 +0100
-+++ tcl8.6.10/unix/configure.in	2020-01-15 21:03:28.699530737 +0100
-@@ -870,9 +870,9 @@
+--- tcl8.6.12/unix/configure.in~	2021-11-09 16:27:34.000000000 +0100
++++ tcl8.6.12/unix/configure.in	2021-11-09 16:30:31.236276242 +0100
+@@ -870,9 +870,9 @@ if test "$FRAMEWORK_BUILD" = "1" ; then
      test -z "$TCL_MODULE_PATH"  && \
  	TCL_MODULE_PATH="~/Library/Tcl /Library/Tcl"
  elif test "$prefix/lib" != "$libdir"; then
--    test -z "$TCL_PACKAGE_PATH" && TCL_PACKAGE_PATH="${libdir} ${prefix}/lib ${TCL_PACKAGE_PATH}"
-+    test -z "$TCL_PACKAGE_PATH" && TCL_PACKAGE_PATH="${libdir} ${libdir}/tcl8.6 ${prefix}/lib ${prefix}/lib/tcl8.6 ${prefix}/share/tcl8.6 ${TCL_PACKAGE_PATH}"
+-    test -z "$TCL_PACKAGE_PATH" && TCL_PACKAGE_PATH="{${libdir}} {${prefix}/lib} ${TCL_PACKAGE_PATH}"
++    test -z "$TCL_PACKAGE_PATH" && TCL_PACKAGE_PATH="{${libdir}} {${libdir}/tcl8.6} {${prefix}/lib} {${prefix}/lib/tcl8.6} {${prefix}/share/tcl8.6} ${TCL_PACKAGE_PATH}"
  else
--    test -z "$TCL_PACKAGE_PATH" && TCL_PACKAGE_PATH="${prefix}/lib ${TCL_PACKAGE_PATH}"
-+    test -z "$TCL_PACKAGE_PATH" && TCL_PACKAGE_PATH="${libdir} ${libdir}/tcl8.6 ${prefix}/share/tcl8.6 ${TCL_PACKAGE_PATH}"
+-    test -z "$TCL_PACKAGE_PATH" && TCL_PACKAGE_PATH="{${prefix}/lib} ${TCL_PACKAGE_PATH}"
++    test -z "$TCL_PACKAGE_PATH" && TCL_PACKAGE_PATH="{${libdir}} {${libdir}/tcl8.6} {${prefix}/share/tcl8.6} ${TCL_PACKAGE_PATH}"
  fi
  
  #--------------------------------------------------------------------
-diff -up tcl8.5.1/library/init.tcl.autopath tcl8.5.1/library/init.tcl
---- tcl8.5.1/library/init.tcl.autopath	2008-02-04 18:29:11.000000000 +0100
-+++ tcl8.5.1/library/init.tcl	2008-02-19 09:11:51.000000000 +0100
-@@ -48,16 +48,11 @@ if {![info exists auto_path]} {
- }
+--- tcl8.6.12/library/init.tcl~	2021-10-29 19:08:07.000000000 +0200
++++ tcl8.6.12/library/init.tcl	2021-11-09 16:32:24.629609514 +0100
+@@ -52,16 +52,11 @@ if {![info exists auto_path]} {
  namespace eval tcl {
-     variable Dir
--    foreach Dir [list $::tcl_library [file dirname $::tcl_library]] {
-+    foreach Dir [list $::tcl_library] {
- 	if {$Dir ni $::auto_path} {
- 	    lappend ::auto_path $Dir
- 	}
-     }
--    set Dir [file join [file dirname [file dirname \
--	    [info nameofexecutable]]] lib]
--    if {$Dir ni $::auto_path} {
--	lappend ::auto_path $Dir
--    }
-     catch {
- 	foreach Dir $::tcl_pkgPath {
+     if {![interp issafe]} {
+ 	variable Dir
+-	foreach Dir [list $::tcl_library [file dirname $::tcl_library]] {
++	foreach Dir [list $::tcl_library] {
  	    if {$Dir ni $::auto_path} {
-diff -up tcl8.5.1/library/auto.tcl.autopath tcl8.5.1/library/auto.tcl
---- tcl8.5.1/library/auto.tcl.autopath	2006-11-03 01:34:52.000000000 +0100
-+++ tcl8.5.1/library/auto.tcl	2008-02-19 09:11:51.000000000 +0100
-@@ -85,6 +85,13 @@ proc tcl_findLibrary {basename version p
- 	    lappend dirs $value
+ 		lappend ::auto_path $Dir
+ 	    }
+ 	}
+-	set Dir [file join [file dirname [file dirname \
+-		[info nameofexecutable]]] lib]
+-	if {$Dir ni $::auto_path} {
+-	    lappend ::auto_path $Dir
+-	}
+ 	if {[info exists ::tcl_pkgPath]} { catch {
+ 	    foreach Dir $::tcl_pkgPath {
+ 		if {$Dir ni $::auto_path} {
+--- tcl8.6.12/library/auto.tcl~	2021-10-29 19:08:07.000000000 +0200
++++ tcl8.6.12/library/auto.tcl	2021-11-09 16:33:51.629609462 +0100
+@@ -81,6 +81,13 @@ proc tcl_findLibrary {basename version p
+ 	    lappend dirs [::${basename}::pkgconfig get scriptdir,runtime]
  	}
  
-+        # 2a. As a sibling of Tcl's script directory
-+        if {[catch {
-+            ::tcl::pkgconfig get scriptdir,runtime
-+        } value] == 0} {
-+            lappend dirs [file join [file dirname $value] $basename$version]
-+        }
++	# 2a. As a sibling of Tcl's script directory
++	if {[catch {
++		::tcl::pkgconfig get scriptdir,runtime
++	} value] == 0} {
++		lappend dirs [file join [file dirname $value] $basename$version]
++	}
 +
  	# 3. Relative to auto_path directories.  This checks relative to the
  	# Tcl library as well as allowing loading of libraries added to the
  	# auto_path that is not relative to the core library or binary paths.
+

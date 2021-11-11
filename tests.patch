@@ -1,0 +1,25 @@
+--- tcl8.6.12/tests/cmdAH.test~	2021-10-29 19:08:08.000000000 +0200
++++ tcl8.6.12/tests/cmdAH.test	2021-11-11 14:25:49.036254905 +0100
+@@ -1294,22 +1294,6 @@ test cmdAH-24.14.1 {
+     file mtime [file join [temporaryDirectory] CON.txt]
+ } -match regexp -result {could not (?:get modification time|read)} -returnCodes error
+ 
+-# 3155760000 is 64-bit unix time, Wed Jan 01 00:00:00 GMT 2070:
+-test cmdAH-24.20.1 {Tcl_FileObjCmd: atime 64-bit time_t, bug [4718b41c56]} -constraints {time64bit} -setup {
+-    set filename [makeFile "" foo.text]
+-} -body {
+-    list [file atime $filename 3155760000] [file atime $filename]
+-} -cleanup {
+-    removeFile $filename
+-} -result {3155760000 3155760000}
+-test cmdAH-24.20.2 {Tcl_FileObjCmd: mtime 64-bit time_t, bug [4718b41c56]} -constraints {time64bit} -setup {
+-    set filename [makeFile "" foo.text]
+-} -body {
+-    list [file mtime $filename 3155760000] [file mtime $filename]
+-} -cleanup {
+-    file delete -force $filename
+-} -result {3155760000 3155760000}
+-
+ # owned
+ test cmdAH-25.1 {Tcl_FileObjCmd: owned} -returnCodes error -body {
+     file owned a b
