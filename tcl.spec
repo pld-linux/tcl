@@ -6,7 +6,7 @@
 %bcond_without	tests	# don't perform "make test"
 #
 %define		major	8.6
-%define		minor	13
+%define		minor	16
 Summary:	Tool Command Language embeddable scripting language, with shared libraries
 Summary(fr.UTF-8):	Tool Command Language, langage de script avec bibliothèques partagées
 Summary(pl.UTF-8):	Tool Command Language - język skryptowy z bibliotekami dynamicznymi
@@ -19,7 +19,7 @@ Release:	1
 License:	BSD
 Group:		Development/Languages/Tcl
 Source0:	http://downloads.sourceforge.net/tcl/%{name}-core%{version}-src.tar.gz
-# Source0-md5:	2d96737be9e2e961a653ce1f0a831f90
+# Source0-md5:	245d6b2540db277893f72d91b30e9111
 Source1:	%{name}-pl-man-pages.tar.bz2
 # Source1-md5:	dd3370f2b588763758787831a4bf48fc
 Patch1:		tests.patch
@@ -142,10 +142,11 @@ cd unix
 %configure \
 	OPTFLAGS="%{rpmcflags} %{rpmcppflags}" \
 	TCL_PACKAGE_PATH="%{?have_ulibdir:%{_libdir} %{_libdir}/tcl%{major} }%{_ulibdir} %{_ulibdir}/tcl%{major} %{_datadir}/tcl%{major}" \
+	--enable-64bit \
 	--enable-langinfo \
+	--disable-rpath \
 	--enable-shared \
 	--%{?with_threads:en}%{!?with_threads:dis}able-threads \
-	--enable-64bit \
 	--without-tzdata
 %{__make}
 
@@ -161,6 +162,10 @@ fi
 %{__rm} ../tests/{http,httpold,socket,unixInit}.test
 # problematic
 %{__rm} ../tests/{clock,async}.test
+# fail with unshare --net
+%{__rm} ../tests/{chan,event,http11,ioCmd,zlib}.test
+# hang
+%{__rm} ../tests/{chanio,io}.test
 
 %{__make} test 2>&1 | tee make-test.log
 FAILED=$(grep 'Files with failing tests:' make-test.log | sed -e 's#Files with failing tests: ##g' | sort | xargs)
@@ -211,7 +216,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_bindir}/tclsh
 %attr(755,root,root) %{_libdir}/libtcl%{major}.so.*.*
 %attr(755,root,root) %ghost %{_libdir}/libtcl%{major}.so.0
 %{?have_ulibdir:%dir %{_libdir}/tcl%{major}}

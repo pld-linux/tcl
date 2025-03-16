@@ -25,10 +25,8 @@ diff -urN tcl8.5a2.org/unix/Makefile.in tcl8.5a2/unix/Makefile.in
      ], [
  	CFLAGS_OPTIMIZE=-O
 
---- tcl8.6.12/unix/tcl.m4~	2021-11-11 14:43:00.000000000 +0100
-+++ tcl8.6.12/unix/tcl.m4	2021-11-11 14:44:35.499587617 +0100
-@@ -1376,7 +1376,6 @@ AC_DEFUN([SC_CONFIG_CFLAGS], [
- 	    SHLIB_CFLAGS="-fPIC"
+@@ -1372,7 +1372,6 @@ AC_DEFUN([SC_CONFIG_CFLAGS], [
+ 	    SHLIB_CFLAGS="-fPIC -fno-common"
  	    SHLIB_SUFFIX=".so"
  
 -	    CFLAGS_OPTIMIZE="-O2"
