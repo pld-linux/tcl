@@ -33,7 +33,7 @@ Patch8:		%{name}-hidden.patch
 Patch9:		%{name}-conf.patch
 Patch10:	libc-version.patch
 Patch11:	tcl-8.6.10-tcltests-path-fix.patch
-URL:		http://www.tcl.tk/
+URL:		https://www.tcl-lang.org/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	ncurses-devel >= 5.2
 Requires:	tzdata
