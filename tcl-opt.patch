@@ -13,9 +13,9 @@ diff -urN tcl8.5a2.org/unix/Makefile.in tcl8.5a2/unix/Makefile.in
  
  # Flags to pass to the linker
  LDFLAGS_DEBUG		= @LDFLAGS_DEBUG@
---- tcl8.6.12/unix/tcl.m4~	2021-11-04 15:29:53.000000000 +0100
-+++ tcl8.6.12/unix/tcl.m4	2021-11-09 16:19:51.296276589 +0100
-@@ -1074,7 +1074,7 @@ AC_DEFUN([SC_CONFIG_CFLAGS], [
+--- tcl8.6.16/unix/tcl.m4.orig	2024-11-27 16:56:57.000000000 +0100
++++ tcl8.6.16/unix/tcl.m4	2025-03-16 21:28:46.383184848 +0100
+@@ -1073,7 +1073,7 @@ AC_DEFUN([SC_CONFIG_CFLAGS], [
      TCL_LIB_VERSIONS_OK=ok
      CFLAGS_DEBUG=-g
      AS_IF([test "$GCC" = yes], [
@@ -24,7 +24,6 @@ diff -urN tcl8.5a2.org/unix/Makefile.in tcl8.5a2/unix/Makefile.in
  	CFLAGS_WARNING="-Wall -Wpointer-arith"
      ], [
  	CFLAGS_OPTIMIZE=-O
-
 @@ -1372,7 +1372,6 @@ AC_DEFUN([SC_CONFIG_CFLAGS], [
  	    SHLIB_CFLAGS="-fPIC -fno-common"
  	    SHLIB_SUFFIX=".so"
