@@ -1,15 +1,15 @@
---- tcl8.6.16/generic/tclInt.h.orig	2025-03-16 10:07:37.273700861 +0100
-+++ tcl8.6.16/generic/tclInt.h	2025-03-16 10:15:34.271116744 +0100
-@@ -3282,7 +3282,7 @@ MODULE_SCOPE Tcl_ObjCmdProc TclChanPopOb
+--- tcl9.0.3/generic/tclInt.h.orig	2025-11-11 17:22:57.000000000 +0100
++++ tcl9.0.3/generic/tclInt.h	2025-11-11 17:23:00.000000000 +0100
+@@ -3786,7 +3786,7 @@
  MODULE_SCOPE Tcl_ObjCmdProc TclChanPushObjCmd;
  MODULE_SCOPE void	TclClockInit(Tcl_Interp *interp);
  MODULE_SCOPE Tcl_ObjCmdProc TclClockOldscanObjCmd;
 -MODULE_SCOPE Tcl_ObjCmdProc Tcl_CloseObjCmd;
 +extern Tcl_ObjCmdProc Tcl_CloseObjCmd;
  MODULE_SCOPE Tcl_ObjCmdProc Tcl_ConcatObjCmd;
+ MODULE_SCOPE Tcl_ObjCmdProc Tcl_ConstObjCmd;
  MODULE_SCOPE Tcl_ObjCmdProc Tcl_ContinueObjCmd;
- MODULE_SCOPE Tcl_TimerToken TclCreateAbsoluteTimerHandler(
-@@ -3355,7 +3355,7 @@ MODULE_SCOPE Tcl_ObjCmdProc Tcl_RegexpOb
+@@ -3863,7 +3863,7 @@
  MODULE_SCOPE Tcl_ObjCmdProc Tcl_RegsubObjCmd;
  MODULE_SCOPE Tcl_ObjCmdProc Tcl_RenameObjCmd;
  MODULE_SCOPE Tcl_ObjCmdProc Tcl_RepresentationCmd;
@@ -18,10 +18,8 @@
  MODULE_SCOPE Tcl_ObjCmdProc Tcl_ScanObjCmd;
  MODULE_SCOPE Tcl_ObjCmdProc Tcl_SeekObjCmd;
  MODULE_SCOPE Tcl_ObjCmdProc Tcl_SetObjCmd;
-diff --git a/generic/tclPort.h b/generic/tclPort.h
-index 12a60db..d817154 100644
---- a/generic/tclPort.h
-+++ b/generic/tclPort.h
+--- tcl9.0.3/generic/tclPort.h.orig	2025-11-11 17:22:57.000000000 +0100
++++ tcl9.0.3/generic/tclPort.h	2025-11-11 17:23:00.000000000 +0100
 @@ -20,7 +20,7 @@
  #if defined(_WIN32)
  #   include "tclWinPort.h"
@@ -30,4 +28,4 @@ index 12a60db..d817154 100644
 +#   include "../unix/tclUnixPort.h"
  #endif
  #include "tcl.h"
- 
+

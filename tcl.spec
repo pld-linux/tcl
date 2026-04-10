@@ -2,11 +2,10 @@
 # - why is tclConfig.sh in /usr/lib on lib64 platform?
 #
 # Conditional build:
-%bcond_without	threads
 %bcond_without	tests	# don't perform "make test"
 #
-%define		major	8.6
-%define		minor	17
+%define		major	9.0
+%define		minor	3
 Summary:	Tool Command Language embeddable scripting language, with shared libraries
 Summary(fr.UTF-8):	Tool Command Language, langage de script avec bibliothèques partagées
 Summary(pl.UTF-8):	Tool Command Language - język skryptowy z bibliotekami dynamicznymi
@@ -18,21 +17,18 @@ Version:	%{major}.%{minor}
 Release:	1
 License:	BSD
 Group:		Development/Languages/Tcl
-Source0:	http://downloads.sourceforge.net/tcl/%{name}-core%{version}-src.tar.gz
-# Source0-md5:	509597025ee2e4395f369a334b9089fd
+Source0:	https://downloads.sourceforge.net/tcl/%{name}-core%{version}-src.tar.gz
+# Source0-md5:	180ab5694717348659214d6e9393f283
 Source1:	%{name}-pl-man-pages.tar.bz2
 # Source1-md5:	dd3370f2b588763758787831a4bf48fc
-Patch1:		tests.patch
-Patch2:		%{name}-opt.patch
-Patch3:		%{name}-mannames.patch
-Patch4:		%{name}-soname_fix.patch
-Patch5:		%{name}-norpath.patch
-Patch6:		%{name}-multilib.patch
-Patch7:		%{name}-autopath.patch
-Patch8:		%{name}-hidden.patch
-Patch9:		%{name}-conf.patch
-Patch10:	libc-version.patch
-Patch11:	tcl-8.6.10-tcltests-path-fix.patch
+Patch0:		%{name}-opt.patch
+Patch1:		%{name}-mannames.patch
+Patch2:		%{name}-norpath.patch
+Patch3:		%{name}-autopath.patch
+Patch4:		%{name}-hidden.patch
+Patch5:		%{name}-conf.patch
+Patch6:		libc-version.patch
+Patch7:		%{name}-tcltests-path-fix.patch
 URL:		https://www.tcl-lang.org/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	ncurses-devel >= 5.2
@@ -115,6 +111,7 @@ Pliki nagłówkowe oraz dokumentacja dla Tcl (Tool Command Language).
 %prep
 %setup -q -n %{name}%{version}
 
+%patch -P0 -p1
 %patch -P1 -p1
 %patch -P2 -p1
 %patch -P3 -p1
@@ -122,20 +119,14 @@ Pliki nagłówkowe oraz dokumentacja dla Tcl (Tool Command Language).
 %patch -P5 -p1
 %patch -P6 -p1
 %patch -P7 -p1
-%patch -P8 -p1
-%patch -P9 -p1
-%patch -P10 -p1
-%patch -P11 -p1
 
 %build
-%if %{with threads}
 # Make sure we have /proc mounted - otherwise pthread_getattr_np will fail
 # https://sourceforge.net/tracker/index.php?func=detail&aid=1815573&group_id=10894&atid=110894
 if [ ! -r /proc/self/maps ]; then
 		echo "You need to have /proc mounted in order to build this package!"
 		exit 1
 fi
-%endif
 
 cd unix
 %{__autoconf}
@@ -146,7 +137,7 @@ cd unix
 	--enable-langinfo \
 	--disable-rpath \
 	--enable-shared \
-	--enable-threads%{!?with_threads:=no} \
+	--disable-zipfs \
 	--without-tzdata
 %{__make}
 
@@ -159,7 +150,7 @@ fi
 
 %if %{with tests}
 # tests that are problematic on builders; some probably could be fixed
-%{__rm} ../tests/{http,httpold,socket,unixInit}.test
+%{__rm} ../tests/{http,socket,unixInit}.test
 # problematic
 %{__rm} ../tests/{clock,async}.test
 # fail with unshare --net
@@ -196,9 +187,7 @@ for h in $RPM_BUILD_ROOT%{_includedir}/*.h; do
 	fi
 done
 
-ln -sf libtcl%{major}.so.0.0 $RPM_BUILD_ROOT%{_libdir}/libtcl.so
-ln -sf libtcl%{major}.so.0.0 $RPM_BUILD_ROOT%{_libdir}/libtcl%{major}.so
-ln -sf libtcl%{major}.so.0.0 $RPM_BUILD_ROOT%{_libdir}/libtcl%{major}.so.0
+ln -sf libtcl%{major}.so $RPM_BUILD_ROOT%{_libdir}/libtcl.so
 mv -f $RPM_BUILD_ROOT%{_bindir}/tclsh%{major} $RPM_BUILD_ROOT%{_bindir}/tclsh
 
 %{?have_ulibdir:mv $RPM_BUILD_ROOT%{_libdir}/tclConfig.sh $RPM_BUILD_ROOT%{_ulibdir}/tclConfig.sh}
@@ -217,17 +206,17 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/tclsh
-%attr(755,root,root) %{_libdir}/libtcl%{major}.so.*.*
-%attr(755,root,root) %ghost %{_libdir}/libtcl%{major}.so.0
+%attr(755,root,root) %{_libdir}/libtcl%{major}.so
 %{?have_ulibdir:%dir %{_libdir}/tcl%{major}}
 %dir %{_datadir}/tcl%{major}
-%{_ulibdir}/tcl[0-9]
 %dir %{_ulibdir}/tcl%{major}
 %{_ulibdir}/tcl%{major}/*.tcl
+%{_ulibdir}/tcl%{major}/cookiejar0.2
 %{_ulibdir}/tcl%{major}/encoding
-%{_ulibdir}/tcl%{major}/http1.0
 %{_ulibdir}/tcl%{major}/opt0.4
 %{_ulibdir}/tcl%{major}/tclIndex
+%dir %{_ulibdir}/tcl9
+%{_ulibdir}/tcl9/9.0
 
 %dir %{_ulibdir}/tcl%{major}/msgs
 %lang(af) %{_ulibdir}/tcl%{major}/msgs/af.msg
@@ -366,9 +355,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_ulibdir}/tclConfig.sh
 %attr(755,root,root) %{_ulibdir}/tclooConfig.sh
 %{_ulibdir}/tcl%{major}/tclAppInit.c
-%attr(755,root,root) %{_libdir}/libtcl%{major}.so
-%attr(755,root,root) %{_libdir}/libtcl.so
-%{_libdir}/libtclstub%{major}.a
+%{_libdir}/libtcl.so
+%{_libdir}/libtclstub.a
 %{_includedir}/tcl*.h
 %{_includedir}/tcl-private
 %{_pkgconfigdir}/tcl.pc
@@ -377,8 +365,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/RegExp.3*
 %{_mandir}/man3/TCL_*.3*
 %{_mandir}/man3/Tcl_*.3*
+%{_mandir}/man3/TclZipfs_*.3*
 %{_mandir}/man3/Thread.3*
-%{_mandir}/man3/attemptck*alloc.3*
-%{_mandir}/man3/ck*.3*
 %{_mandir}/mann/*.n*
 %lang(pl) %{_mandir}/pl/mann/*.n*

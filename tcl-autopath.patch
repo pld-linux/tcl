@@ -1,20 +1,6 @@
---- tcl8.6.16/unix/configure.in.orig	2025-03-16 10:03:23.661741462 +0100
-+++ tcl8.6.16/unix/configure.in	2025-03-16 10:07:10.900510404 +0100
-@@ -873,9 +873,9 @@ if test "$FRAMEWORK_BUILD" = "1" ; then
-     test -z "$TCL_MODULE_PATH"  && \
- 	TCL_MODULE_PATH="~/Library/Tcl /Library/Tcl"
- elif test "$prefix/lib" != "$libdir"; then
--    test -z "$TCL_PACKAGE_PATH" && TCL_PACKAGE_PATH="${libdir}:${prefix}/lib"
-+    test -z "$TCL_PACKAGE_PATH" && TCL_PACKAGE_PATH="${libdir}:${libdir}/tcl8.6:${prefix}/lib:${prefix}/lib/tcl8.6:${prefix}/share/tcl8.6"
- else
--    test -z "$TCL_PACKAGE_PATH" && TCL_PACKAGE_PATH="${prefix}/lib"
-+    test -z "$TCL_PACKAGE_PATH" && TCL_PACKAGE_PATH="${prefix}/lib:${prefix}/lib/tcl8.6:${prefix}/share/tcl8.6"
- fi
- 
- #--------------------------------------------------------------------
---- tcl8.6.12/library/init.tcl~	2021-10-29 19:08:07.000000000 +0200
-+++ tcl8.6.12/library/init.tcl	2021-11-09 16:32:24.629609514 +0100
-@@ -52,16 +52,11 @@ if {![info exists auto_path]} {
+--- tcl9.0.3/library/init.tcl.orig	2025-11-11 17:22:57.000000000 +0100
++++ tcl9.0.3/library/init.tcl	2025-11-11 17:23:00.000000000 +0100
+@@ -60,16 +60,11 @@
  namespace eval tcl {
      if {![interp issafe]} {
  	variable Dir
@@ -32,20 +18,3 @@
  	if {[info exists ::tcl_pkgPath]} { catch {
  	    foreach Dir $::tcl_pkgPath {
  		if {$Dir ni $::auto_path} {
---- tcl8.6.12/library/auto.tcl~	2021-10-29 19:08:07.000000000 +0200
-+++ tcl8.6.12/library/auto.tcl	2021-11-09 16:33:51.629609462 +0100
-@@ -81,6 +81,13 @@ proc tcl_findLibrary {basename version p
- 	    lappend dirs [::${basename}::pkgconfig get scriptdir,runtime]
- 	}
- 
-+	# 2a. As a sibling of Tcl's script directory
-+	if {[catch {
-+		::tcl::pkgconfig get scriptdir,runtime
-+	} value] == 0} {
-+		lappend dirs [file join [file dirname $value] $basename$version]
-+	}
-+
- 	# 3. Relative to auto_path directories.  This checks relative to the
- 	# Tcl library as well as allowing loading of libraries added to the
- 	# auto_path that is not relative to the core library or binary paths.
-

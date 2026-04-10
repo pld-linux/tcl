@@ -1,6 +1,6 @@
---- tcl8.5a6/unix/Makefile.in.orig	2007-06-26 07:50:20.974722448 +0200
-+++ tcl8.5a6/unix/Makefile.in	2007-06-26 18:05:36.274405487 +0200
-@@ -192,8 +192,8 @@
+--- tcl9.0.3/unix/Makefile.in.orig	2025-11-11 17:22:57.000000000 +0100
++++ tcl9.0.3/unix/Makefile.in	2025-11-11 17:23:00.000000000 +0100
+@@ -188,8 +188,8 @@
  # Additional search flags needed to find the various shared libraries at
  # run-time. The first symbol is for use when creating a binary with cc, and
  # the second is for use when running ld directly.
@@ -8,13 +8,13 @@
 -LD_SEARCH_FLAGS	= @LD_SEARCH_FLAGS@
 +CC_SEARCH_FLAGS	=
 +LD_SEARCH_FLAGS	=
- 
+
  # The following symbol is defined to "$(DLTEST_TARGETS)" if dynamic loading is
  # available; this causes everything in the "dltest" subdirectory to be built
---- tcl8.6.16/unix/tcl.m4.orig	2025-03-16 09:59:06.263135910 +0100
-+++ tcl8.6.16/unix/tcl.m4	2025-03-16 10:03:05.461840059 +0100
-@@ -2000,7 +2000,7 @@ dnl # preprocessing tests use only CPPFL
- 
+--- tcl9.0.3/unix/tcl.m4.orig	2025-11-11 17:22:57.000000000 +0100
++++ tcl9.0.3/unix/tcl.m4	2025-11-11 17:23:00.000000000 +0100
+@@ -1790,7 +1790,7 @@
+
      AS_IF([test "${SHARED_BUILD}" = 1 -a "${SHLIB_SUFFIX}" != ""], [
  	LIB_SUFFIX=${SHARED_LIB_SUFFIX}
 -	MAKE_LIB='${SHLIB_LD} -o [$]@ ${OBJS} ${LDFLAGS} ${SHLIB_LD_LIBS} ${TCL_SHLIB_LD_EXTRAS} ${TK_SHLIB_LD_EXTRAS} ${LD_SEARCH_FLAGS}'

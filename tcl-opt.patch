@@ -1,7 +1,6 @@
-diff -urN tcl8.5a2.org/unix/Makefile.in tcl8.5a2/unix/Makefile.in
---- tcl8.5a2.org/unix/Makefile.in	2004-12-08 00:16:06.000000000 +0100
-+++ tcl8.5a2/unix/Makefile.in	2005-04-04 13:15:13.000000000 +0200
-@@ -94,9 +94,9 @@
+--- tcl9.0.3/unix/Makefile.in.orig	2025-11-11 17:22:57.000000000 +0100
++++ tcl9.0.3/unix/Makefile.in	2025-11-11 17:23:00.000000000 +0100
+@@ -105,9 +105,9 @@
  # To change the compiler switches, for example to change from optimization to
  # debugging symbols, change the following line:
  #CFLAGS			= $(CFLAGS_DEBUG)
@@ -10,24 +9,24 @@ diff -urN tcl8.5a2.org/unix/Makefile.in tcl8.5a2/unix/Makefile.in
  #CFLAGS			= $(CFLAGS_DEBUG) $(CFLAGS_OPTIMIZE)
 -CFLAGS			= @CFLAGS_DEFAULT@ @CFLAGS@
 +#CFLAGS			= @CFLAGS_DEFAULT@ @CFLAGS@
- 
+
  # Flags to pass to the linker
  LDFLAGS_DEBUG		= @LDFLAGS_DEBUG@
---- tcl8.6.16/unix/tcl.m4.orig	2024-11-27 16:56:57.000000000 +0100
-+++ tcl8.6.16/unix/tcl.m4	2025-03-16 21:28:46.383184848 +0100
-@@ -1073,7 +1073,7 @@ AC_DEFUN([SC_CONFIG_CFLAGS], [
+--- tcl9.0.3/unix/tcl.m4.orig	2025-11-11 17:22:57.000000000 +0100
++++ tcl9.0.3/unix/tcl.m4	2025-11-11 17:23:00.000000000 +0100
+@@ -959,7 +959,7 @@
      TCL_LIB_VERSIONS_OK=ok
      CFLAGS_DEBUG=-g
      AS_IF([test "$GCC" = yes], [
 -	CFLAGS_OPTIMIZE=-O2
 +	CFLAGS_OPTIMIZE="${OPTFLAGS}"
- 	CFLAGS_WARNING="-Wall -Wpointer-arith"
-     ], [
- 	CFLAGS_OPTIMIZE=-O
-@@ -1372,7 +1372,6 @@ AC_DEFUN([SC_CONFIG_CFLAGS], [
+ 	CFLAGS_WARNING="-Wall -Wextra -Wshadow -Wundef -Wwrite-strings -Wpointer-arith"
+ 	case "${CC}" in
+ 	    *++|*++-*)
+@@ -1263,7 +1263,6 @@
  	    SHLIB_CFLAGS="-fPIC -fno-common"
  	    SHLIB_SUFFIX=".so"
- 
+
 -	    CFLAGS_OPTIMIZE="-O2"
  	    # egcs-2.91.66 on Redhat Linux 6.0 generates lots of warnings
  	    # when you inline the string and math operations.  Turn this off to

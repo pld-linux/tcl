@@ -1,11 +1,11 @@
---- tcl8.5.13/library/platform/platform.tcl.orig	2012-11-06 16:04:59.000000000 +0100
-+++ tcl8.5.13/library/platform/platform.tcl	2013-01-01 14:14:42.116858289 +0100
-@@ -256,7 +256,7 @@
-     if {![catch {
+--- tcl9.0.3/library/platform/platform.tcl.orig	2025-11-11 17:22:57.000000000 +0100
++++ tcl9.0.3/library/platform/platform.tcl	2025-11-11 17:23:00.000000000 +0100
+@@ -275,7 +275,7 @@
+     try {
  	set vdata [lindex [split [exec $libc] \n] 0]
-     }]} {
+     } on ok {} {
 -	regexp {version ([0-9]+(\.[0-9]+)*)} $vdata -> v
 +	regexp {version ([0-9]+(\.[0-9]+)*), by } $vdata -> v
- 	foreach {major minor} [split $v .] break
+ 	lassign [split $v .] major minor
  	set v glibc${major}.${minor}
  	return 1
