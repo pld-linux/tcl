@@ -5,7 +5,7 @@
 %bcond_without	tests	# don't perform "make test"
 #
 %define		major	9.0
-%define		minor	3
+%define		minor	4
 Summary:	Tool Command Language embeddable scripting language, with shared libraries
 Summary(fr.UTF-8):	Tool Command Language, langage de script avec bibliothèques partagées
 Summary(pl.UTF-8):	Tool Command Language - język skryptowy z bibliotekami dynamicznymi
@@ -18,7 +18,7 @@ Release:	1
 License:	BSD
 Group:		Development/Languages/Tcl
 Source0:	https://downloads.sourceforge.net/tcl/%{name}-core%{version}-src.tar.gz
-# Source0-md5:	180ab5694717348659214d6e9393f283
+# Source0-md5:	dca595847a7c676bacb74fdf7f839c08
 Source1:	%{name}-pl-man-pages.tar.bz2
 # Source1-md5:	dd3370f2b588763758787831a4bf48fc
 Patch0:		%{name}-opt.patch
@@ -30,8 +30,9 @@ Patch5:		%{name}-conf.patch
 Patch6:		libc-version.patch
 Patch7:		%{name}-tcltests-path-fix.patch
 URL:		https://www.tcl-lang.org/
-BuildRequires:	autoconf >= 2.59
-BuildRequires:	ncurses-devel >= 5.2
+BuildRequires:	autoconf >= 2.69
+BuildRequires:	libtommath-devel >= 1.2.0
+BuildRequires:	zlib-devel >= 1.2.3
 Requires:	tzdata
 Provides:	tcl(abi) = %{major}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -138,6 +139,7 @@ cd unix
 	--disable-rpath \
 	--enable-shared \
 	--disable-zipfs \
+	--with-system-libtommath \
 	--without-tzdata
 %{__make}
 
@@ -158,6 +160,9 @@ fi
 # hang
 %{__rm} ../tests/{chanio,io}.test
 
+# fCmd-6.2x create directories in [file home]
+install -d test-home
+export HOME=$(pwd)/test-home
 %{__make} test 2>&1 | tee make-test.log
 FAILED=$(grep 'Files with failing tests:' make-test.log | sed -e 's#Files with failing tests: ##g' | sort | xargs)
 if [ -n "$FAILED" ]; then
